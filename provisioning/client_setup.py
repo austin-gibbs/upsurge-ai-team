@@ -462,12 +462,15 @@ def build_package(profile, out_dir):
             "target_owner": "UpSurge GitHub organization",
             "created": False,
             "creation_path": (
-                "The provisioning run attempts creation. Where repo "
-                "creation is not permitted to the automation, creation "
-                "becomes a certified team fulfillment step under the "
-                "Install Fulfillment Training model, and this package is "
-                "pushed the moment the repo exists. This record stays "
-                "false until a creation is verified by read back."
+                "The provisioning run creates the repository through "
+                "the GitHub Provisioning connector "
+                "(custom.github-provisioning, verified live 2026-11-05) "
+                "and reads it back. If that credential is expired or "
+                "unavailable, creation becomes a certified team "
+                "fulfillment step under the Install Fulfillment "
+                "Training model, and this package is pushed the moment "
+                "the repo exists. This record stays false until a "
+                "creation is verified by read back."
             ),
         },
         "orchestrator_mapping": {

@@ -67,23 +67,26 @@ Each client gets their own repository:
 
 How creation works:
 
-1. The provisioning run attempts to create the repository through
-   the GitHub integration.
-2. Where repo creation is not permitted to the automation, creation
-   becomes a certified team fulfillment step under the Install
-   Fulfillment Training model: a team member certified on that step
-   creates the repo in the org, and the generated package is pushed
-   the moment the repo exists. The package is complete and verified
-   before the repo exists, so the fulfillment step is minutes of
-   work, not a project.
+1. The provisioning run creates the repository through the GitHub
+   Provisioning connector (custom.github-provisioning), which holds
+   a dedicated repo creation credential the Muse GitHub App does
+   not have, then reads the new repo back.
+2. Where that connector is unavailable (for example an expired
+   token), creation becomes a certified team fulfillment step under
+   the Install Fulfillment Training model: a team member certified
+   on that step creates the repo in the org, and the generated
+   package is pushed the moment the repo exists. The package is
+   complete and verified before the repo exists, so the fulfillment
+   step is minutes of work, not a project.
 3. The provisioning record tells the truth throughout:
    `repository.created` stays `false`, and the workspace config
    status stays `package_ready_repo_creation_pending`, until a
    creation is verified by read back. No step, report, or client
-   surface may claim a repo was created when it was not. (Known
-   state at this build: the current GitHub integration cannot create
-   repositories, returning 403, verified 2026-11-04. The fulfillment
-   path in step 2 is therefore the expected path today.)
+   surface may claim a repo was created when it was not. (Verified
+   2026-11-05: creation through the GitHub Provisioning connector
+   succeeded end to end, the repo was created and read back, and
+   the main GitHub connector sees repos created this way, so the
+   normal push path seeds them.)
 
 ## The generator
 
