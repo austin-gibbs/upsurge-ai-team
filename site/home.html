@@ -70,6 +70,7 @@
     .board-item small { color: var(--muted); display: block; margin-top: 3px; font-size: 0.82rem; }
     .board-item .item-cat { color: #9beaff; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; display: block; margin-top: 8px; }
     .board-empty { color: var(--muted); font-size: 0.86rem; border: 1px dashed rgba(255,255,255,0.14); border-radius: 12px; padding: 12px; text-align: center; }
+    .homebase-strip { border: 1px solid rgba(85,230,165,0.3); background: rgba(85,230,165,0.06); border-radius: 14px; padding: 12px 15px; color: var(--soft); font-weight: 650; line-height: 1.5; margin: 0 0 14px; }
     .template-list { display: grid; gap: 10px; }
     .template-item {
       display: flex; justify-content: space-between; gap: 12px; align-items: center;
@@ -161,6 +162,7 @@
           <article class="home-card">
             <h3 id="board-title">Your board, right now</h3>
             <p class="card-sub" id="boardSub">Every job, who owns it, and where it stands, in your business's own words. Quiet here means the team is handling it.</p>
+            <p class="homebase-strip">This board is home base. Every lane adds its projects here, and finished work lands in your ledger below.</p>
             <div class="cat-chips" id="catChips" aria-label="Work categories"></div>
             <div class="board-cols" id="boardCols"></div>
           </article>
