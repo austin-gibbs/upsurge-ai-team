@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your UpSurge AI Team setup hub. Turn on your team yourself, step by step. Every step checks itself as you go.">
+  <title>Onboarding Hub | UpSurge AI Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .page-hero { padding: 56px 0 6px; }
+    .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); margin-top: 20px; }
+    .preview-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(244,199,106,0.45); background: rgba(244,199,106,0.1);
+      color: #ffe1a1; border-radius: 999px; padding: 7px 13px;
+      font-size: 0.8rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .hub-head {
+      position: sticky; top: 72px; z-index: 15;
+      margin-top: 34px; padding: 20px 22px;
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 24px;
+      background: rgba(6, 12, 26, 0.92); backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+    .hub-head-top { display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .hub-head-top strong { font-size: 1.05rem; letter-spacing: -0.02em; }
+    .hub-head-top span { color: var(--muted); font-size: 0.9rem; }
+    .reset-link { color: var(--muted); font-size: 0.85rem; font-weight: 700; text-decoration: underline; cursor: pointer; background: none; border: 0; font: inherit; }
+    .stage-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .track-step {
+      border: 1px solid var(--line); border-radius: 16px; padding: 12px 13px;
+      background: rgba(255,255,255,0.04); color: var(--muted); font-size: 0.86rem; font-weight: 750;
+      display: grid; gap: 3px;
+    }
+    .track-step .track-state { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+    .track-step.current { border-color: rgba(56,225,255,0.6); background: rgba(56,225,255,0.1); color: var(--text); }
+    .track-step.current .track-state { color: #9beaff; }
+    .track-step.done { border-color: rgba(85,230,165,0.45); background: rgba(85,230,165,0.08); color: var(--soft); }
+    .track-step.done .track-state { color: #8ff5c5; }
+    .stage-panel {
+      border: 1px solid var(--line); background: var(--panel); border-radius: var(--radius);
+      padding: 30px; margin-top: 20px;
+    }
+    .stage-panel.current { border-color: rgba(56,225,255,0.45); }
+    .stage-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 8px; }
+    .stage-head h3 { font-size: 1.45rem; }
+    .stage-sub { color: var(--muted); margin: 0 0 8px; max-width: 760px; }
+    .time-line { color: #8ff5c5; font-size: 0.88rem; font-weight: 750; margin: 0 0 20px; }
+    .shape-note { color: #9beaff; font-weight: 650; margin: -6px 0 18px; max-width: 760px; }
+    .status.idle { background: rgba(255,255,255,0.1); color: var(--muted); }
+    .status.attn { background: rgba(255,120,120,0.15); color: #ffb4b4; }
+    .rescue {
+      margin-top: 18px; border: 1px dashed rgba(56,225,255,0.35); border-radius: 16px;
+      background: rgba(56,225,255,0.05); padding: 14px 16px; color: var(--soft); font-size: 0.94rem;
+    }
+    .rescue strong { color: #9beaff; }
+    .prov-list { display: grid; gap: 10px; }
+    .prov-step {
+      display: flex; gap: 13px; align-items: center; padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; background: rgba(3,10,22,0.44);
+      color: var(--muted); font-weight: 700;
+    }
+    .prov-step .tick {
+      width: 30px; height: 30px; border-radius: 11px; display: grid; place-items: center; flex: 0 0 auto;
+      background: rgba(255,255,255,0.08); font-size: 0.85rem; font-weight: 900;
+    }
+    .prov-step.active { color: var(--text); border-color: rgba(56,225,255,0.5); }
+    .prov-step.complete { color: var(--soft); border-color: rgba(85,230,165,0.35); }
+    .prov-step.complete .tick { background: rgba(85,230,165,0.18); color: #8ff5c5; }
+    .workspace-line { color: var(--muted); margin-top: 16px; font-size: 0.95rem; }
+    .workspace-line strong { color: var(--soft); }
+    .progress-shell { height: 12px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; margin: 4px 0 18px; }
+    .progress-fill { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--cyan), var(--green)); transition: width 500ms ease; }
+    .tool-row {
+      display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 16px 18px;
+      background: rgba(3,10,22,0.44); margin-bottom: 10px;
+    }
+    .tool-row strong { display: block; font-size: 1rem; }
+    .tool-row small { color: var(--muted); display: block; margin-top: 2px; line-height: 1.45; }
+    .tool-row .tool-actions { display: flex; align-items: center; gap: 12px; }
+    .tool-reason { grid-column: 1 / -1; display: none; color: #ffd7d7; font-size: 0.92rem; font-weight: 650; }
+    .tool-row.failed .tool-reason { display: block; }
+    .tool-row.failed { border-color: rgba(255,120,120,0.45); }
+    .security-note {
+      border: 1px solid rgba(85,230,165,0.3); background: rgba(85,230,165,0.06);
+      border-radius: 18px; padding: 18px 20px; margin-top: 16px;
+    }
+    .security-note h4 { margin: 0 0 8px; font-size: 1rem; }
+    .security-note ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
+    .lane-seat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .lane-seat { border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 20px; background: rgba(3,10,22,0.44); }
+    .lane-seat h4 { margin: 0 0 4px; font-size: 1.1rem; letter-spacing: -0.02em; }
+    .lane-seat .lane-sub { color: var(--muted); font-size: 0.9rem; margin: 0 0 14px; }
+    .copy-block {
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; background: rgba(0,0,0,0.35);
+      padding: 13px 14px; font-size: 0.82rem; line-height: 1.55; color: var(--soft);
+      white-space: pre-wrap; word-break: break-word; margin: 0 0 12px; max-height: 148px; overflow: auto;
+    }
+    .lane-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 14px; }
+    .drill { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .drill li { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 0.92rem; font-weight: 650; }
+    .drill .tick { width: 24px; height: 24px; border-radius: 9px; display: grid; place-items: center; background: rgba(255,255,255,0.08); font-size: 0.72rem; font-weight: 900; flex: 0 0 auto; }
+    .drill li.complete { color: var(--soft); }
+    .drill li.complete .tick { background: rgba(85,230,165,0.18); color: #8ff5c5; }
+    .fact-row {
+      display: grid; grid-template-columns: 1fr auto; gap: 10px 14px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 13px 15px;
+      background: rgba(3,10,22,0.44); margin-bottom: 9px;
+    }
+    .fact-row input {
+      width: 100%; border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 650;
+      padding: 4px 2px; border-bottom: 1px dashed rgba(255,255,255,0.18);
+    }
+    .fact-row input:focus { outline: none; border-bottom-color: var(--cyan); }
+    .fact-row .fact-src { grid-column: 1 / -1; color: var(--muted); font-size: 0.82rem; margin-top: -4px; }
+    .fact-row.confirmed { border-color: rgba(85,230,165,0.4); }
+    .fact-counter { font-weight: 850; color: var(--soft); margin: 4px 0 16px; }
+    .fact-counter strong { color: #8ff5c5; }
+    .know-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-weight: 750; font-size: 0.94rem; }
+    .field input[type="text"], .field textarea {
+      width: 100%; border: 1px solid var(--line); background: rgba(3,10,22,0.48); color: var(--text);
+      border-radius: 14px; padding: 13px 14px; font: inherit; font-size: 0.97rem;
+    }
+    .field textarea { min-height: 84px; resize: vertical; }
+    .field input:focus, .field textarea:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; }
+    .voice-choices { display: flex; flex-wrap: wrap; gap: 9px; }
+    .voice-choices label {
+      border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px; cursor: pointer;
+      font-weight: 750; font-size: 0.92rem; background: rgba(3,10,22,0.44);
+    }
+    .voice-choices input { position: absolute; opacity: 0; pointer-events: none; }
+    .voice-choices label:has(input:checked) { border-color: rgba(56,225,255,0.7); background: rgba(56,225,255,0.14); color: #eafcff; }
+    .form-error { display: none; color: #ffb4b4; font-weight: 650; font-size: 0.92rem; margin-top: 12px; }
+    .form-error.show { display: block; }
+    .live-box { text-align: center; padding: 14px 8px 6px; }
+    .live-badge {
+      width: 78px; height: 78px; margin: 0 auto 20px; border-radius: 26px; display: grid; place-items: center;
+      font-size: 1.8rem; font-weight: 900; color: #03111d;
+      background: linear-gradient(135deg, #7ff3ff, #34d399); box-shadow: 0 18px 44px rgba(45,212,191,0.3);
+    }
+    .live-box h3 { font-size: 2rem; margin-bottom: 10px; }
+    .live-box p { color: var(--muted); max-width: 600px; margin: 0 auto 10px; }
+    .first-request { max-width: 640px; margin: 22px auto 0; display: grid; gap: 12px; text-align: left; }
+    .first-request textarea {
+      width: 100%; border: 1px solid var(--line); background: rgba(3,10,22,0.5); color: var(--text);
+      border-radius: 16px; padding: 15px; font: inherit; min-height: 92px; resize: vertical;
+    }
+    .remaining-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .remaining-list li {
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 13px 16px;
+      background: rgba(3,10,22,0.44); font-weight: 700;
+    }
+    .remaining-list a { color: #9beaff; font-weight: 800; white-space: nowrap; }
+    .small-note { color: var(--muted); font-size: 0.9rem; }
+    @media (max-width: 1020px) { .stage-track { grid-template-columns: repeat(2, 1fr); } .lane-seat-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) {
+      .hub-head { top: 64px; }
+      .stage-track, .know-grid { grid-template-columns: 1fr; }
+      .tool-row { grid-template-columns: 1fr; }
+      .stage-panel { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="UpSurge AI Team home">
+        <span class="brand-mark">US</span>
+        <span>UpSurge <small>AI Team</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#team">Team</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="signin.html">Client sign in</a>
+        <a class="button primary small" href="book.html">Book a fit call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-hero">
+      <span class="preview-badge">Guided preview: the connects and quick checks here are pretend, so you can see how it feels</span>
+      <h1>Set up your team. <span class="gradient">It runs itself.</span></h1>
+      <p class="hero-copy">Welcome aboard. Your AI team is officially on the job. From here, you ask and we deliver: strategy, websites, automations, content, follow up, reporting. This hub sets everything up with you, checks each step as you go, and lights up the moment you are live. Hundreds of moving parts just became someone else's problem. Ours, gladly.</p>
+    </div>
+
+    <div class="wrap">
+      <div class="hub-head" aria-label="Install progress">
+        <div class="hub-head-top">
+          <div><strong id="hubSummary">Your setup is under way.</strong><br><span>Leave anytime. We will keep your place, and every step picks up right where you left it.</span></div>
+          <button class="reset-link" id="resetDemo" type="button">Reset demo</button>
+        </div>
+        <div class="stage-track" id="stageTrack">
+          <div class="track-step" data-track="1"><span class="track-state">Stage 1</span>Set up your command center</div>
+          <div class="track-step" data-track="2"><span class="track-state">Stage 2</span>Connect your tools</div>
+          <div class="track-step" data-track="3"><span class="track-state">Stage 3</span>Turn on your team</div>
+          <div class="track-step" data-track="4"><span class="track-state">Stage 4</span>Tell us about your business</div>
+          <div class="track-step" data-track="5"><span class="track-state">Stage 5</span>Go live</div>
+        </div>
+      </div>
+
+      <section class="stage-panel" id="panel1" aria-labelledby="stage1-title">
+        <div class="stage-head">
+          <h3 id="stage1-title"><span class="step-num" style="display:inline-grid;margin:0 10px 0 0;vertical-align:middle">1</span>Set up your command center</h3>
+          <span class="status working" data-stage-pill="1">Setting up</span>
+        </div>
+        <p class="stage-sub">Your application and start payment are in, so this step runs on its own. No one on our side touches a thing: your workspace builds itself and checks itself as it goes.</p>
+        <p class="time-line">About 2 minutes, and it finishes by itself. We handle the rest.</p>
+        <div class="prov-list" id="provList">
+          <div class="prov-step" data-prov="0"><span class="tick">1</span>Creating your command center</div>
+          <div class="prov-step" data-prov="1"><span class="tick">2</span>Naming your workspace for your business</div>
+          <div class="prov-step" data-prov="2"><span class="tick">3</span>Loading your team roster across all three lanes</div>
+          <div class="prov-step" data-prov="3"><span class="tick">4</span>Opening your request board and output ledger</div>
+          <div class="prov-step" data-prov="4"><span class="tick">5</span>Preparing your live team page</div>
+        </div>
+        <p class="workspace-line">Workspace: <strong id="workspaceName">Summit Ridge Realty Group, Command Center</strong> (demonstration name). Your board, team page, and ledger live at this address from now on.<span id="wsTypeLine"></span></p>
+        <div class="rescue" data-rescue="1"><strong>Next smallest step:</strong> none. This stage finishes itself. Watch it land, then connect your first tool below.</div>
+      </section>
+
+      <section class="stage-panel" id="panel2" aria-labelledby="stage2-title">
+        <div class="stage-head">
+          <h3 id="stage2-title"><span class="step-num" style="display:inline-grid;margin:0 10px 0 0;vertical-align:middle">2</span>Connect your tools</h3>
+          <span class="status idle" data-stage-pill="2">Not started</span>
+        </div>
+        <p class="stage-sub">Click Connect next to a tool, sign in on that tool's own page, then come back here. A quick check runs by itself, and only then does the tool count as connected. One tool at a time.</p>
+        <p class="time-line">About 15 minutes, one tool at a time. We handle the rest.</p>
+        <p class="shape-note" id="shapeNoteConnect" style="display:none">Do not see your kind of business? We shape everything around yours as we learn it.</p>
+        <div class="progress-shell" aria-hidden="true"><div class="progress-fill" id="connectProgress"></div></div>
+        <p class="fact-counter" style="margin-top:0"><strong id="connectCount">0</strong> of 8 tools connected and checked</p>
+        <div id="toolList">
+          <div class="tool-row" data-tool="crm">
+            <div><strong>CRM</strong><small>So follow up, pipelines, and customer records stay current without anyone chasing them.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+          <div class="tool-row" data-tool="email">
+            <div><strong>Email</strong><small>So your team can draft, send, and follow up with your approval rules in place.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+          <div class="tool-row" data-tool="calendar">
+            <div><strong>Calendar</strong><small>So your team can book, prepare, and protect your schedule.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+          <div class="tool-row" data-tool="phone">
+            <div><strong>Phone system</strong><small>So voice agents can dial, qualify, and book with your numbers, checked before any outreach.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+            <p class="tool-reason" data-tool-reason></p>
+          </div>
+          <div class="tool-row" data-tool="ads">
+            <div><strong>Ads</strong><small>So campaigns can be prepared, launched on your approval, and reported without a scramble.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+          <div class="tool-row" data-tool="files">
+            <div><strong>File storage</strong><small>So your team works from your real materials: photos, documents, and brand files.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+          <div class="tool-row" data-tool="accounting">
+            <div><strong>Accounting</strong><small>So invoices, payments, and month-end numbers assemble themselves.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+          <div class="tool-row" data-tool="project">
+            <div><strong>Project tool</strong><small>Optional. If your staff already works in one, your team picks requests up there too.</small></div>
+            <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+          </div>
+        </div>
+        <div class="security-note">
+          <h4>How connecting works, and why it is safe</h4>
+          <ul>
+            <li><strong style="color:var(--soft)">You sign in yourself.</strong> Every connection uses the tool's own secure sign-in page. You type your password into their page, never to us. We never see, receive, or store your passwords.</li>
+            <li><strong style="color:var(--soft)">One tap at a time.</strong> The checklist shows exactly what is being connected and why, and nothing connects without your tap.</li>
+            <li><strong style="color:var(--soft)">You can turn a connection off anytime.</strong> Every tool lets you disconnect in its own settings, instantly, no phone call and no questions.</li>
+            <li><strong style="color:var(--soft)">Least access by default.</strong> We request only the access each tool needs to do its job, and you see it before you approve it.</li>
+          </ul>
+        </div>
+        <div class="rescue" data-rescue="2"><strong>Next smallest step:</strong> connect one tool. Email is the fastest first win. <span class="small-note">We will keep your place if you need to come back to the rest.</span></div>
+      </section>
+
+      <section class="stage-panel" id="panel3" aria-labelledby="stage3-title">
+        <div class="stage-head">
+          <h3 id="stage3-title"><span class="step-num" style="display:inline-grid;margin:0 10px 0 0;vertical-align:middle">3</span>Turn on your team</h3>
+          <span class="status idle" data-stage-pill="3">Not started</span>
+        </div>
+        <p class="stage-sub">Your team turns on in three lanes. For each lane: copy the setup words, paste them into that app, tap I pasted it, and a quick check runs by itself. A lane counts as on when every check passes.</p>
+        <p class="time-line">About 5 minutes. We handle the rest.</p>
+        <div class="lane-seat-grid">
+          <article class="lane-seat" data-lane="muse">
+            <h4>Muse lane</h4>
+            <p class="lane-sub">Operations and Systems: connected tools, memory, and daily follow through.</p>
+            <pre class="copy-block" data-setup-text>You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. When a request is unclear, ask the team lead once, with a recommendation.</pre>
+            <div class="lane-actions">
+              <button class="button secondary small" type="button" data-copy>Copy the setup words</button>
+              <button class="button secondary small" type="button" data-pasted>I pasted it</button>
+            </div>
+            <ul class="drill">
+              <li data-drill="0"><span class="tick">1</span>Your team can see the team list</li>
+              <li data-drill="1"><span class="tick">2</span>Work rules checked</li>
+              <li data-drill="2"><span class="tick">3</span>Found what your team knows</li>
+            </ul>
+            <p style="margin:14px 0 0"><span class="status idle" data-lane-status>Not on yet</span></p>
+          </article>
+          <article class="lane-seat" data-lane="claude">
+            <h4>Claude lane</h4>
+            <p class="lane-sub">Strategy and Craft: deep thinking, careful writing, research, and polished work.</p>
+            <pre class="copy-block" data-setup-text>You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. Bring judgment, cite your sources, and hand finished work back through the team lead.</pre>
+            <div class="lane-actions">
+              <button class="button secondary small" type="button" data-copy>Copy the setup words</button>
+              <button class="button secondary small" type="button" data-pasted>I pasted it</button>
+            </div>
+            <ul class="drill">
+              <li data-drill="0"><span class="tick">1</span>Your team can see the team list</li>
+              <li data-drill="1"><span class="tick">2</span>Work rules checked</li>
+              <li data-drill="2"><span class="tick">3</span>Found what your team knows</li>
+            </ul>
+            <p style="margin:14px 0 0"><span class="status idle" data-lane-status>Not on yet</span></p>
+          </article>
+          <article class="lane-seat" data-lane="grok">
+            <h4>Grok lane</h4>
+            <p class="lane-sub">Speed and Signal: fast production, live awareness, and high volume follow through.</p>
+            <pre class="copy-block" data-setup-text>You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. Move fast, keep quality checks on, and report finished work to the board.</pre>
+            <div class="lane-actions">
+              <button class="button secondary small" type="button" data-copy>Copy the setup words</button>
+              <button class="button secondary small" type="button" data-pasted>I pasted it</button>
+            </div>
+            <ul class="drill">
+              <li data-drill="0"><span class="tick">1</span>Your team can see the team list</li>
+              <li data-drill="1"><span class="tick">2</span>Work rules checked</li>
+              <li data-drill="2"><span class="tick">3</span>Found what your team knows</li>
+            </ul>
+            <p style="margin:14px 0 0"><span class="status idle" data-lane-status>Not on yet</span></p>
+          </article>
+        </div>
+        <div class="rescue" data-rescue="3"><strong>Next smallest step:</strong> turn on one lane. The Muse lane takes under a minute, start to checked. <span class="small-note">We will keep your place on the other two.</span></div>
+      </section>
+
+      <section class="stage-panel" id="panel4" aria-labelledby="stage4-title">
+        <div class="stage-head">
+          <h3 id="stage4-title"><span class="step-num" style="display:inline-grid;margin:0 10px 0 0;vertical-align:middle">4</span>Tell us about your business</h3>
+          <span class="status idle" data-stage-pill="4">Not started</span>
+        </div>
+        <p class="stage-sub">Your website and your tools already wrote a first draft of the basics. Tap Confirm on each line that looks right, fix any line that is off, then add the things only you know: your voice, your rules, and who says yes. This becomes what your team knows about your business.</p>
+        <p class="time-line">About 10 minutes. We handle the rest.</p>
+        <p class="shape-note" id="shapeNoteFacts" style="display:none">Do not see your kind of business? We shape everything around yours as we learn it.</p>
+        <p class="fact-counter"><strong id="factCount">0</strong> of <span id="factTotal">8</span> facts confirmed</p>
+        <div id="factList"></div>
+
+        <form id="knowledgeForm" novalidate>
+          <div class="know-grid">
+            <div class="field full">
+              <label for="kServices">Services you offer</label>
+              <textarea id="kServices" placeholder="Listings, buyer representation, relocation, property management, and so on."></textarea>
+            </div>
+            <div class="field full">
+              <label for="kServe">Who you serve</label>
+              <textarea id="kServe" placeholder="First-time buyers, move-up families, investors, and the neighborhoods or areas you know best."></textarea>
+            </div>
+            <div class="field full">
+              <label>Your voice</label>
+              <div class="voice-choices" role="radiogroup" aria-label="Voice">
+                <label><input type="radio" name="kVoice" value="Warm and direct" checked>Warm and direct</label>
+                <label><input type="radio" name="kVoice" value="Polished and formal">Polished and formal</label>
+                <label><input type="radio" name="kVoice" value="Friendly and casual">Friendly and casual</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label for="kVoiceNote">Anything else about your voice</label>
+              <textarea id="kVoiceNote" placeholder="Words you love, words you never use, how you sign off, how formal a first message should feel."></textarea>
+            </div>
+            <div class="field">
+              <label for="kApprover">Who approves client-facing work</label>
+              <input type="text" id="kApprover" placeholder="Owner only, or a named manager">
+            </div>
+            <div class="field">
+              <label for="kSeason">Your busiest season</label>
+              <input type="text" id="kSeason" placeholder="Spring listings, open enrollment, tax season">
+            </div>
+            <div class="field full">
+              <label for="kRules">Hard rules and never-dos</label>
+              <textarea id="kRules" placeholder="Never quote a price without approval. Never contact a client after 8 PM. Anything your team must treat as a wall, say it here."></textarea>
+            </div>
+            <div class="field full">
+              <label for="kAnything">Anything else</label>
+              <textarea id="kAnything" placeholder="The thing a great new hire would learn in week one. Give it to your team now."></textarea>
+            </div>
+          </div>
+          <p class="form-error" id="knowledgeError">Two quick answers finish this step: what you offer, and who you serve. A sentence each is plenty.</p>
+          <div style="margin-top:18px; display:flex; gap:14px; flex-wrap:wrap; align-items:center">
+            <button class="button primary" type="submit" id="knowledgeSave">Save what my team knows</button>
+            <span class="small-note" id="knowledgeSavedNote"></span>
+          </div>
+        </form>
+        <div class="rescue" data-rescue="4"><strong>Next smallest step:</strong> confirm one fact above. Each tap teaches your team something it will use on every request. <span class="small-note">We will keep your place on the rest.</span></div>
+      </section>
+
+      <section class="stage-panel" id="panel5" aria-labelledby="stage5-title">
+        <div class="stage-head">
+          <h3 id="stage5-title"><span class="step-num" style="display:inline-grid;margin:0 10px 0 0;vertical-align:middle">5</span>Go live</h3>
+          <span class="status idle" data-stage-pill="5">Waiting on stages</span>
+        </div>
+        <div id="livePending">
+          <p class="stage-sub">This step turns on by itself the moment every step above passes its quick check. Nothing waits on us. Here is exactly what is left:</p>
+          <p class="time-line">No time at all. It turns on by itself.</p>
+          <ul class="remaining-list" id="remainingList"></ul>
+        </div>
+        <div id="liveDone" style="display:none">
+          <div class="live-box">
+            <div class="live-badge" aria-hidden="true">&#10003;</div>
+            <h3>You are live.</h3>
+            <p>Your team is on, your tools are connected, and your Surge Command app is open. Every step checked itself, and your organization is now on the job.</p>
+            <p>Send your first request whenever you are ready. We are.</p>
+            <div class="first-request">
+              <label for="firstRequest" style="font-weight:750">Your first request</label>
+              <textarea id="firstRequest" placeholder="Start with the task you have been putting off. One sentence is enough."></textarea>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center">
+                <button class="button primary" type="button" id="sendFirst">Send my first request</button>
+                <span class="small-note" id="firstAck"></span>
+              </div>
+              <div id="homeCta" style="display:none">
+                <a class="button secondary" href="home.html">Open your command home</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rescue" data-rescue="5"><strong>Next smallest step:</strong> whichever stage above is still open. The moment it verifies, this panel lights up by itself.</div>
+      </section>
+
+      <p class="pricing-note" style="margin-bottom:70px">Questions while you set up? Message your team lead from your command center and a person answers. Everything else on this page runs itself.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>UpSurge AI Team</span>
+      <span>Installed AI operations for service businesses.</span>
+      <span>&copy; <span id="year">2026</span> UpSurge Pros</span>
+    </div>
+  </footer>
+
+  <script src="journey.js"></script>
+  <script>
+    (function () {
+      var KEY = 'upsurgeOnboardZeroTouchV1';
+      /* The business type chosen in the application shapes this hub: the facts
+         drafted for review, the order tools are connected in, and the words in
+         the questions. Production types come from the Business Type Packs in
+         install-templates/business-types/. */
+      var journey = window.JOURNEY ? JOURNEY.getJourney() : { businessType: 'real-estate', workspaceName: 'Summit Ridge Realty Group' };
+      var typeCfg = window.JOURNEY ? JOURNEY.getType(journey.businessType) : null;
+      /* Business types without a pack yet render from the general wording.
+         There is no industry limit: the shaped panels carry a plain line
+         saying the setup shapes itself around any business, and when the
+         client named their own kind of business in the application, those
+         words name their workspace type here and in their facts below. */
+      var isFallbackType = window.JOURNEY ? JOURNEY.isFallback(journey.businessType) : false;
+      if (isFallbackType) {
+        ['shapeNoteConnect', 'shapeNoteFacts'].forEach(function (id) {
+          var note = document.getElementById(id);
+          if (note) note.style.display = '';
+        });
+      }
+      var wsTypeEl = document.getElementById('wsTypeLine');
+      if (wsTypeEl && window.JOURNEY) {
+        wsTypeEl.textContent = ' Business type: ' + JOURNEY.typeLabel(journey.businessType, journey) + '.';
+      }
+      var TOOL_IDS = ['crm', 'email', 'calendar', 'phone', 'ads', 'files', 'accounting', 'project'];
+      var LANE_IDS = ['muse', 'claude', 'grok'];
+      var DEFAULT_FACTS = [
+        { text: 'Business name: Summit Ridge Realty Group', src: 'From your website and application' },
+        { text: 'Industry: Real estate, residential sales', src: 'From your website' },
+        { text: 'Service area: Denver metro and the foothills', src: 'From your website service pages' },
+        { text: 'Core offer: Listing representation and buyer representation', src: 'From your website' },
+        { text: 'Main lead sources: Referrals, past clients, and open houses', src: 'Drafted from your connected CRM' },
+        { text: 'Follow up today: Manual, owner-led, often next day', src: 'From your application answers' },
+        { text: 'Team size: 6 to 15', src: 'From your application' },
+        { text: 'Approval habit: Owner approves client-facing work', src: 'Default. Correct it below if a manager approves' }
+      ];
+
+      function blankState() {
+        return {
+          provSteps: 0,
+          tools: {},            // id -> { s: 'connected' | 'failed', tries: n }
+          lanes: {},            // id -> { pasted: bool, drill: 0..3, seated: bool }
+          facts: null,          // [{ text, confirmed }]
+          knowledge: {},        // field id -> value, plus voice
+          knowledgeSaved: false,
+          live: false,
+          firstRequestSent: false
+        };
+      }
+      var state = blankState();
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          for (var k in parsed) state[k] = parsed[k];
+        }
+      } catch (e) { /* fresh state */ }
+      TOOL_IDS.forEach(function (id) { if (!state.tools[id]) state.tools[id] = { s: 'idle', tries: 0 }; });
+      LANE_IDS.forEach(function (id) { if (!state.lanes[id]) state.lanes[id] = { pasted: false, drill: 0, seated: false }; });
+      if (!state.facts) {
+        var factSource = (typeCfg && typeCfg.facts) ? typeCfg.facts : DEFAULT_FACTS;
+        state.facts = factSource.map(function (f) {
+          var text = f.text;
+          if (journey.businessType === 'other' && journey.customType && text.indexOf('Industry:') === 0) {
+            text = 'Industry: ' + journey.customType;
+          }
+          return { text: text, src: f.src, confirmed: false };
+        });
+      }
+      /* The workspace carries the client's own business name everywhere. */
+      if (journey.workspaceName) {
+        var wsEl = document.getElementById('workspaceName');
+        if (wsEl) wsEl.textContent = journey.workspaceName + ', Command Center';
+        document.querySelectorAll('[data-setup-text]').forEach(function (el) {
+          el.textContent = el.textContent.split('Summit Ridge Realty Group').join(journey.workspaceName);
+        });
+      }
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* preview still works in memory */ }
+      }
+
+      function pill(el, text, cls) {
+        el.textContent = text;
+        el.className = 'status ' + cls;
+      }
+
+      /* ---------- Stage 1: automated provisioning ---------- */
+      var provTimer = null;
+      function renderProv() {
+        var steps = document.querySelectorAll('[data-prov]');
+        steps.forEach(function (el, i) {
+          el.classList.toggle('complete', i < state.provSteps);
+          el.classList.toggle('active', i === state.provSteps && state.provSteps < 5);
+          el.querySelector('.tick').innerHTML = i < state.provSteps ? '&#10003;' : (i + 1);
+        });
+      }
+      function runProv() {
+        if (state.provSteps >= 5 || provTimer) return;
+        provTimer = window.setInterval(function () {
+          state.provSteps++;
+          save(); renderProv(); renderProgress();
+          if (state.provSteps >= 5) { window.clearInterval(provTimer); provTimer = null; renderProgress(); }
+        }, 650);
+      }
+
+      /* ---------- Stage 2: connect and quick check loop ---------- */
+      /* Connect the tools this business leans on first: the list order comes
+         from the business type, not from a fixed template. */
+      if (typeCfg && typeCfg.connectOrder) {
+        var toolListEl = document.getElementById('toolList');
+        typeCfg.connectOrder.forEach(function (id) {
+          var row = toolListEl.querySelector('[data-tool="' + id + '"]');
+          if (row) toolListEl.appendChild(row);
+        });
+      }
+      function renderTool(id) {
+        var row = document.querySelector('[data-tool="' + id + '"]');
+        var status = row.querySelector('[data-tool-status]');
+        var btn = row.querySelector('[data-connect]');
+        var t = state.tools[id];
+        row.classList.toggle('failed', t.s === 'failed');
+        if (t.s === 'connected') { pill(status, 'Connected', 'done'); btn.textContent = 'Connected'; btn.disabled = true; }
+        else if (t.s === 'failed') { pill(status, 'Needs attention', 'attn'); btn.textContent = 'Retry connection'; btn.disabled = false; }
+        else if (t.s === 'opening') { pill(status, 'Opening sign-in', 'working'); btn.textContent = 'Opening'; btn.disabled = true; }
+        else if (t.s === 'verifying') { pill(status, 'Running a quick check', 'review'); btn.textContent = 'Checking'; btn.disabled = true; }
+        else { pill(status, 'Not started', 'idle'); btn.textContent = 'Connect'; btn.disabled = false; }
+      }
+      function renderConnectProgress() {
+        var done = TOOL_IDS.filter(function (id) { return state.tools[id].s === 'connected'; }).length;
+        document.getElementById('connectCount').textContent = done;
+        document.getElementById('connectProgress').style.width = (done / TOOL_IDS.length * 100) + '%';
+      }
+      TOOL_IDS.forEach(function (id) {
+        var row = document.querySelector('[data-tool="' + id + '"]');
+        var btn = row.querySelector('[data-connect]');
+        btn.addEventListener('click', function () {
+          var t = state.tools[id];
+          t.tries++;
+          t.s = 'opening'; save(); renderTool(id);
+          window.setTimeout(function () {
+            t.s = 'verifying'; save(); renderTool(id);
+            window.setTimeout(function () {
+              // The phone system demonstrates the rescue path: its first quick check
+              // needs an admin sign-in, so it fails once with a plain reason and a retry.
+              if (id === 'phone' && t.tries === 1) {
+                t.s = 'failed';
+                var reason = row.querySelector('[data-tool-reason]');
+                if (reason) reason.textContent = 'One quick fix needed: your phone provider asks for an admin sign-in on this connection. Sign in with an admin account, then tap Retry connection. Nothing else about your setup changes.';
+              } else {
+                t.s = 'connected';
+              }
+              save(); renderTool(id); renderConnectProgress(); renderProgress();
+            }, 1200);
+          }, 900);
+        });
+        if (state.tools[id].s === 'opening' || state.tools[id].s === 'verifying') state.tools[id].s = 'idle';
+        renderTool(id);
+      });
+      renderConnectProgress();
+
+      /* ---------- Stage 3: turn on each lane, quick check runs itself ---------- */
+      function renderLane(id) {
+        var card = document.querySelector('[data-lane="' + id + '"]');
+        var status = card.querySelector('[data-lane-status]');
+        var L = state.lanes[id];
+        var items = card.querySelectorAll('[data-drill]');
+        items.forEach(function (li, i) {
+          li.classList.toggle('complete', i < L.drill);
+          li.querySelector('.tick').innerHTML = i < L.drill ? '&#10003;' : (i + 1);
+        });
+        if (L.seated) pill(status, 'Team is on', 'done');
+        else if (L.pasted) pill(status, 'Checking', 'working');
+        else pill(status, 'Not on yet', 'idle');
+        var pastedBtn = card.querySelector('[data-pasted]');
+        pastedBtn.disabled = !!L.seated;
+        pastedBtn.textContent = L.pasted ? 'Pasted it' : 'I pasted it';
+      }
+      function runDrill(id) {
+        var L = state.lanes[id];
+        if (L.seated || !L.pasted) return;
+        var step = function () {
+          if (L.drill < 3) {
+            L.drill++; save(); renderLane(id);
+            window.setTimeout(step, 550);
+          } else {
+            L.seated = true; save(); renderLane(id); renderProgress();
+          }
+        };
+        window.setTimeout(step, 400);
+      }
+      LANE_IDS.forEach(function (id) {
+        var card = document.querySelector('[data-lane="' + id + '"]');
+        var copyBtn = card.querySelector('[data-copy]');
+        copyBtn.addEventListener('click', function () {
+          var text = card.querySelector('[data-setup-text]').textContent;
+          var done = function () { copyBtn.textContent = 'Copied'; window.setTimeout(function () { copyBtn.textContent = 'Copy the setup words'; }, 1800); };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, done);
+          } else { done(); }
+        });
+        card.querySelector('[data-pasted]').addEventListener('click', function () {
+          state.lanes[id].pasted = true; save(); renderLane(id); runDrill(id);
+        });
+        renderLane(id);
+        if (state.lanes[id].pasted && !state.lanes[id].seated) runDrill(id);
+      });
+
+      /* ---------- Stage 4: auto-seeded facts plus knowledge form ---------- */
+      var factList = document.getElementById('factList');
+      function renderFacts() {
+        factList.innerHTML = '';
+        state.facts.forEach(function (f, i) {
+          var row = document.createElement('div');
+          row.className = 'fact-row' + (f.confirmed ? ' confirmed' : '');
+          var input = document.createElement('input');
+          input.type = 'text'; input.value = f.text;
+          input.setAttribute('aria-label', 'Draft fact ' + (i + 1));
+          input.addEventListener('input', function () {
+            state.facts[i].text = input.value;
+            if (state.facts[i].confirmed) { state.facts[i].confirmed = false; }
+            save(); renderFactsCount(); renderRowState(row, i);
+          });
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'button ' + (f.confirmed ? 'secondary' : 'primary') + ' small';
+          btn.textContent = f.confirmed ? 'Confirmed' : 'Confirm';
+          btn.addEventListener('click', function () {
+            state.facts[i].confirmed = !state.facts[i].confirmed;
+            save(); renderFacts(); renderProgress();
+          });
+          var src = document.createElement('span');
+          src.className = 'fact-src'; src.textContent = f.src + '. Edit the line if it is off, then confirm.';
+          row.appendChild(input); row.appendChild(btn); row.appendChild(src);
+          factList.appendChild(row);
+        });
+        renderFactsCount();
+      }
+      function renderRowState(row, i) {
+        row.classList.toggle('confirmed', state.facts[i].confirmed);
+        var btn = row.querySelector('button');
+        btn.textContent = state.facts[i].confirmed ? 'Confirmed' : 'Confirm';
+        btn.className = 'button ' + (state.facts[i].confirmed ? 'secondary' : 'primary') + ' small';
+        renderProgress();
+      }
+      function renderFactsCount() {
+        var n = state.facts.filter(function (f) { return f.confirmed; }).length;
+        document.getElementById('factCount').textContent = n;
+        document.getElementById('factTotal').textContent = state.facts.length;
+      }
+      renderFacts();
+
+      /* The questions speak the business's language: placeholders come from the type. */
+      if (typeCfg && typeCfg.intake) {
+        document.getElementById('kServices').placeholder = typeCfg.intake.services;
+        document.getElementById('kServe').placeholder = typeCfg.intake.serve;
+        document.getElementById('kSeason').placeholder = typeCfg.intake.season;
+      }
+      var KNOW_FIELDS = ['kServices', 'kServe', 'kVoiceNote', 'kApprover', 'kSeason', 'kRules', 'kAnything'];
+      KNOW_FIELDS.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (state.knowledge[id]) el.value = state.knowledge[id];
+        el.addEventListener('input', function () { state.knowledge[id] = el.value; save(); });
+      });
+      if (state.knowledge.kVoice) {
+        var radio = document.querySelector('input[name="kVoice"][value="' + state.knowledge.kVoice + '"]');
+        if (radio) radio.checked = true;
+      }
+      document.querySelectorAll('input[name="kVoice"]').forEach(function (r) {
+        r.addEventListener('change', function () { state.knowledge.kVoice = r.value; save(); });
+      });
+      if (state.knowledgeSaved) document.getElementById('knowledgeSavedNote').textContent = 'Saved. This is now part of what your team knows.';
+      document.getElementById('knowledgeForm').addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var services = document.getElementById('kServices').value.trim();
+        var serve = document.getElementById('kServe').value.trim();
+        var err = document.getElementById('knowledgeError');
+        if (services.length < 3 || serve.length < 3) {
+          err.classList.add('show');
+          return;
+        }
+        err.classList.remove('show');
+        state.knowledgeSaved = true; save();
+        document.getElementById('knowledgeSavedNote').textContent = 'Saved. This is now part of what your team knows.';
+        renderProgress();
+      });
+
+      /* ---------- Stage completion, progress header, go live ---------- */
+      function stageDone(n) {
+        if (n === 1) return state.provSteps >= 5;
+        if (n === 2) return TOOL_IDS.every(function (id) { return state.tools[id].s === 'connected'; });
+        if (n === 3) return LANE_IDS.every(function (id) { return state.lanes[id].seated; });
+        if (n === 4) return state.knowledgeSaved && state.facts.every(function (f) { return f.confirmed; });
+        if (n === 5) return state.live;
+        return false;
+      }
+      function renderProgress() {
+        var current = 0;
+        for (var n = 1; n <= 5; n++) { if (!stageDone(n)) { current = n; break; } }
+        document.querySelectorAll('[data-track]').forEach(function (el) {
+          var n = parseInt(el.getAttribute('data-track'), 10);
+          el.classList.toggle('done', stageDone(n));
+          el.classList.toggle('current', n === current);
+          var label = el.querySelector('.track-state');
+          label.textContent = stageDone(n) ? 'Stage ' + n + ' complete' : (n === current ? 'Stage ' + n + ' in progress' : 'Stage ' + n);
+        });
+        for (var s = 1; s <= 5; s++) {
+          var panel = document.getElementById('panel' + s);
+          panel.classList.toggle('current', s === current);
+          var pillEl = document.querySelector('[data-stage-pill="' + s + '"]');
+          if (stageDone(s)) pill(pillEl, s === 5 ? 'Live' : 'Complete', 'done');
+          else if (s === current) pill(pillEl, 'In progress', 'working');
+          else if (s === 5) pill(pillEl, 'Waiting on steps', 'idle');
+          else pill(pillEl, 'Up next', 'idle');
+          var rescue = document.querySelector('[data-rescue="' + s + '"]');
+          if (rescue) rescue.style.display = stageDone(s) ? 'none' : 'block';
+        }
+        var doneCount = [1, 2, 3, 4, 5].filter(stageDone).length;
+        document.getElementById('hubSummary').textContent =
+          state.live ? 'You are live. Your AI organization is on the job.' :
+          doneCount === 0 ? 'Your setup is under way.' :
+          'Saved: ' + doneCount + ' of 5 steps done.';
+        renderRemaining();
+        maybeGoLive();
+      }
+      function renderRemaining() {
+        var list = document.getElementById('remainingList');
+        if (!list) return;
+        list.innerHTML = '';
+        var items = [];
+        if (!stageDone(1)) items.push(['Set up your command center', 'panel1', 'Finishing itself']);
+        if (!stageDone(2)) {
+          var left = TOOL_IDS.filter(function (id) { return state.tools[id].s !== 'connected'; }).length;
+          items.push(['Connect your tools', 'panel2', left + (left === 1 ? ' tool' : ' tools') + ' to go']);
+        }
+        if (!stageDone(3)) {
+          var lanesLeft = LANE_IDS.filter(function (id) { return !state.lanes[id].seated; }).length;
+          items.push(['Turn on your team', 'panel3', lanesLeft + (lanesLeft === 1 ? ' lane' : ' lanes') + ' to turn on']);
+        }
+        if (!stageDone(4)) {
+          var factsLeft = state.facts.filter(function (f) { return !f.confirmed; }).length;
+          var whats = [];
+          if (factsLeft) whats.push(factsLeft + (factsLeft === 1 ? ' fact' : ' facts') + ' to confirm');
+          if (!state.knowledgeSaved) whats.push('your answers to save');
+          items.push(['Tell us about your business', 'panel4', whats.join(' and ')]);
+        }
+        items.forEach(function (it) {
+          var li = document.createElement('li');
+          li.innerHTML = '<span>' + it[0] + '</span>';
+          var a = document.createElement('a');
+          a.href = '#' + it[1]; a.textContent = it[2];
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      }
+      function maybeGoLive() {
+        var ready = stageDone(1) && stageDone(2) && stageDone(3) && stageDone(4);
+        if (ready && !state.live) {
+          state.live = true; save();
+        }
+        document.getElementById('livePending').style.display = state.live ? 'none' : 'block';
+        document.getElementById('liveDone').style.display = state.live ? 'block' : 'none';
+        if (state.live) {
+          var pillEl = document.querySelector('[data-stage-pill="5"]');
+          pill(pillEl, 'Live', 'done');
+          if (state.firstRequestSent) showFirstAck();
+        }
+      }
+      function showFirstAck() {
+        document.getElementById('firstAck').textContent = 'Got it. Watch it move on your board.';
+        document.getElementById('homeCta').style.display = 'block';
+      }
+      document.getElementById('sendFirst').addEventListener('click', function () {
+        var box = document.getElementById('firstRequest');
+        if (box.value.trim().length < 3) {
+          document.getElementById('firstAck').textContent = 'One sentence is enough. What is the first job?';
+          box.focus();
+          return;
+        }
+        state.firstRequestSent = true; save();
+        showFirstAck(); renderProgress();
+      });
+
+      document.getElementById('resetDemo').addEventListener('click', function () {
+        try { localStorage.removeItem(KEY); } catch (e) { /* ignore */ }
+        window.location.reload();
+      });
+
+      renderProv();
+      renderProgress();
+      runProv();
+
+      var year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
