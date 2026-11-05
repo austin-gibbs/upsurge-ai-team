@@ -1,0 +1,42 @@
+{
+  "business_name": "Cedar Peak Dental",
+  "client_slug": "cedar-peak-dental",
+  "business_type": {
+    "pack": "dental-practice",
+    "display": "Dental practice",
+    "custom_words": {}
+  },
+  "timezone": "America/Denver",
+  "tier": "growth",
+  "tier_label": "Growth Team",
+  "item_word": "Appointment",
+  "customer_word": "Patient",
+  "lanes": [
+    {
+      "house_lane": "muse",
+      "name": "Operations Lane",
+      "platform": "ChatGPT",
+      "leader": "Maive"
+    },
+    {
+      "house_lane": "claude",
+      "name": "Strategy Lane",
+      "platform": "Claude",
+      "leader": "Named in the install record"
+    },
+    {
+      "house_lane": "grok",
+      "name": "Speed Lane",
+      "platform": "Grok",
+      "leader": "Marcus"
+    }
+  ],
+  "payment_status": "awaiting_payment_link",
+  "repository": {
+    "name": "upsurge-client-cedar-peak-dental",
+    "owner": "UpSurge GitHub organization",
+    "created_by_this_generator": false,
+    "status": "package_ready_repo_creation_pending"
+  },
+  "pm_tool_rule": "The PM tool is home base. Every lane adds every project here, and the client watches all work from here."
+}

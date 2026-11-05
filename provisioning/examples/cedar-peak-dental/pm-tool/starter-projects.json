@@ -1,0 +1,96 @@
+{
+  "rule": "The PM tool (Surge Command) is home base: it is the single location where all lanes add all projects, where the client submits and watches work, and where completed work enters the Output Ledger. No lane works off board.",
+  "projects": [
+    {
+      "id": "starter-01",
+      "title": "Make a call list from the recall report I approved for patients due this month.",
+      "lane": "muse",
+      "lane_name": "Operations Lane",
+      "platform": "ChatGPT",
+      "specialist": "Diego",
+      "category": "New patient requests",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    },
+    {
+      "id": "starter-02",
+      "title": "Draft a friendly reminder for tomorrow's visits using the appointment list I approved.",
+      "lane": "claude",
+      "lane_name": "Strategy Lane",
+      "platform": "Claude",
+      "specialist": "Parker",
+      "category": "Appointments",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    },
+    {
+      "id": "starter-03",
+      "title": "Sort these new patient requests and tell me what detail is missing from each one.",
+      "lane": "grok",
+      "lane_name": "Speed Lane",
+      "platform": "Grok",
+      "specialist": "Milo",
+      "category": "Visit reminders",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    },
+    {
+      "id": "starter-04",
+      "title": "Write a kind follow up for patients who missed a visit and need to rebook.",
+      "lane": "muse",
+      "lane_name": "Operations Lane",
+      "platform": "ChatGPT",
+      "specialist": "Hazel",
+      "category": "Hygiene recalls",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    },
+    {
+      "id": "starter-05",
+      "title": "Turn our approved aftercare sheet into a short, clear patient message.",
+      "lane": "claude",
+      "lane_name": "Strategy Lane",
+      "platform": "Claude",
+      "specialist": "Mira",
+      "category": "Treatment follow ups",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    },
+    {
+      "id": "starter-06",
+      "title": "Make a list of treatment follow ups that need a booking reminder.",
+      "lane": "grok",
+      "lane_name": "Speed Lane",
+      "platform": "Grok",
+      "specialist": "Greta",
+      "category": "Insurance questions",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    },
+    {
+      "id": "starter-07",
+      "title": "Draft a thank you and review request for a patient whose care is complete.",
+      "lane": "muse",
+      "lane_name": "Operations Lane",
+      "platform": "ChatGPT",
+      "specialist": "Remy",
+      "category": "Payments and forms",
+      "stage": "New patient request",
+      "first_step": "Open this project in the PM tool, confirm the approved source material for the work with the champion, and begin with the first item on the list.",
+      "definition_of_done": "The finished work is checked against the source material, recorded in the PM tool and in the memory work log, and the result is visible to the client in the PM tool.",
+      "source": "Business Type Pack starter request, in the client's words"
+    }
+  ]
+}

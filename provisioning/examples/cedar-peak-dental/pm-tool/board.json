@@ -1,0 +1,35 @@
+{
+  "item_word": "Appointment",
+  "customer_word": "Patient",
+  "stages": [
+    "New patient request",
+    "Visit booked",
+    "Visit coming up",
+    "Care in progress",
+    "Next visit planned",
+    "Recall due",
+    "Care complete"
+  ],
+  "categories": [
+    "New patient requests",
+    "Appointments",
+    "Visit reminders",
+    "Hygiene recalls",
+    "Treatment follow ups",
+    "Insurance questions",
+    "Payments and forms",
+    "Missed visits",
+    "Reviews and referrals"
+  ],
+  "starter_requests": [
+    "Make a call list from the recall report I approved for patients due this month.",
+    "Draft a friendly reminder for tomorrow's visits using the appointment list I approved.",
+    "Sort these new patient requests and tell me what detail is missing from each one.",
+    "Write a kind follow up for patients who missed a visit and need to rebook.",
+    "Turn our approved aftercare sheet into a short, clear patient message.",
+    "Make a list of treatment follow ups that need a booking reminder.",
+    "Draft a thank you and review request for a patient whose care is complete."
+  ],
+  "source_pack": "dental-practice",
+  "rename_rule": "The client can rename any stage, category, or word at any time, in the PM tool or by asking their team lead."
+}

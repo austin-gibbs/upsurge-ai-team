@@ -1,0 +1,78 @@
+{
+  "client_slug": "cedar-peak-dental",
+  "source": "App Census (install-system/app-census.md). States are the four recorded decisions. A row reads Connected only after the orchestrator verification passes during onboarding; until then the state in this file is the setup target the census resolved to.",
+  "tier_included_app_count": 10,
+  "counted_toward_included": 7,
+  "rows": [
+    {
+      "function": "customer_system",
+      "tool_name": "HighLevel",
+      "state": "Set up for them",
+      "owner": "upsurge",
+      "note": "No customer system today. The standard is set up for the practice during onboarding."
+    },
+    {
+      "function": "email",
+      "tool_name": "Google Workspace (Gmail)",
+      "state": "Connected",
+      "owner": "client",
+      "note": "You told us. Counts as Connected only after the orchestrator check passes during onboarding."
+    },
+    {
+      "function": "calendar",
+      "tool_name": "Google Calendar",
+      "state": "Connected",
+      "owner": "client",
+      "note": "You told us. Counts as Connected only after the orchestrator check passes during onboarding."
+    },
+    {
+      "function": "phones_texts",
+      "tool_name": "HighLevel phone",
+      "state": "Set up for them",
+      "owner": "upsurge",
+      "note": "Rides the customer system set up for the practice, so calls and texts live with the patient record."
+    },
+    {
+      "function": "files_photos",
+      "tool_name": "Google Drive",
+      "state": "Connected",
+      "owner": "client",
+      "note": "You told us. Counts as Connected only after the orchestrator check passes during onboarding."
+    },
+    {
+      "function": "money_invoices",
+      "tool_name": "QuickBooks",
+      "state": "Coming next",
+      "owner": "client",
+      "note": "Week 2 after go live."
+    },
+    {
+      "function": "ads_social",
+      "tool_name": "Meta ads",
+      "state": "Coming next",
+      "owner": "client",
+      "note": "Week 2 after go live."
+    },
+    {
+      "function": "website",
+      "tool_name": "WordPress",
+      "state": "Connected",
+      "owner": "client",
+      "note": "Found on your application. The website form wiring is checked during onboarding."
+    },
+    {
+      "function": "work_board",
+      "tool_name": "Surge Command (the PM tool)",
+      "state": "Set up for them",
+      "owner": "upsurge",
+      "note": "Ships with the service. Set up in Provision, in the practice's own words."
+    },
+    {
+      "function": "weekly_other",
+      "tool_name": "Canva",
+      "state": "Not needed",
+      "owner": "client",
+      "note": "You said skip this one for now."
+    }
+  ]
+}

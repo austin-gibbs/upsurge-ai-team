@@ -1,0 +1,167 @@
+{
+  "front_door": "Maive (team lead and single point of contact)",
+  "lanes": [
+    {
+      "house_lane": "muse",
+      "name": "Operations Lane",
+      "platform": "ChatGPT",
+      "leader": "Maive",
+      "delivery_method": "Custom GPT instructions or project instructions, per the client's plan",
+      "specialists": [
+        "Maive",
+        "Owen",
+        "Lena",
+        "Felix",
+        "Diego",
+        "Dana",
+        "Remy",
+        "Theo",
+        "Quinn",
+        "Aria",
+        "Hazel",
+        "Finn",
+        "Dex"
+      ]
+    },
+    {
+      "house_lane": "claude",
+      "name": "Strategy Lane",
+      "platform": "Claude",
+      "leader": "Named in the install record",
+      "delivery_method": "Project instructions and project knowledge files",
+      "specialists": [
+        "Mira",
+        "Wes",
+        "Kai",
+        "Parker",
+        "Greta",
+        "Nova",
+        "Sage"
+      ]
+    },
+    {
+      "house_lane": "grok",
+      "name": "Speed Lane",
+      "platform": "Grok",
+      "leader": "Marcus",
+      "delivery_method": "System instructions in the workspace, memory files attached per workspace setup",
+      "specialists": [
+        "Marcus",
+        "Milo"
+      ]
+    }
+  ],
+  "specialists": [
+    {
+      "name": "Maive",
+      "role": "Team lead and client front door",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Marcus",
+      "role": "Grok lane lead",
+      "home_lane": "grok"
+    },
+    {
+      "name": "Owen",
+      "role": "Onboarding orchestrator",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Lena",
+      "role": "Memory librarian",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Felix",
+      "role": "Fulfillment lead",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Diego",
+      "role": "CRM architect",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Dana",
+      "role": "CRM data operations",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Mira",
+      "role": "Marketing lead",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Milo",
+      "role": "Ad creative producer",
+      "home_lane": "grok"
+    },
+    {
+      "name": "Remy",
+      "role": "Voice and dialer specialist",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Wes",
+      "role": "Web development lead",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Kai",
+      "role": "SEO and AEO lead",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Theo",
+      "role": "Meeting to action",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Quinn",
+      "role": "Call QA auditor",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Aria",
+      "role": "A2P compliance",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Hazel",
+      "role": "Client success lead",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Finn",
+      "role": "Finance controller",
+      "home_lane": "muse"
+    },
+    {
+      "name": "Parker",
+      "role": "Performance analyst",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Greta",
+      "role": "Growth and sales lead",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Nova",
+      "role": "Service innovation",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Sage",
+      "role": "SOP and skill writer",
+      "home_lane": "claude"
+    },
+    {
+      "name": "Dex",
+      "role": "Delivery QA",
+      "home_lane": "muse"
+    }
+  ],
+  "note": "Lanes are roles, not vendors. The platform named on a lane is the seat filling it for this client and can be refilled by another platform without a re-install."
+}

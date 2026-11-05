@@ -1,0 +1,23 @@
+{
+  "client_slug": "cedar-peak-dental",
+  "business_name": "Cedar Peak Dental",
+  "generated_from_profile": "profile-template.json",
+  "payment": {
+    "payment_status": "awaiting_payment_link",
+    "how_it_works": "A secure payment link is sent through the existing sales and accounting path. Setup starts when the paid confirmation event (start_payment_received) is recorded, together with agreement_signed, per wiring contract section 3.3. No amounts are stored in this package.",
+    "stripe_integrated": false
+  },
+  "repository": {
+    "target_name": "upsurge-client-cedar-peak-dental",
+    "target_owner": "UpSurge GitHub organization",
+    "created": false,
+    "creation_path": "The provisioning run attempts creation. Where repo creation is not permitted to the automation, creation becomes a certified team fulfillment step under the Install Fulfillment Training model, and this package is pushed the moment the repo exists. This record stays false until a creation is verified by read back."
+  },
+  "orchestrator_mapping": {
+    "provision.create_client_layer": "repo/ tree in this package",
+    "census.run_questions": "pm-tool/census.json rows",
+    "census.resolve_rows": "pm-tool/census.json states",
+    "seat.deliver_pack": "repo/team-pack/ delivery records",
+    "go_live.create_first_project": "pm-tool/starter-projects.json"
+  }
+}
