@@ -20,4 +20,4 @@ Checked 7 seeded files on 2026-11-05T06:24:04.839611+00:00 for credential shaped
 
 ## Cross check
 
-Cross checked on 2026-11-05T06:24:19.884164+00:00 across the install config (agreement facts) and profile.md. No conflicts detected: agreement facts match profile.md.
+Cross checked on 2026-11-05T06:27:43.004959+00:00 across the install config (agreement facts) and profile.md. No conflicts detected: agreement facts match profile.md.
