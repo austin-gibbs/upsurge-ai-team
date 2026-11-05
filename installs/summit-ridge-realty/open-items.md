@@ -13,3 +13,7 @@
 ## Open items
 
 No open items yet.
+
+## Quarantine
+
+Checked 7 seeded files on 2026-11-05T06:24:04.839611+00:00 for credential shaped values (API key prefixes, private key blocks) and do-not-publish material. None found in orchestrator seeded files. Client sourced values are never written to this tree; categories only are recorded here.
