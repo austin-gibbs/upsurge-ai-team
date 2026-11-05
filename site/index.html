@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="UpSurge installs a complete AI operations team inside your business. One person to ask, specialists behind them, and finished work you can watch happen.">
+  <title>UpSurge AI Team | Hire the Team. Skip the Hiring.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-2: #081120;
+      --panel: rgba(255, 255, 255, 0.065);
+      --panel-strong: rgba(255, 255, 255, 0.1);
+      --line: rgba(255, 255, 255, 0.13);
+      --text: #f5f8ff;
+      --muted: #aeb9cf;
+      --soft: #dbe5f7;
+      --cyan: #38e1ff;
+      --teal: #2dd4bf;
+      --violet: #8b7cf6;
+      --gold: #f4c76a;
+      --green: #55e6a5;
+      --ink: #06101f;
+      --radius: 26px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-system, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(56, 225, 255, 0.18), transparent 30rem),
+        radial-gradient(circle at 88% 12%, rgba(139, 124, 246, 0.16), transparent 34rem),
+        linear-gradient(180deg, #060a18 0%, #050914 46%, #030711 100%);
+      line-height: 1.58;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 72%);
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 9, 20, 0.76);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: #03111d;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      box-shadow: 0 0 0 6px rgba(56, 225, 255, 0.1), 0 14px 34px rgba(45, 212, 191, 0.25);
+      font-size: 0.82rem;
+      letter-spacing: -0.06em;
+    }
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: -3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 650;
+    }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary {
+      color: #03111d;
+      background: linear-gradient(135deg, #7ff3ff, #34d399);
+      box-shadow: 0 16px 38px rgba(45, 212, 191, 0.26);
+    }
+    .button.secondary {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,0.05);
+    }
+    .button.small { min-height: 42px; padding: 0 17px; font-size: 0.92rem; }
+
+    .hero {
+      padding: 86px 0 58px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.78fr);
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border: 1px solid rgba(56,225,255,0.28);
+      border-radius: 999px;
+      background: rgba(56,225,255,0.08);
+      color: #bbeeff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(85, 230, 165, 0.55);
+      animation: dotPulse 2s infinite;
+      flex: 0 0 auto;
+    }
+    @keyframes dotPulse {
+      0% { box-shadow: 0 0 0 0 rgba(85, 230, 165, 0.48); }
+      70% { box-shadow: 0 0 0 9px rgba(85, 230, 165, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(85, 230, 165, 0); }
+    }
+    h1, h2, h3 { line-height: 0.98; letter-spacing: -0.055em; margin: 0; }
+    h1 {
+      font-size: clamp(3.4rem, 8vw, 7.1rem);
+      max-width: 780px;
+      margin-top: 26px;
+    }
+    h1 .gradient {
+      background: linear-gradient(92deg, #fff 10%, #8cecff 46%, #6ee7b7 88%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-copy {
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+      max-width: 680px;
+      margin: 26px 0 0;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+    .hero-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+    .hero-notes span {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.045);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .hero-console, .team-console {
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.105), rgba(255,255,255,0.045));
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-console { padding: 22px; }
+    .console-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .console-title { font-weight: 900; letter-spacing: -0.03em; }
+    .console-subtitle { color: var(--muted); font-size: 0.86rem; margin-top: 2px; }
+    .window-dots { display: flex; gap: 7px; }
+    .window-dots i { width: 10px; height: 10px; border-radius: 99px; background: rgba(255,255,255,0.22); display: block; }
+    .request-list { display: grid; gap: 12px; margin-top: 18px; }
+    .request-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(3, 10, 22, 0.48);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .request-row strong { display: block; font-size: 0.96rem; letter-spacing: -0.015em; }
+    .request-row small { color: var(--muted); display: block; margin-top: 1px; }
+    .status {
+      font-size: 0.73rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .status.done { background: rgba(85,230,165,0.14); color: #8ff5c5; }
+    .status.working { background: rgba(56,225,255,0.14); color: #9beaff; }
+    .status.review { background: rgba(244,199,106,0.15); color: #ffe1a1; }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.1);
+      font-weight: 900;
+      font-size: 0.78rem;
+    }
+
+    .proof-strip {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      padding: 26px 0;
+    }
+    .proof-line {
+      text-align: center;
+      color: var(--soft);
+      font-weight: 750;
+      max-width: 880px;
+      margin: 0 auto 18px;
+    }
+    .proof-items {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .proof-item {
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 13px 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    section { padding: 92px 0; }
+    .section-head { max-width: 780px; margin-bottom: 38px; }
+    .section-head.center { margin-inline: auto; text-align: center; }
+    .kicker {
+      color: var(--cyan);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h2 { font-size: clamp(2.25rem, 5vw, 4.25rem); }
+    .section-head p, .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin: 20px 0 0;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .quote-card, .mini-card, .step-card, .bundle-card, .price-card, .faq-item {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+    }
+    .quote-card {
+      padding: 34px;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(56,225,255,0.13), transparent 18rem),
+        var(--panel);
+    }
+    .quote-card blockquote {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+      line-height: 1.16;
+      letter-spacing: -0.04em;
+      font-weight: 850;
+    }
+    .quote-card p { color: var(--muted); margin: 22px 0 0; }
+    .problem-points { display: grid; gap: 18px; }
+    .mini-card { padding: 26px; }
+    .mini-card h3, .step-card h3, .bundle-card h3 { font-size: 1.25rem; letter-spacing: -0.035em; margin-bottom: 10px; }
+    .mini-card p, .step-card p, .bundle-card p { color: var(--muted); margin: 0; }
+
+    .team-section { position: relative; }
+    .team-console { padding: 0; isolation: isolate; }
+    .team-console::before, .team-console::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(85, 230, 165, 0.22);
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .team-console::before { width: 340px; height: 340px; right: -120px; top: -150px; animation: ringPulse 3.6s ease-out infinite; }
+    .team-console::after { width: 220px; height: 220px; left: -80px; bottom: -110px; animation: ringPulse 3.6s ease-out 1.2s infinite; }
+    @keyframes ringPulse {
+      0% { transform: scale(0.76); opacity: 0; }
+      35% { opacity: 0.85; }
+      100% { transform: scale(1.22); opacity: 0; }
+    }
+    .team-window { padding: 26px; }
+    .team-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    .team-toolbar h3 { font-size: clamp(1.65rem, 3vw, 2.55rem); }
+    .team-toolbar p { color: var(--muted); margin: 8px 0 0; max-width: 660px; }
+    .clock-card {
+      min-width: 172px;
+      text-align: right;
+      border: 1px solid rgba(85,230,165,0.25);
+      background: rgba(85,230,165,0.07);
+      border-radius: 18px;
+      padding: 13px 15px;
+    }
+    .clock-card span { display: block; color: #9df0c8; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+    .clock-card strong { display: block; font-size: 1.2rem; margin-top: 3px; letter-spacing: -0.03em; }
+    .pulse-line {
+      height: 54px;
+      margin: 24px 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(56,225,255,0.05), rgba(85,230,165,0.09), rgba(139,124,246,0.06));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .pulse-line svg { width: 100%; height: 100%; display: block; }
+    .pulse-line path {
+      fill: none;
+      stroke: var(--green);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 720;
+      stroke-dashoffset: 720;
+      filter: drop-shadow(0 0 10px rgba(85,230,165,0.65));
+      animation: heartbeat 3.4s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0% { stroke-dashoffset: 720; opacity: 0.3; }
+      35% { stroke-dashoffset: 0; opacity: 1; }
+      72% { stroke-dashoffset: 0; opacity: 0.94; }
+      100% { stroke-dashoffset: -720; opacity: 0.3; }
+    }
+    .lead-strip {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(56,225,255,0.14), rgba(85,230,165,0.1));
+      border: 1px solid rgba(56,225,255,0.22);
+      margin-bottom: 18px;
+    }
+    .lead-strip strong { display: block; font-size: 1.06rem; }
+    .lead-strip p { margin: 3px 0 0; color: var(--muted); }
+    .lanes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .lane {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 18px;
+      background: rgba(3, 10, 22, 0.44);
+    }
+    .lane.cyan { box-shadow: inset 0 1px 0 rgba(56,225,255,0.45); }
+    .lane.violet { box-shadow: inset 0 1px 0 rgba(139,124,246,0.55); }
+    .lane.gold { box-shadow: inset 0 1px 0 rgba(244,199,106,0.55); }
+    .lane-head { padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.09); margin-bottom: 15px; }
+    .lane-head span { color: var(--muted); font-size: 0.73rem; font-weight: 900; letter-spacing: 0.13em; text-transform: uppercase; }
+    .lane-head h3 { font-size: 1.35rem; margin-top: 5px; }
+    .lane-head p { color: var(--muted); font-size: 0.92rem; margin: 8px 0 0; }
+    .specialist {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 11px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.065);
+    }
+    .specialist:last-child { border-bottom: 0; padding-bottom: 0; }
+    .specialist .avatar { width: 34px; height: 34px; border-radius: 12px; font-size: 0.7rem; }
+    .specialist strong { display: block; font-size: 0.93rem; }
+    .specialist small { color: var(--muted); display: block; line-height: 1.42; }
+    .specialist em {
+      display: inline-block;
+      margin-top: 6px;
+      color: #b8f4d8;
+      background: rgba(85,230,165,0.1);
+      border: 1px solid rgba(85,230,165,0.16);
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-style: normal;
+      font-weight: 800;
+    }
+    .team-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .team-features div {
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.045);
+      border-radius: 17px;
+      padding: 15px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      font-weight: 680;
+    }
+
+    .steps, .bundle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step-card, .bundle-card { padding: 28px; }
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: rgba(56,225,255,0.12);
+      color: #a5ecff;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .bundle-grid { grid-template-columns: repeat(4, 1fr); }
+    .bundle-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.09);
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: #b8f4d8;
+    }
+
+    .handoff-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .handoff-card {
+      padding: 26px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.04));
+    }
+    .handoff-card h3 { font-size: 1.22rem; margin-bottom: 16px; }
+    .handoff-card ul, .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+    .handoff-card li, .price-card li { position: relative; padding-left: 19px; }
+    .handoff-card li::before, .price-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      background: var(--teal);
+    }
+
+    .pricing-section { padding-top: 40px; }
+    .pilot-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(244,199,106,0.34);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(244,199,106,0.17), transparent 20rem),
+        linear-gradient(135deg, rgba(244,199,106,0.12), rgba(56,225,255,0.08));
+      margin-bottom: 18px;
+    }
+    .pilot-banner h3 { font-size: clamp(1.55rem, 3vw, 2.35rem); margin-bottom: 10px; }
+    .pilot-banner p { color: var(--soft); margin: 0; max-width: 760px; }
+    .pilot-price { text-align: right; min-width: 250px; }
+    .pilot-price span { display: block; color: #ffe1a1; font-size: 0.76rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+    .pilot-price strong { display: block; font-size: 1.55rem; letter-spacing: -0.04em; margin-top: 5px; }
+    .pilot-price small { color: var(--muted); display: block; margin-top: 5px; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .price-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card.featured {
+      background: linear-gradient(180deg, rgba(56,225,255,0.14), rgba(255,255,255,0.065));
+      border-color: rgba(56,225,255,0.38);
+      transform: translateY(-8px);
+    }
+    .tier-label {
+      color: var(--cyan);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .price-card h3 { font-size: 1.72rem; margin: 10px 0 12px; }
+    .price-card .fit { color: var(--muted); margin: 0 0 22px; }
+    .price-line { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 17px 0; margin-bottom: 20px; }
+    .price-line span { display: block; color: var(--muted); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
+    .price-line strong { display: block; font-size: 1.18rem; letter-spacing: -0.03em; margin-top: 4px; }
+    .price-card .button { margin-top: auto; }
+    .price-card ul { margin-bottom: 26px; }
+    .pricing-note { color: var(--muted); text-align: center; max-width: 820px; margin: 24px auto 0; }
+
+    .faq-list { display: grid; gap: 12px; max-width: 920px; margin: 0 auto; }
+    .faq-item { overflow: hidden; }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 22px 24px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      width: 30px;
+      height: 30px;
+      border-radius: 99px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.08);
+      color: var(--cyan);
+      flex: 0 0 auto;
+    }
+    .faq-item[open] summary::after { content: "-"; }
+    .faq-item p { color: var(--muted); margin: 0; padding: 0 24px 24px; max-width: 800px; }
+
+    .final-cta {
+      text-align: center;
+      padding: 70px 34px;
+      border-radius: 34px;
+      border: 1px solid rgba(56,225,255,0.25);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56,225,255,0.17), transparent 26rem),
+        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.045));
+      box-shadow: var(--shadow);
+    }
+    .final-cta h2 { max-width: 760px; margin: 0 auto; }
+    .final-cta p { color: var(--muted); max-width: 700px; margin: 22px auto 30px; font-size: 1.08rem; }
+    footer {
+      padding: 34px 0 46px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 88px;
+    }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 1020px) {
+      .hero-grid, .problem-grid { grid-template-columns: 1fr; }
+      .proof-items, .team-features { grid-template-columns: repeat(2, 1fr); }
+      .lanes, .steps, .pricing-grid, .handoff-grid { grid-template-columns: 1fr 1fr; }
+      .bundle-grid { grid-template-columns: 1fr 1fr; }
+      .price-card.featured { transform: none; }
+    }
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      .nav { min-height: 64px; }
+      .nav-links a:not(.button) { display: none; }
+      .hero { padding-top: 54px; }
+      section { padding: 64px 0; }
+      .proof-items, .team-features, .lanes, .steps, .pricing-grid, .handoff-grid, .bundle-grid { grid-template-columns: 1fr; }
+      .team-toolbar, .pilot-banner { display: block; }
+      .clock-card { text-align: left; margin-top: 18px; }
+      .pilot-price { text-align: left; margin-top: 20px; }
+      .lead-strip, .request-row { grid-template-columns: 1fr; }
+      .status { justify-self: start; }
+      .final-cta { padding: 48px 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="UpSurge AI Team home">
+        <span class="brand-mark">US</span>
+        <span>UpSurge <small>AI Team</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#team">Team</a>
+        <a href="#how">How it works</a>
+        <a href="#handoff">Hand off</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="button primary small" href="#book">Book a fit call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="live-dot"></span> AI operations team, installed for you</span>
+          <h1>Hire the team. <span class="gradient">Skip the hiring.</span></h1>
+          <p class="hero-copy">UpSurge installs a complete AI operations team inside your business. One person to ask. A full bench of specialists behind them. Finished work, delivered the same day, in an app where you can watch it happen.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#book">Book a fit call</a>
+            <a class="button secondary" href="#how">See how it works</a>
+          </div>
+          <div class="hero-notes" aria-label="Service highlights">
+            <span>One team lead</span>
+            <span>Finished work, not another tool</span>
+            <span>Your tools stay in place</span>
+          </div>
+        </div>
+
+        <aside class="hero-console" aria-label="Preview of the Surge Command request board">
+          <div class="console-top">
+            <div>
+              <div class="console-title">Surge Command</div>
+              <div class="console-subtitle">Requests move from ask to done in one place.</div>
+            </div>
+            <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+          <div class="request-list">
+            <div class="request-row">
+              <span class="avatar">RG</span>
+              <span><strong>Follow up with unbooked leads</strong><small>Voice and text sequence prepared in your voice</small></span>
+              <span class="status working">Working</span>
+            </div>
+            <div class="request-row">
+              <span class="avatar">LP</span>
+              <span><strong>Build the new offer page</strong><small>Page built, checked, and ready for approval</small></span>
+              <span class="status review">Review</span>
+            </div>
+            <div class="request-row">
+              <span class="avatar">WR</span>
+              <span><strong>Weekly pipeline report</strong><small>Summary delivered with the numbers assembled</small></span>
+              <span class="status done">Done</span>
+            </div>
+            <div class="request-row">
+              <span class="avatar">MI</span>
+              <span><strong>Turn meetings into actions</strong><small>Owners assigned and follow through tracked</small></span>
+              <span class="status done">Done</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="proof-strip" aria-label="Proof points">
+      <div class="wrap">
+        <p class="proof-line">Built by UpSurge Pros, the operations team behind AI voice, CRM, and marketing systems for service businesses across the US.</p>
+        <div class="proof-items">
+          <div class="proof-item">Same-day completion standard</div>
+          <div class="proof-item">Voice agents checked before outreach</div>
+          <div class="proof-item">CRM systems built and verified</div>
+          <div class="proof-item">Search and content engines</div>
+          <div class="proof-item">Meetings turned into owned actions</div>
+        </div>
+      </div>
+    </div>
+
+    <section aria-labelledby="problem-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">The problem</div>
+          <h2 id="problem-title">You did not start your business to run its inbox.</h2>
+          <p>Growth created a second job. Leads need follow-up within minutes, not days. Your CRM needs constant care. Marketing needs content every week. Reports need building. Vendors, tools, and logins multiply. Every one of those jobs is small. Together they consume the owner.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="quote-card">
+            <blockquote>“I am the bottleneck. Every lead follow-up, every report, every little fix waits on me or on a hire I cannot find. I bought the tools. Nobody has time to run them.”</blockquote>
+            <p>So the work waits, or it lands on your best people, or it quietly does not happen. The missed follow-up never announces itself. It just becomes revenue somebody else collected.</p>
+          </article>
+          <div class="problem-points">
+            <article class="mini-card">
+              <h3>The owner becomes the routing layer</h3>
+              <p>Every question, approval, and loose end travels back to the same person, even when the work itself is simple.</p>
+            </article>
+            <article class="mini-card">
+              <h3>Important work waits for a free moment</h3>
+              <p>Follow-up, reporting, content, and cleanup are rarely urgent in the moment. Together, they decide whether growth compounds or leaks.</p>
+            </article>
+            <article class="mini-card">
+              <h3>The tools are not the missing piece</h3>
+              <p>Most businesses already pay for capable tools. What they lack is a team with the time, memory, and follow through to run them well.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-section" id="team" aria-labelledby="team-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="kicker">Meet your team</div>
+          <h2 id="team-title">This is your team page. It is alive.</h2>
+          <p>Every install comes with the Surge Command app, and inside it, a page most owners check the way they check the weather. Your whole AI team is on it: every specialist, what they are great at, and what they are working on right now.</p>
+        </div>
+
+        <div class="team-console" aria-label="Illustrative rendering of the Surge Command team heartbeat page">
+          <div class="team-window">
+            <div class="team-toolbar">
+              <div>
+                <h3>Surge Command Team Heartbeat</h3>
+                <p>No tickets disappearing into a void. No wondering whether anyone saw your message. You watch your organization breathe as requests move from intake to done.</p>
+              </div>
+              <div class="clock-card" aria-label="Current local time">
+                <span>Team page live</span>
+                <strong id="localClock">Checking time</strong>
+              </div>
+            </div>
+
+            <div class="pulse-line" aria-hidden="true">
+              <svg viewBox="0 0 900 54" preserveAspectRatio="none" role="img">
+                <path d="M0 27 H250 L268 27 L282 12 L302 45 L318 27 H470 L488 27 L502 8 L524 48 L540 27 H900" />
+              </svg>
+            </div>
+
+            <div class="lead-strip">
+              <span class="avatar">ML</span>
+              <div>
+                <strong>Your single point of contact: Maive, Team Lead</strong>
+                <p>Ask one person. Maive scopes the work, routes it to the right lane, and brings it back finished. Questions return batched and rare.</p>
+              </div>
+              <span class="status working">Coordinating</span>
+            </div>
+
+            <div class="lanes">
+              <article class="lane cyan">
+                <div class="lane-head">
+                  <span>Muse lane</span>
+                  <h3>Operations and Systems</h3>
+                  <p>Connected tools, business memory, background follow through, and the daily machinery of the business.</p>
+                </div>
+                <div class="specialist"><span class="avatar">DC</span><div><strong>Diego, CRM Systems</strong><small>Pipelines, fields, automations, and cleaner customer records.</small><em>Working on pipeline care</em></div></div>
+                <div class="specialist"><span class="avatar">WW</span><div><strong>Wes, Web Builds</strong><small>Landing pages, offer pages, and practical web improvements.</small><em>Building a page</em></div></div>
+                <div class="specialist"><span class="avatar">RV</span><div><strong>Remy, Voice Agents</strong><small>AI callers that dial, qualify, follow up, and book appointments.</small><em>Preparing outreach</em></div></div>
+                <div class="specialist"><span class="avatar">LM</span><div><strong>Lena, Business Memory</strong><small>Your services, voice, rules, customers, and decisions, kept current.</small><em>Memory current</em></div></div>
+                <div class="specialist"><span class="avatar">DQ</span><div><strong>Dex, Quality Review</strong><small>Independent checks before finished work reaches you.</small><em>Reviewing delivery</em></div></div>
+              </article>
+
+              <article class="lane violet">
+                <div class="lane-head">
+                  <span>Claude lane</span>
+                  <h3>Strategy and Craft</h3>
+                  <p>Deep thinking, careful writing, research, planning, and polished work that needs judgment.</p>
+                </div>
+                <div class="specialist"><span class="avatar">MM</span><div><strong>Mira, Marketing Strategy</strong><small>Positioning, campaigns, offers, and the story customers remember.</small><em>Planning a campaign</em></div></div>
+                <div class="specialist"><span class="avatar">KS</span><div><strong>Kai, Search and Visibility</strong><small>Search programs, AI visibility, local presence, and content plans.</small><em>Drafting content</em></div></div>
+                <div class="specialist"><span class="avatar">SS</span><div><strong>Sage, Systems and Guides</strong><small>Clear processes and playbooks your business can reuse.</small><em>Documenting a process</em></div></div>
+                <div class="specialist"><span class="avatar">PP</span><div><strong>Parker, Reporting</strong><small>Weekly summaries, dashboards, and numbers assembled without the scramble.</small><em>Assembling a report</em></div></div>
+                <div class="specialist"><span class="avatar">HC</span><div><strong>Hazel, Client Success</strong><small>Follow through, experience checks, and making sure nothing important goes quiet.</small><em>Watching open loops</em></div></div>
+              </article>
+
+              <article class="lane gold">
+                <div class="lane-head">
+                  <span>Grok lane</span>
+                  <h3>Speed and Signal</h3>
+                  <p>Fast production, live awareness, high volume follow through, and work that benefits from momentum.</p>
+                </div>
+                <div class="specialist"><span class="avatar">MC</span><div><strong>Milo, Creative Production</strong><small>Ad creative, visuals, video support, and campaign assets.</small><em>Producing assets</em></div></div>
+                <div class="specialist"><span class="avatar">GG</span><div><strong>Greta, Growth</strong><small>Offers, outbound support, partnerships, and new revenue paths.</small><em>Scanning opportunities</em></div></div>
+                <div class="specialist"><span class="avatar">TM</span><div><strong>Theo, Meeting Follow Through</strong><small>Decisions and action items captured, assigned, and tracked.</small><em>Tracking actions</em></div></div>
+                <div class="specialist"><span class="avatar">QQ</span><div><strong>Quinn, Call Quality</strong><small>Call reviews, coaching notes, and quality signals from real conversations.</small><em>Reviewing calls</em></div></div>
+                <div class="specialist"><span class="avatar">FF</span><div><strong>Felix, Fulfillment</strong><small>Delivery coordination and the final steps that turn work into results.</small><em>Closing the loop</em></div></div>
+              </article>
+            </div>
+
+            <div class="team-features">
+              <div>Every specialist by name and strength, organized like a real org chart.</div>
+              <div>Live status: what is being worked on now and what finished today.</div>
+              <div>Your board underneath: every request, its status, and its result.</div>
+              <div>Needs-you flags only when a decision is genuinely yours.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">How it works</div>
+          <h2 id="how-title">From asking to done, without a meeting about it.</h2>
+        </div>
+        <div class="steps">
+          <article class="step-card">
+            <div class="step-num">1</div>
+            <h3>Ask, anywhere</h3>
+            <p>Submit in the app, in your own project tool, or by messaging your team lead. One sentence is enough. Your lead turns it into a proper brief, so nothing depends on you writing perfect instructions.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-num">2</div>
+            <h3>Watch it move</h3>
+            <p>The right specialists pick the work up. Your team page shows who has it and where it stands. Silence means the team is handling it.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-num">3</div>
+            <h3>Receive finished work</h3>
+            <p>Deliverables arrive complete and checked against your business rules, with a short summary of what was done. Approvals are one tap. The result is saved, and your team remembers it for next time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="handoff" aria-labelledby="handoff-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">What you can hand off</div>
+          <h2 id="handoff-title">Start with the work that is eating your week.</h2>
+        </div>
+        <div class="handoff-grid">
+          <article class="handoff-card">
+            <h3>Operations</h3>
+            <ul>
+              <li>Inbox triage and drafted replies in your voice</li>
+              <li>Scheduling, rescheduling, and calendar hygiene</li>
+              <li>Meeting notes turned into owned, tracked action items</li>
+              <li>Data cleanup and list building in your CRM</li>
+              <li>Vendor and tool administration</li>
+            </ul>
+          </article>
+          <article class="handoff-card">
+            <h3>Marketing</h3>
+            <ul>
+              <li>Weekly content: posts, articles, and newsletters</li>
+              <li>Search and AI visibility programs</li>
+              <li>Landing pages and offer pages, built and tested</li>
+              <li>Review requests and reputation follow-up</li>
+              <li>Email and text campaigns, prepared and scheduled</li>
+            </ul>
+          </article>
+          <article class="handoff-card">
+            <h3>Sales support</h3>
+            <ul>
+              <li>Speed-to-lead follow-up by call, text, and email</li>
+              <li>AI voice agents that dial, qualify, and book</li>
+              <li>Pipeline cleanup and stage-by-stage follow-up</li>
+              <li>Lead list checks before outreach goes out</li>
+              <li>Booking confirmations and reminder sequences</li>
+            </ul>
+          </article>
+          <article class="handoff-card">
+            <h3>Reporting</h3>
+            <ul>
+              <li>A daily one minute digest of what got done</li>
+              <li>Weekly pipeline and marketing summaries</li>
+              <li>Custom dashboards in your command center</li>
+              <li>Month-end numbers assembled without the scramble</li>
+              <li>Open loops surfaced before they become problems</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="included-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">What comes with it</div>
+          <h2 id="included-title">A team, a command center, and people standing behind both.</h2>
+          <p>The service is more than access to specialists. It includes the system that makes their work visible, cumulative, and accountable.</p>
+        </div>
+        <div class="bundle-grid">
+          <article class="bundle-card">
+            <div class="bundle-icon">SC</div>
+            <h3>Surge Command App</h3>
+            <p>Your private command center for requests, project tracking, team visibility, approvals, and finished results.</p>
+          </article>
+          <article class="bundle-card">
+            <div class="bundle-icon">OL</div>
+            <h3>Output Ledger</h3>
+            <p>A running record of completed work, so you can see what the team delivered, when it landed, and how the wins stack up.</p>
+          </article>
+          <article class="bundle-card">
+            <div class="bundle-icon">UO</div>
+            <h3>UpSurge Oversight</h3>
+            <p>Real people review quality, watch open work, maintain the memory, and stand behind every delivery.</p>
+          </article>
+          <article class="bundle-card">
+            <div class="bundle-icon">BM</div>
+            <h3>Living Business Memory</h3>
+            <p>Your services, voice, customers, offers, and rules are remembered, so every request starts smarter than the last.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-section" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="kicker">Pricing</div>
+          <h2 id="pricing-title">Three ways to bring the team in.</h2>
+          <p>One right size for where you are. Every plan starts with the pilot install, so the work proves itself before a longer commitment.</p>
+        </div>
+
+        <div class="pilot-banner">
+          <div>
+            <h3>Start with a founding pilot install.</h3>
+            <p>Your command center live, your priority tools connected, your team seated, and your first real request completed on day one. Founding clients who convert without a service gap receive a 12 month rate lock on the selected standard tier.</p>
+          </div>
+          <div class="pilot-price">
+            <span>Pilot install</span>
+            <strong>$2,500 to $5,000</strong>
+            <small>Management $1,500 to $2,500 per month for the first 90 days. Payment is 50% to start and 50% at go live.</small>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <div class="tier-label">Start focused</div>
+            <h3>Launch Team</h3>
+            <p class="fit">For the owner with one clear bottleneck to remove first: inbox, scheduling, follow-up, and reporting.</p>
+            <div class="price-line">
+              <span>Install</span>
+              <strong>$4,500 to $7,500</strong>
+              <span style="margin-top:14px">Management</span>
+              <strong>$1,950 to $2,950 per month</strong>
+            </div>
+            <ul>
+              <li>1 lane active</li>
+              <li>Up to 5 connected tools</li>
+              <li>Up to 20 completed requests a month</li>
+              <li>Surge Command App and team page</li>
+              <li>Weekly summary and monthly review</li>
+            </ul>
+            <a class="button secondary" href="#book">Start with the pilot</a>
+          </article>
+
+          <article class="price-card featured">
+            <div class="tier-label">Built for growth</div>
+            <h3>Growth Team</h3>
+            <p class="fit">For the business actively acquiring customers, with marketing and sales support working at volume.</p>
+            <div class="price-line">
+              <span>Install</span>
+              <strong>$7,500 to $12,500</strong>
+              <span style="margin-top:14px">Management</span>
+              <strong>$3,950 to $5,950 per month</strong>
+            </div>
+            <ul>
+              <li>2 lanes active</li>
+              <li>Up to 10 connected tools</li>
+              <li>Up to 50 completed requests a month</li>
+              <li>Content, campaigns, voice agents, and pipeline work</li>
+              <li>Daily digest and weekly review</li>
+            </ul>
+            <a class="button primary" href="#book">Start with the pilot</a>
+          </article>
+
+          <article class="price-card">
+            <div class="tier-label">Full organization</div>
+            <h3>Full AI Organization</h3>
+            <p class="fit">For multi-location and multi-brand operators who need the complete organization and priority turnaround.</p>
+            <div class="price-line">
+              <span>Install</span>
+              <strong>$12,500 to $20,000</strong>
+              <span style="margin-top:14px">Management</span>
+              <strong>$6,950 to $9,950 per month</strong>
+            </div>
+            <ul>
+              <li>All 3 lanes active</li>
+              <li>Up to 18 connected tools</li>
+              <li>Up to 100 completed requests a month</li>
+              <li>Priority turnaround</li>
+              <li>Dedicated oversight rhythm with the UpSurge senior team</li>
+            </ul>
+            <a class="button secondary" href="#book">Start with the pilot</a>
+          </article>
+        </div>
+        <p class="pricing-note">The exact figure inside each approved range is set in your proposal by scope. Platform subscriptions and usage remain yours and are never hidden inside the management fee. No long contract is required to prove the pilot works.</p>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="kicker">Questions</div>
+          <h2 id="faq-title">Straight answers before you ask.</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is my business data safe?</summary>
+            <p>Yes, and the design is the answer. Your install is yours alone. Your facts, customers, and files live in your private workspace and are never shared with, or used for, another client. What improves across all clients is general craft: better checklists, better processes. Never your information. You can revoke any connection at any time, instantly.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do I need to be technical?</summary>
+            <p>No. If you can send a text message, you can run this team. The technical side is our job. Your total setup effort is about fifteen minutes of sign-ins and one short conversation about how your business works.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is this a chatbot?</summary>
+            <p>No. Chatbots answer questions. This is a team that does work: builds the page, makes the calls, cleans the pipeline, writes the report, and brings it back finished for your approval.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How fast will I see results?</summary>
+            <p>Your first real request is completed on day one of go-live. Most owners feel the difference in week one, when the daily digest shows work finished that they never touched. The memory effect compounds from there.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What if I already have tools and a CRM?</summary>
+            <p>Good. We connect to what you already use and pay for. The team works inside your stack, not instead of it. If a tool genuinely needs replacing, we will recommend it and explain why, but replacement is never the starting point.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What if I want to stop?</summary>
+            <p>You can. Your data and your workspace history are yours, connections revoke in one step, and we will hand over a clean summary of everything the team set up. We would rather earn the renewal than engineer the exit.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="book" aria-labelledby="book-title">
+      <div class="wrap">
+        <div class="final-cta">
+          <div class="kicker">Book a 20 minute fit call</div>
+          <h2 id="book-title">Your next hire could be a whole team.</h2>
+          <p>One fit call. Twenty minutes. We will show you a live team page, map the first ten things you would hand off, and give you a straight answer on fit. If it is not a fit, you keep the map.</p>
+          <a class="button primary" href="#book">Book a fit call</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>UpSurge AI Team</span>
+      <span>Installed AI operations for service businesses.</span>
+      <span>&copy; <span id="year">2026</span> UpSurge Pros</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var clock = document.getElementById('localClock');
+      var year = document.getElementById('year');
+      function updateClock() {
+        if (!clock) return;
+        var now = new Date();
+        clock.textContent = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + ' local';
+      }
+      updateClock();
+      window.setInterval(updateClock, 30000);
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
