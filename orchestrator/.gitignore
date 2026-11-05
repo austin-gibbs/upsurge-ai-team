@@ -1,0 +1,3 @@
+# Runtime state: install records, locks, audit logs, dry run registries.
+.state/
+__pycache__/
