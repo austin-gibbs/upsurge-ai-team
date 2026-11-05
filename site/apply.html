@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Apply for a founding pilot install of the UpSurge AI Team. Four minutes, plain language terms, and a clear picture of what happens next.">
+  <title>Pilot Application | UpSurge AI Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .page-hero { padding: 64px 0 6px; }
+    .page-hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); max-width: 780px; margin-top: 22px; }
+    .form-shell { max-width: 920px; margin: 40px auto 0; }
+    .form-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 30px;
+      margin-bottom: 18px;
+    }
+    .form-card h3 { font-size: 1.4rem; margin-bottom: 8px; }
+    .form-card .card-sub { color: var(--muted); margin: 0 0 10px; }
+    .time-line { color: #8ff5c5; font-size: 0.88rem; font-weight: 750; margin: 0 0 22px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-weight: 750; font-size: 0.94rem; letter-spacing: -0.01em; }
+    .field label .req { color: var(--cyan); }
+    .field input[type="text"], .field input[type="email"], .field input[type="url"],
+    .field select, .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(3, 10, 22, 0.48);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font: inherit;
+      font-size: 0.98rem;
+    }
+    .field textarea { min-height: 96px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; border-color: rgba(56,225,255,0.5);
+    }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: rgba(255, 120, 120, 0.75); }
+    .field-error { display: none; color: #ffb4b4; font-size: 0.86rem; font-weight: 650; }
+    .field.invalid .field-error { display: block; }
+    .check-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .check-chip {
+      display: flex; align-items: center; gap: 9px;
+      border: 1px solid var(--line); border-radius: 14px; padding: 12px 13px;
+      background: rgba(3, 10, 22, 0.4); font-weight: 700; font-size: 0.94rem; cursor: pointer;
+    }
+    .check-chip input { accent-color: var(--teal); width: 17px; height: 17px; }
+    .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .choice-grid.four { grid-template-columns: repeat(2, 1fr); }
+    .choice {
+      display: block; cursor: pointer; height: 100%;
+      border: 1px solid var(--line); border-radius: 20px; padding: 20px;
+      background: rgba(3, 10, 22, 0.44); transition: border-color 160ms ease, background 160ms ease;
+    }
+    .choice:hover { border-color: rgba(56,225,255,0.45); }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice:has(input:checked) {
+      border-color: rgba(56,225,255,0.7);
+      background: linear-gradient(160deg, rgba(56,225,255,0.16), rgba(85,230,165,0.1));
+    }
+    .choice:has(input:focus-visible) { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 2px; }
+    .choice strong { display: block; font-size: 1.06rem; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .choice p { color: var(--muted); margin: 0; font-size: 0.93rem; }
+    .choice .choice-price { color: #b8f4d8; font-weight: 800; margin-top: 12px; font-size: 0.95rem; }
+    .choice .choice-tag {
+      display: inline-block; margin-bottom: 10px; padding: 4px 9px; border-radius: 999px;
+      background: rgba(244,199,106,0.15); color: #ffe1a1; font-size: 0.72rem; font-weight: 900;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .terms-list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 11px; color: var(--muted); }
+    .terms-list li { position: relative; padding-left: 19px; }
+    .terms-list li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 7px; height: 7px; border-radius: 99px; background: var(--teal); }
+    .terms-list strong { color: var(--soft); }
+    .agree { display: flex; gap: 11px; align-items: flex-start; font-weight: 650; cursor: pointer; }
+    .agree input { accent-color: var(--teal); width: 19px; height: 19px; margin-top: 2px; flex: 0 0 auto; }
+    .error-summary {
+      display: none; border: 1px solid rgba(255, 120, 120, 0.5); background: rgba(255, 90, 90, 0.09);
+      color: #ffd7d7; border-radius: 18px; padding: 16px 18px; margin-bottom: 18px; font-weight: 650;
+    }
+    .error-summary.show { display: block; }
+    .submit-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
+    .submit-note { color: var(--muted); font-size: 0.9rem; margin: 0; }
+    .success { display: none; max-width: 920px; margin: 40px auto 0; }
+    .success.show { display: block; }
+    .success-head {
+      text-align: center; border: 1px solid rgba(85,230,165,0.35); border-radius: 30px;
+      background: linear-gradient(180deg, rgba(85,230,165,0.1), rgba(255,255,255,0.045));
+      padding: 38px 30px; box-shadow: var(--shadow);
+    }
+    .success-head h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); }
+    .success-head p { color: var(--muted); max-width: 620px; margin: 16px auto 0; }
+    .next-steps { display: grid; gap: 12px; margin-top: 18px; }
+    .next-step {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center;
+      border: 1px solid var(--line); background: var(--panel); border-radius: 20px; padding: 20px 22px;
+    }
+    .next-step strong { display: block; font-size: 1.04rem; }
+    .next-step p { color: var(--muted); margin: 3px 0 0; font-size: 0.95rem; }
+    .next-step .timing { color: #b8f4d8; font-weight: 800; font-size: 0.88rem; white-space: nowrap; text-align: right; }
+    @media (max-width: 900px) { .check-grid { grid-template-columns: 1fr 1fr; } .choice-grid, .choice-grid.four { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .form-grid { grid-template-columns: 1fr; } .next-step { grid-template-columns: auto 1fr; } .next-step .timing { grid-column: 2; text-align: left; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="UpSurge AI Team home">
+        <span class="brand-mark">US</span>
+        <span>UpSurge <small>AI Team</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#team">Team</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="signin.html">Client sign in</a>
+        <a class="button primary small" href="book.html">Book a fit call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-hero">
+      <span class="eyebrow"><span class="live-dot"></span> Founding pilot application</span>
+      <h1>Start with the pilot. <span class="gradient">Prove it in your business.</span></h1>
+      <p class="hero-copy">Four minutes, plain words, no obligation to continue. Tell us about your business and the one job you want off your plate. We bring the plan, the team, and the setup.</p>
+    </div>
+
+    <section style="padding-top:10px">
+      <div class="wrap">
+        <!-- Wiring contract: on submit, POST the form payload as JSON to /api/pilot-applications.
+             The endpoint creates the prospect record and the install project, then returns
+             { received: true }. Nothing is sent anywhere by this preview build. -->
+        <form class="form-shell" id="applyForm" novalidate>
+          <div class="error-summary" id="errorSummary" role="alert"></div>
+
+          <div class="form-card">
+            <h3>1. What kind of business is this?</h3>
+            <p class="card-sub">The named types are quick starts, ready to go. Anything else gets shaped around your business during setup. Either way, your board, your words, and your starter jobs come out in the language of your business.</p>
+            <p class="time-line">About 10 seconds. We handle the rest.</p>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="bizType">Business type <span class="req">*</span></label>
+                <select id="bizType" name="bizType">
+                  <option value="">Choose one</option>
+                  <option value="real-estate">Real estate team</option>
+                  <option value="insurance">Insurance agency</option>
+                  <option value="dental">Dental practice</option>
+                  <option value="education">School or education</option>
+                  <option value="home-services">Home services</option>
+                  <option value="other">Something else</option>
+                </select>
+                <span class="field-error">Pick the closest match. It shapes everything that gets set up for you.</span>
+              </div>
+              <div class="field full" id="bizTypeCustomField" style="display:none">
+                <label for="bizTypeCustom">What kind of business is it? <span class="req">*</span></label>
+                <input type="text" id="bizTypeCustom" name="bizTypeCustom" placeholder="In your own words: wedding photography, boat repair, dog training">
+                <span class="field-error">Tell us in your own words. Two or three words is plenty, and your whole setup will use them.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>2. Your business</h3>
+            <p class="card-sub">Just the basics. Your setup is built around your real business from the first step.</p>
+            <p class="time-line">About 1 minute. We handle the rest.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="bizName">Business name <span class="req">*</span></label>
+                <input type="text" id="bizName" name="bizName" autocomplete="organization" placeholder="Summit Ridge Realty Group">
+                <span class="field-error">Please add your business name so we know what to call the install.</span>
+              </div>
+              <div class="field">
+                <label for="ownerName">Owner name <span class="req">*</span></label>
+                <input type="text" id="ownerName" name="ownerName" autocomplete="name" placeholder="Your name">
+                <span class="field-error">Please add the owner or decision maker name.</span>
+              </div>
+              <div class="field">
+                <label for="email">Work email <span class="req">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="you@yourbusiness.com">
+                <span class="field-error">That email does not look complete. Check it and try again.</span>
+              </div>
+              <div class="field">
+                <label for="website">Website</label>
+                <input type="url" id="website" name="website" placeholder="https://yourbusiness.com">
+                <span class="field-error">That web address looks off. A full address works best.</span>
+              </div>
+              <div class="field">
+                <label for="industry">Industry <span class="req">*</span></label>
+                <select id="industry" name="industry">
+                  <option value="">Choose one</option>
+                  <option>Real estate</option>
+                  <option>Insurance</option>
+                  <option>Education</option>
+                  <option>Home services</option>
+                  <option>Professional services</option>
+                  <option>Healthcare services</option>
+                  <option>Other service business</option>
+                </select>
+                <span class="field-error">Pick the closest fit. It helps us bring in the right specialists first.</span>
+              </div>
+              <div class="field">
+                <label for="teamSize">Team size <span class="req">*</span></label>
+                <select id="teamSize" name="teamSize">
+                  <option value="">Choose one</option>
+                  <option>Just me</option>
+                  <option>2 to 5</option>
+                  <option>6 to 15</option>
+                  <option>16 to 50</option>
+                  <option>51 or more</option>
+                </select>
+                <span class="field-error">Choose your team size so capacity is sized honestly.</span>
+              </div>
+              <div class="field full">
+                <label for="revenue">Annual revenue band <span class="req">*</span></label>
+                <select id="revenue" name="revenue">
+                  <option value="">Choose one</option>
+                  <option>Under $250K</option>
+                  <option>$250K to $750K</option>
+                  <option>$750K to $2M</option>
+                  <option>$2M to $5M</option>
+                  <option>$5M to $20M</option>
+                  <option>Over $20M</option>
+                  <option>Prefer not to say</option>
+                </select>
+                <span class="field-error">A band is enough. It guides tier fit, nothing more.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>3. The one job you want off your plate</h3>
+            <p class="card-sub">Answer two questions. Your first job and your first win come straight from these answers.</p>
+            <p class="time-line">About 1 minute. We handle the rest.</p>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="handoff">What would you hand off first? <span class="req">*</span></label>
+                <textarea id="handoff" name="handoff" placeholder="Example: Follow up with every new lead within minutes, in my voice, until they book or clearly pass."></textarea>
+                <span class="field-error">Give us the first job in a sentence or two. It becomes your day one request.</span>
+              </div>
+              <div class="field full">
+                <label for="stuck">Where does work get stuck today? <span class="req">*</span></label>
+                <textarea id="stuck" name="stuck" placeholder="Example: Everything routes back to me. Reports wait for a free evening, follow-up waits for a free hour, and both usually lose."></textarea>
+                <span class="field-error">Tell us where it piles up. That is what your setup is designed to take away.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>4. Your tools today</h3>
+            <p class="card-sub">Tick the tools you already use. Your team works inside them, and anything missing can be added while we set you up.</p>
+            <p class="time-line">About 30 seconds. We handle the rest.</p>
+            <div class="check-grid" id="toolGrid">
+              <label class="check-chip"><input type="checkbox" name="tools" value="CRM"> CRM</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Email"> Email</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Calendar"> Calendar</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Phone system"> Phone system</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Ads"> Ads</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Accounting"> Accounting</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Project tool"> Project tool</label>
+              <label class="check-chip"><input type="checkbox" name="tools" value="Other" id="toolOther"> Other</label>
+            </div>
+            <div class="field full" style="margin-top:14px">
+              <label for="otherTools">Anything else we should know about?</label>
+              <input type="text" id="otherTools" name="otherTools" placeholder="Name any other tool your business leans on">
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>5. How you want to ask for work</h3>
+            <p class="card-sub">Pick one way to ask. Every way lands on the same board and gets the same team.</p>
+            <p class="time-line">About 10 seconds. We handle the rest.</p>
+            <div class="choice-grid" role="radiogroup" aria-label="Intake mode">
+              <label class="choice">
+                <input type="radio" name="intake" value="Command App" checked>
+                <strong>Command App</strong>
+                <p>Submit, watch, and approve in your Surge Command app. The fullest picture of your team at work.</p>
+              </label>
+              <label class="choice">
+                <input type="radio" name="intake" value="Own project tool">
+                <strong>Your own project tool</strong>
+                <p>Keep working where your staff already works. Your team picks requests up there and mirrors status back.</p>
+              </label>
+              <label class="choice">
+                <input type="radio" name="intake" value="Direct to team lead">
+                <strong>Direct to your team lead</strong>
+                <p>Message one person the way you would a chief of staff. They log it, brief it, and run it from there.</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>6. Where you want to start</h3>
+            <p class="card-sub">Most clients start with the pilot. Pick the size that fits where your business is headed.</p>
+            <p class="time-line">About 30 seconds. We handle the rest.</p>
+            <div class="choice-grid four" role="radiogroup" aria-label="Tier interest">
+              <label class="choice">
+                <input type="radio" name="tier" value="Pilot" checked>
+                <span class="choice-tag">Start here</span>
+                <strong>Founding Pilot</strong>
+                <p>One clear job off your plate, your command center live, your team turned on, and your first request done on day one.</p>
+                <p class="choice-price">Install $2,500 to $5,000<br>Management $1,500 to $2,500 per month for 90 days</p>
+              </label>
+              <label class="choice">
+                <input type="radio" name="tier" value="Launch Team">
+                <strong>Launch Team</strong>
+                <p>One lane active, up to 5 connected tools, up to 20 completed requests a month. The operational floor, covered.</p>
+                <p class="choice-price">Install $4,500 to $7,500<br>Management $1,950 to $2,950 per month</p>
+              </label>
+              <label class="choice">
+                <input type="radio" name="tier" value="Growth Team">
+                <strong>Growth Team</strong>
+                <p>Two lanes active, up to 10 connected tools, up to 50 completed requests a month, with marketing and sales support at volume.</p>
+                <p class="choice-price">Install $7,500 to $12,500<br>Management $3,950 to $5,950 per month</p>
+              </label>
+              <label class="choice">
+                <input type="radio" name="tier" value="Full AI Organization">
+                <strong>Full AI Organization</strong>
+                <p>All three lanes, up to 18 connected tools, up to 100 completed requests a month, and priority turnaround.</p>
+                <p class="choice-price">Install $12,500 to $20,000<br>Management $6,950 to $9,950 per month</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>7. The terms, in plain words</h3>
+            <p class="card-sub">The same terms you will see in the pilot agreement. No fine print hiding anywhere else.</p>
+            <p class="time-line">About 1 minute to read. We handle the rest.</p>
+            <ul class="terms-list">
+              <li><strong>Half to start, half at go live.</strong> 50% of the install fee begins the build. The other 50% is due when your team is live.</li>
+              <li><strong>Management is monthly, in advance.</strong> Pilot management runs for the first 90 days at the pilot rate.</li>
+              <li><strong>Three month initial term, then month to month.</strong> After the initial term, the service continues monthly and either side can end it with notice.</li>
+              <li><strong>Founding rate lock.</strong> Convert from the pilot without a service gap and your standard tier rate is locked for 12 months.</li>
+              <li><strong>Your costs stay yours.</strong> Platform subscriptions, phone and messaging usage, and ad spend are never folded into the management fee.</li>
+            </ul>
+            <div class="field" id="agreeField">
+              <label class="agree" for="agree">
+                <input type="checkbox" id="agree" name="agree">
+                <span>I have read the pilot terms above and I am happy to start on that basis. <span class="req">*</span></span>
+              </label>
+              <span class="field-error">Please confirm the terms so we can start on the same page.</span>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <button class="button primary" type="submit">Send my application</button>
+            <p class="submit-note">A real person confirms we got it. No obligation to continue.</p>
+          </div>
+        </form>
+
+        <div class="success" id="successState" role="status">
+          <div class="success-head">
+            <span class="eyebrow"><span class="live-dot"></span> Application received</span>
+            <h2>Welcome aboard. Here is what happens next.</h2>
+            <p>Your application is with the UpSurge team. From here the path to a live AI organization is five steps, and only one of them asks anything of you.</p>
+          </div>
+          <div class="next-steps">
+            <div class="next-step">
+              <div class="step-num">1</div>
+              <div><strong>Fit call and scope confirmation</strong><p>We confirm your first bottleneck, your tier, and your install window together, using the map from your application.</p></div>
+              <span class="timing">Within 1 business day</span>
+            </div>
+            <div class="next-step">
+              <div class="step-num">2</div>
+              <div><strong>Agreement and start payment</strong><p>Your pilot agreement arrives in plain language. Signing it and the 50% start payment open the build.</p></div>
+              <span class="timing">The day you approve</span>
+            </div>
+            <div class="next-step">
+              <div class="step-num">3</div>
+              <div><strong>Your command center is set up</strong><p>Your Surge Command app, request board, team page, and output ledger are created and branded for your business.</p></div>
+              <span class="timing">Setup days 1 to 2</span>
+            </div>
+            <div class="next-step">
+              <div class="step-num">4</div>
+              <div><strong>Tools connected, team turned on</strong><p>You click Connect next to each tool and sign in. That is your whole job. Then your team turns on, passes a quick check, and learns your business from your real materials.</p></div>
+              <span class="timing">Setup days 2 to 4</span>
+            </div>
+            <div class="next-step">
+              <div class="step-num">5</div>
+              <div><strong>Go live, first request done</strong><p>Your team page lights up and your first real request, the bottleneck you named above, is completed end to end.</p></div>
+              <span class="timing">Day one of live service</span>
+            </div>
+          </div>
+          <div class="submit-row" style="margin-top:22px">
+            <a class="button primary" href="onboard.html">Enter your onboarding hub</a>
+            <p class="submit-note">Preview note: this walkthrough keeps everything in your browser. On the live site, your application goes straight to the UpSurge team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>UpSurge AI Team</span>
+      <span>Installed AI operations for service businesses.</span>
+      <span>&copy; <span id="year">2026</span> UpSurge Pros</span>
+    </div>
+  </footer>
+
+  <script src="journey.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('applyForm');
+      var summary = document.getElementById('errorSummary');
+
+      function markInvalid(el, bad) {
+        var field = el.closest('.field');
+        if (field) field.classList.toggle('invalid', bad);
+        return !bad;
+      }
+      function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+      function isUrl(v) { if (!v) return true; try { new URL(v); return true; } catch (e) { return false; } }
+
+      var rules = [
+        { id: 'bizType', test: function (v) { return v !== ''; } },
+        { id: 'bizName', test: function (v) { return v.trim().length > 1; } },
+        { id: 'ownerName', test: function (v) { return v.trim().length > 1; } },
+        { id: 'email', test: function (v) { return isEmail(v.trim()); } },
+        { id: 'website', test: function (v) { return isUrl(v.trim()); } },
+        { id: 'industry', test: function (v) { return v !== ''; } },
+        { id: 'teamSize', test: function (v) { return v !== ''; } },
+        { id: 'revenue', test: function (v) { return v !== ''; } },
+        { id: 'handoff', test: function (v) { return v.trim().length >= 12; } },
+        { id: 'stuck', test: function (v) { return v.trim().length >= 12; } }
+      ];
+
+      rules.forEach(function (r) {
+        var el = document.getElementById(r.id);
+        el.addEventListener('input', function () { markInvalid(el, false); });
+        el.addEventListener('change', function () { markInvalid(el, false); });
+      });
+      var agree = document.getElementById('agree');
+      agree.addEventListener('change', function () {
+        document.getElementById('agreeField').classList.toggle('invalid', !agree.checked);
+      });
+
+      /* Something else is a first-class path, not a dead end: picking it opens
+         a free-text field, and the client's own words are stored with the
+         journey and used to name their business type from here on. */
+      var bizTypeEl = document.getElementById('bizType');
+      var bizTypeCustomEl = document.getElementById('bizTypeCustom');
+      var bizTypeCustomField = document.getElementById('bizTypeCustomField');
+      function syncCustomField() {
+        var show = bizTypeEl.value === 'other';
+        bizTypeCustomField.style.display = show ? '' : 'none';
+        if (show) bizTypeCustomEl.focus();
+        if (!show) markInvalid(bizTypeCustomEl, false);
+      }
+      bizTypeEl.addEventListener('change', syncCustomField);
+      bizTypeCustomEl.addEventListener('input', function () { markInvalid(bizTypeCustomEl, false); });
+      syncCustomField();
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var firstBad = null;
+        var badCount = 0;
+        rules.forEach(function (r) {
+          var el = document.getElementById(r.id);
+          var ok = markInvalid(el, !r.test(el.value));
+          if (!ok) { badCount++; if (!firstBad) firstBad = el; }
+        });
+        if (bizTypeEl.value === 'other') {
+          var customOk = markInvalid(bizTypeCustomEl, bizTypeCustomEl.value.trim().length < 2);
+          if (!customOk) { badCount++; if (!firstBad) firstBad = bizTypeCustomEl; }
+        }
+        if (!agree.checked) {
+          document.getElementById('agreeField').classList.add('invalid');
+          badCount++;
+          if (!firstBad) firstBad = agree;
+        }
+        if (badCount > 0) {
+          summary.textContent = 'A few answers need a little more before this can go in. ' +
+            badCount + (badCount === 1 ? ' field is' : ' fields are') +
+            ' highlighted below, each with a note on what is needed.';
+          summary.classList.add('show');
+          if (firstBad) firstBad.focus();
+          window.scrollTo({ top: summary.offsetTop - 110, behavior: 'smooth' });
+          return;
+        }
+        summary.classList.remove('show');
+        // The chosen business type shapes everything downstream: the setup steps,
+        // the board words, the starter jobs, and the questions in the hub. For
+        // something else, the client's own words ride along and name their type.
+        if (window.JOURNEY) {
+          var typeVal = bizTypeEl.value;
+          JOURNEY.setJourney({
+            businessType: typeVal,
+            customType: typeVal === 'other' ? bizTypeCustomEl.value.trim() : ''
+          });
+        }
+        // Wiring contract: POST the collected payload to /api/pilot-applications here.
+        // This preview build sends nothing anywhere; it advances the journey locally.
+        form.style.display = 'none';
+        var success = document.getElementById('successState');
+        success.classList.add('show');
+        window.scrollTo({ top: success.offsetTop - 110, behavior: 'smooth' });
+      });
+
+      var year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
