@@ -337,7 +337,7 @@ The sprint ends with a short review: what changed, what did not, what should be 
 
 **Every price in this section is proposed. No number is final until Austin approves it in writing.**
 
-The numbers are planning ranges for the pilot conversation and proposal model. They are not published prices, not current client rates, and not a promise to a prospect. Austin owns the final price, discount, contract term, and pilot conversion terms.
+Status: APPROVED by Austin on 2026-11-04. The ranges below are the approved pricing framework; the exact figure inside a range is set per client in the proposal, by scope. They are not published prices and not current client rates.
 
 ### Pricing model
 
@@ -348,9 +348,9 @@ The commercial model has four parts:
 3. **Pass-through costs:** AI platform subscriptions, telephony, messaging, advertising spend, and third-party tools are client-owned or reimbursed under the approved agreement. They are never hidden inside management reporting.
 4. **Project add-ons:** work outside the tier is scoped and priced before it starts.
 
-### Proposed tier structure
+### Approved tier structure
 
-| Tier | Best fit | Active lanes | Connected apps | Included completed requests | Operating rhythm | Proposed install fee | Proposed monthly management |
+| Tier | Best fit | Active lanes | Connected apps | Included completed requests | Operating rhythm | Approved install fee | Approved monthly management |
 |---|---|---:|---:|---:|---|---:|---:|
 | Launch Team | One clear bottleneck, one main workflow, limited systems | 1 lane: Muse | Up to 5 | Up to 20 per month | Weekly summary, monthly review | $4,500 to $7,500 | $1,950 to $2,950 |
 | Growth Team | Recurring work across operations and one major growth function | 2 lanes: Muse plus Claude or Grok, selected by dominant work type | Up to 10 | Up to 50 per month | Daily digest on business days, weekly review, monthly operating review | $7,500 to $12,500 | $3,950 to $5,950 |
@@ -363,7 +363,7 @@ The commercial model has four parts:
 - **Completed request** means one execution brief with one definition of done that reaches delivery or a documented client decision. A status question is not a request. A campaign or build that naturally contains several deliverables may be split into multiple briefs at intake, and the client sees the split on the board before work starts.
 - **Request allowance** is a planning and staffing boundary, not a promise that every request is the same size. Very large builds are scoped as projects even when the client has allowance remaining.
 - **Approval wait time** is excluded from turnaround measurement. The clock and the reason are visible in the Desk.
-- Austin must approve the overage method before launch. Greta's proposed default is a pre-approved block of 10 additional completed requests, priced at 12% to 18% of the tier's monthly management fee, with client notice at 80% usage. No overage block starts without client approval.
+- Overage method APPROVED by Austin on 2026-11-04: a pre-approved block of 10 additional completed requests, priced at 12% to 18% of the tier's monthly management fee, with client notice at 80% usage. No overage block starts without client approval.
 
 ### Proposed install timing targets
 
@@ -377,13 +377,13 @@ The clock must be defined in the proposal. It starts when the agreement is signe
 
 ### Founding pilot price concept
 
-**Proposed founding pilot terms for Austin to approve or replace:**
+**Founding pilot terms, APPROVED by Austin on 2026-11-04:**
 
 - Install fee: **$2,500 to $5,000**.
 - Management for the first 90 days: **$1,500 to $2,500 per month**.
 - Scope: one primary wedge, one intake mode, priority apps only, and the lane coverage stated in the pilot agreement.
 - Conversion: at the day 30 review, the client selects a standard tier for the remainder of the 90 day pilot period or signs the standard agreement defined in the pilot contract.
-- Founding benefit: Austin should choose one benefit, not stack several. The recommended benefit is a rate lock on the selected standard tier for 12 months if the client converts without a service gap. The alternative is a credit of 50% of the pilot install fee toward the standard install fee if conversion is signed within 7 days of the pilot review.
+- Founding benefit, APPROVED by Austin on 2026-11-04: a rate lock on the selected standard tier for 12 months if the client converts without a service gap. The alternative (a credit of 50% of the pilot install fee toward the standard install fee) was considered and not chosen; benefits are never stacked.
 - Case study rights: requested separately after results are known. The pilot discount is not exchanged for automatic testimonial or logo rights.
 
 The pilot price is lower because the client accepts a bounded scope, participates in timed install measurement, gives structured feedback, and helps UpSurge validate the offer. It is not lower because the QA standard is lower.
@@ -411,8 +411,8 @@ During the diagnostic, quantify one bottleneck in the client's own terms: unwork
 - Do not include AI platform seats, telephony usage, ad spend, or third-party software in the management fee unless Austin has approved a managed-seat model with a separate cost calculation.
 - Do not start an additional lane, app, or project block without written client approval when it changes price.
 - Custom quote triggers: more than 18 apps, multiple brands or locations with separate data boundaries, regulated workflow design, historical data migration, custom API development, more than 100 completed requests per month, or a client-mandated security review.
-- Proposed payment structure for Austin and legal review: 50% of the install fee to start, 50% at go live; monthly management paid in advance; pilot conversion terms written into the pilot agreement before kickoff.
-- Proposed initial management term for Austin to decide: three months after install, then month to month with a defined notice period. A shorter term lowers buyer resistance but weakens the time available to prove retention and expansion.
+- Payment structure APPROVED by Austin on 2026-11-04 (legal review still applies before first signature): 50% of the install fee to start, 50% at go live; monthly management paid in advance; pilot conversion terms written into the pilot agreement before kickoff.
+- Initial management term APPROVED by Austin on 2026-11-04: three months after install, then month to month with a defined notice period.
 
 ## 5. Sales motion
 

@@ -1,7 +1,7 @@
 # UpSurge AI Team: Sales Asset Pack
 
 Prepared 2026-11-04 by Mira (marketing-ceo) with Milo (ad-creative-producer), Muse lane, for Maive.
-Use: every asset below is final copy, ready to hand to a designer, a web builder, or a salesperson. No placeholders except where marked. Pricing carries no numbers until Austin sets them.
+Use: every asset below is final copy, ready to hand to a designer, a web builder, or a salesperson. No placeholders except where marked. Pricing was approved by Austin on 2026-11-04; the approved ranges appear in the pricing section and the pilot terms.
 
 The product in one line, for internal alignment only: an AI organization installed into a business. The client gets the Surge Command app with a live team heartbeat page, one team lead as their only point of contact, specialists working behind that lead across three platforms (Muse, Grok, Claude), memory of their business that compounds with every request, and UpSurge oversight over all of it.
 
@@ -144,11 +144,11 @@ No tickets disappearing into a void. No wondering whether anyone saw your messag
 
 **Heading** Three ways to bring the team in. One right size for where you are.
 
-**Essential** For the owner who needs the operational floor covered. Your command center, your team lead, core specialists, and the everyday work handed off: inbox, scheduling, follow-up, and reporting. Numbers pending.
+**Launch Team** For the owner with one clear bottleneck to remove first. One lane of the team active, up to 5 connected tools, up to 20 completed requests a month, and the everyday work handed off: inbox, scheduling, follow-up, and reporting. Install $4,500 to $7,500. Management $1,950 to $2,950 a month.
 
-**Growth** For the business actively acquiring customers. Everything in Essential, plus the marketing and sales support bench: content, campaigns, voice agents, and pipeline work at volume. Numbers pending.
+**Growth Team** For the business actively acquiring customers. Everything in Launch Team, plus a second lane and the marketing and sales support bench: content, campaigns, voice agents, and pipeline work at volume. Up to 10 connected tools and 50 completed requests a month. Install $7,500 to $12,500. Management $3,950 to $5,950 a month.
 
-**Command** For multi-location and multi-brand operators. Everything in Growth, plus expanded capacity, priority turnaround, and a dedicated oversight rhythm with the UpSurge senior team. Numbers pending.
+**Full AI Organization** For multi-location and multi-brand operators. All three lanes active, up to 18 connected tools, up to 100 completed requests a month, priority turnaround, and a dedicated oversight rhythm with the UpSurge senior team. Install $12,500 to $20,000. Management $6,950 to $9,950 a month.
 
 **Line under the tiers** Every plan starts with the pilot install. No long contract to prove it works. Your team, your data, and your memory of how your business runs are yours.
 
@@ -268,7 +268,7 @@ Response: "Of course. Two things that might help the thinking. First, name the o
 
 ## Pack notes for Austin (not client-facing)
 
-- Pricing tiers are named and positioned (Essential, Growth, Command) with no numbers, per direction. The one-pager and landing page both route every prospect to the pilot, so pricing can land later without reworking copy.
+- Pricing tiers are named Launch Team, Growth Team, and Full AI Organization, matching the approved gameplan, with the approved ranges set on 2026-11-04. The one-pager and landing page both route every prospect to the pilot first.
 - Proof points are stated generically from real UpSurge delivery: same-day completion standard, voice agents dialing and texting live lists, CRM systems built and verified, SEO and content engines. No client is named anywhere.
 - The landing page stat callouts are formatted but flagged for confirmed figures before publish. Do not publish invented numbers.
 - Demo script assumes the heartbeat page and one finished deliverable are showable live. Until the heartbeat build lands in the Desk template, the demo runs on our own internal team page.
