@@ -19,6 +19,10 @@ It is deliberately separate from the internal `upsurgeaiteam` repo. That repo is
 
 Flow is one way for knowledge and never for data: brain to product to installs. Nothing flows from a client install back into this repo except through the same sanitized path, reviewed by Maive.
 
+## Build doctrine (Austin, 2026-11-04)
+
+GitHub is the source of truth for everything in this product. Code is built and tested locally first, then pushed to GitHub, and deployments sync from GitHub. Lovable credits are never spent on this product: no editing or generating inside Lovable. The scalable shape is one template codebase with per-client configuration and data, never per-client hand builds.
+
 ## Contents
 
 - `install-system/AI-Team-Install-System.md`: the master system document. Architecture, the five install stages, the client experience, the heartbeat page, automation status and gaps, build order.
