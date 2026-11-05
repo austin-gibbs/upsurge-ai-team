@@ -247,6 +247,12 @@
           <div class="prov-step" data-prov="2"><span class="tick">3</span>Loading your team roster across all three lanes</div>
           <div class="prov-step" data-prov="3"><span class="tick">4</span>Opening your request board and output ledger</div>
           <div class="prov-step" data-prov="4"><span class="tick">5</span>Preparing your live team page</div>
+          <div class="prov-step" data-prov="5"><span class="tick">6</span>Creating your private memory, where your team saves everything it learns</div>
+          <div class="prov-step" data-prov="6"><span class="tick">7</span>Placing your first projects on your board, added by your lanes</div>
+        </div>
+        <div class="security-note">
+          <h4>Your PM tool is home base</h4>
+          <p style="margin:0; color:var(--muted); line-height:1.55">Every lane adds its projects here, on this board, and finished work lands in your ledger. You never chase work across apps or wonder where something stands, because it all lands here and you can watch it happen.</p>
         </div>
         <p class="workspace-line">Workspace: <strong id="workspaceName">Summit Ridge Realty Group, Command Center</strong> (demonstration name). Your board, team page, and ledger live at this address from now on.<span id="wsTypeLine"></span></p>
         <div class="rescue" data-rescue="1"><strong>Next smallest step:</strong> none. This stage finishes itself. Watch it land, then connect your first tool below.</div>
@@ -654,16 +660,16 @@ You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Loa
         var steps = document.querySelectorAll('[data-prov]');
         steps.forEach(function (el, i) {
           el.classList.toggle('complete', i < state.provSteps);
-          el.classList.toggle('active', i === state.provSteps && state.provSteps < 5);
+          el.classList.toggle('active', i === state.provSteps && state.provSteps < 7);
           el.querySelector('.tick').innerHTML = i < state.provSteps ? '&#10003;' : (i + 1);
         });
       }
       function runProv() {
-        if (state.provSteps >= 5 || provTimer) return;
+        if (state.provSteps >= 7 || provTimer) return;
         provTimer = window.setInterval(function () {
           state.provSteps++;
           save(); renderProv(); renderProgress();
-          if (state.provSteps >= 5) { window.clearInterval(provTimer); provTimer = null; renderProgress(); }
+          if (state.provSteps >= 7) { window.clearInterval(provTimer); provTimer = null; renderProgress(); }
         }, 650);
       }
 
@@ -1009,7 +1015,7 @@ You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Loa
 
       /* ---------- Stage completion, progress header, go live ---------- */
       function stageDone(n) {
-        if (n === 1) return state.provSteps >= 5;
+        if (n === 1) return state.provSteps >= 7;
         if (n === 2) return TOOL_IDS.every(toolHandled);
         if (n === 3) return LANE_IDS.every(function (id) { return state.lanes[id].seated; });
         if (n === 4) return state.knowledgeSaved && state.facts.every(function (f) { return f.confirmed; });
