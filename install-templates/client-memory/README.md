@@ -9,6 +9,8 @@ This folder is the Client layer for {{business_name}}. It holds what the team kn
 
 It is one of two memory layers. The other is the Craft layer, the Team Pack, which holds how the team works and is identical across installs. The two layers never mix. This folder never ships to another install, and nothing in it enters the Craft layer except a generalized pattern that has passed the sanitization checklist in the Team Pack memory contract and been approved by Maive.
 
+This memory instance lives in a repository owned by UpSurge. For every install, that repository is created and held under UpSurge's GitHub organization. The client receives application-level access to their memory through the product, not ownership of the repository, and receives a full factual export of their Client layer on exit, per `product/ip-and-stickiness.md`.
+
 ## Files in this folder
 
 - `client-profile.md`: Business basics, engagement facts, tier, lanes, intake mode, install record, links.

@@ -9,6 +9,10 @@ The exact Team Pack components an install receives, where each one lands for eac
 - Nothing in this manifest contains client facts. The Pack is identical across installs except for the version stamp and the client memory it points to.
 - The Claude lane leader for the install is named in the install record at provisioning. Maive leads the Muse lane. Marcus leads the Grok lane.
 
+## Delivery form and ownership
+
+Every seat receives the full operational content it needs to work: instructions, checklists in working form, and routing in working form. That content is delivered from the master source, which is held in the service repo and stays there. The master source files themselves, their versioning history, the QA scoring rubrics, and the drill banks are never copied into a client workspace or a seat. A seat holds what it needs to do the work, not the source the work system is built from.
+
 ## Components and landing spots
 
 | # | Component | Form delivered | Muse seat (Maive) | Claude seat | Grok seat (Marcus) |
@@ -35,7 +39,7 @@ The exact Team Pack components an install receives, where each one lands for eac
 Per Team Pack section 1.6, in delivery terms:
 
 1. Lena drafts the change in the master Pack with a changelog entry. Dex reviews for conflicts. Maive approves and sets the new version.
-2. The update is pushed to every active install's seat bootstrap packs: roster file, routing rules, brief standard, checklists, and templates are replaced at the new version. All three lanes receive it.
+2. The update is delivered to every active install's seat bootstrap packs as refreshed operational content in working form: roster, routing rules, brief standard, checklists, and templates are refreshed at the new version. All three lanes receive it. The master source is not copied with the update.
 3. The Client layer is never touched by a Pack push. No client memory file is opened, read for content, or modified by the update process. The push writes Craft layer files only.
 4. The Team Pack version field in the install's `client-profile.md` is updated to the new stamp with the push date. This is the one Client layer field a Pack push may write, because it is the install record of the Craft layer's version, not a client fact.
 5. In flight projects finish under the Pack version they started with. A compliance or safety fix applies immediately to all work and is noted in each affected project.
