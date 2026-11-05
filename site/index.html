@@ -4,7 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="UpSurge is the command platform for an AI team that can work across the AI platforms you choose, remembers your business, and brings back finished work under one quality standard.">
-  <title>UpSurge AI Team | Hire the Team. Skip the Hiring.</title>
+  <meta name="theme-color" content="#050914">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UpSurge AI Team">
+  <meta property="og:title" content="UpSurge AI Team | The Command Platform for AI Teams">
+  <meta property="og:description" content="One driver, every AI engine. One login, one board, one memory, and one quality standard, while your AI team works across the platforms that fit each job.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UpSurge AI Team | The Command Platform for AI Teams">
+  <meta name="twitter:description" content="One driver, every AI engine. One login, one board, one memory, and one quality standard, while your AI team works across the platforms that fit each job.">
+  <title>UpSurge AI Team | The Command Platform for AI Teams</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -140,6 +148,22 @@
       background: rgba(255,255,255,0.05);
     }
     .button.small { min-height: 42px; padding: 0 17px; font-size: 0.92rem; }
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -60px;
+      z-index: 40;
+      background: var(--cyan);
+      color: #03111d;
+      font-weight: 800;
+      padding: 10px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: top 160ms ease;
+    }
+    .skip-link:focus { top: 12px; }
+    .section-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .section-cta.center { justify-content: center; }
 
     .hero {
       padding: 86px 0 58px;
@@ -679,6 +703,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#top">Skip to main content</a>
   <header class="site-header">
     <div class="wrap nav">
       <a class="brand" href="#top" aria-label="UpSurge AI Team home">
@@ -800,6 +825,65 @@
             <p>Work is checked against your rules before it reaches you, no matter which specialist or AI platform did it.</p>
           </article>
         </div>
+        <div class="section-cta">
+          <a class="button primary" href="book.html">Book a fit call</a>
+          <a class="button secondary" href="apply.html">Apply for the pilot</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="homebase" aria-labelledby="homebase-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Home base</div>
+          <h2 id="homebase-title">Every lane works in one place: Surge Command.</h2>
+          <p>This is where the work lives. Whichever lane or AI platform does a job, the project is added to your board in Surge Command, not left behind in a chat. You open one place and see the whole team at work. Getting set up is one simple step at a time, and if a step needs a hand, a trained member of our team finishes it behind the scenes.</p>
+        </div>
+        <div class="handoff-grid">
+          <article class="handoff-card">
+            <h3>Projects from every lane</h3>
+            <ul>
+              <li>Every request becomes a project on your board, whichever lane picks it up</li>
+              <li>Nothing lives in a chat thread, an inbox, or someone's memory</li>
+              <li>Ask in the app, or ask your team lead and watch it appear</li>
+            </ul>
+          </article>
+          <article class="handoff-card">
+            <h3>Status you can see</h3>
+            <ul>
+              <li>What is working, what is waiting, and what needs your decision</li>
+              <li>Approvals are one tap, in the same place</li>
+              <li>Questions come back batched, not one ping at a time</li>
+            </ul>
+          </article>
+          <article class="handoff-card">
+            <h3>Finished work, recorded</h3>
+            <ul>
+              <li>Completed work lands in your Output Ledger with a short summary</li>
+              <li>Results are saved to your business memory, so the next job starts smarter</li>
+              <li>Your memory grows with every job, and you can watch it grow</li>
+            </ul>
+          </article>
+          <article class="handoff-card">
+            <h3>Recommendations, in the open</h3>
+            <ul>
+              <li>Tested ideas for new seats, specialists, or tools arrive here as simple cards</li>
+              <li>Each card says the job it would do, in your words</li>
+              <li>Your call every time: Add it, Not now, or Never for us</li>
+            </ul>
+          </article>
+        </div>
+        <div class="lead-strip" style="margin-top:18px">
+          <span class="avatar">YB</span>
+          <div>
+            <strong>Built in your words, for your kind of business.</strong>
+            <p>Any industry. Your board stages follow how a job actually moves through your business, your categories and starter work use the words you use, and your team lead can reshape the board when you ask. The tool fits you. You never have to fit the tool.</p>
+          </div>
+          <span class="status working">Your shape</span>
+        </div>
+        <div class="section-cta">
+          <a class="button primary" href="book.html">Book a fit call</a>
+        </div>
       </div>
     </section>
 
@@ -881,7 +965,7 @@
           <article class="bundle-card">
             <div class="bundle-icon">WL</div>
             <h3>Learn every week</h3>
-            <p>UpSurge turns lessons from real work into better playbooks and checks for your team. Your private business facts stay yours alone.</p>
+            <p>UpSurge turns lessons from real work into better playbooks and checks for your team, delivered as regular Team Pack updates. Your private business facts stay yours alone.</p>
           </article>
         </div>
         <div class="lead-strip" style="margin-top:18px">
@@ -1127,7 +1211,7 @@
           <article class="bundle-card">
             <div class="bundle-icon">UO</div>
             <h3>UpSurge Oversight</h3>
-            <p>Real people review quality, watch open work, check that the memory stays complete, and step in when a platform or tool causes trouble.</p>
+            <p>Your team starts expert, with playbooks proven in real work, and specialists pass skill checks before they are shown as ready. Real people keep reviewing quality, watch open work, check that the memory stays complete, and step in when a platform or tool causes trouble.</p>
           </article>
           <article class="bundle-card">
             <div class="bundle-icon">BM</div>
@@ -1150,6 +1234,10 @@
           <div>
             <h3>Start with a founding pilot install.</h3>
             <p>Your command center live, every app that matters found, your priority tools connected or set up for you, your team turned on, and your first real request completed on day one. Founding clients who convert without a service gap receive a 12 month rate lock on the selected standard tier.</p>
+            <div class="section-cta">
+              <a class="button primary" href="book.html">Book a fit call</a>
+              <a class="button secondary" href="apply.html">Apply for the pilot</a>
+            </div>
           </div>
           <div class="pilot-price">
             <span>Pilot install</span>
@@ -1232,11 +1320,11 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>Is my business data safe?</summary>
-            <p>Yes, and the design is the answer. Your install is yours alone. Your facts, customers, and files live in your private workspace and are never shared with, or used for, another client. What improves across all clients is general craft: better checklists, better processes. Never your information. You can revoke any connection at any time, instantly.</p>
+            <p>Yes, and the design is the answer. Your install is yours alone. Your facts, customers, and files live in your private workspace and are never shared with, or used for, another client. What improves across all clients is general craft: better checklists, better processes. Never your information. Your business data is your property and it exports with you. The command platform and the team playbooks are UpSurge's, and that operating system is the advantage you are renting. You can revoke any connection at any time, instantly.</p>
           </details>
           <details class="faq-item">
             <summary>Do I need to be technical?</summary>
-            <p>No. If you can send a text message, you can run this team. Setup walks you through one sign in at a time, in plain words, with the exact button to tap. We handle the rest, and your team lead is one tap away if you get stuck.</p>
+            <p>No. If you can send a text message, you can run this team. Setup walks you through one sign in at a time, in plain words, with the exact button to tap. If a step cannot be finished on the page alone, a trained member of our team completes it for you behind the scenes. Your team lead is one tap away if you get stuck.</p>
           </details>
           <details class="faq-item">
             <summary>Is this a chatbot?</summary>
@@ -1272,7 +1360,10 @@
           <div class="kicker">Book a 20 minute fit call</div>
           <h2 id="book-title">Your next hire could be a whole team.</h2>
           <p>One fit call. Twenty minutes. We will show you the command platform live, map the first ten things you would hand off, talk through which platforms and lanes fit your business, and give you a straight answer on fit. If it is not a fit, you keep the map.</p>
-          <a class="button primary" href="book.html">Book a fit call</a>
+          <div class="section-cta center">
+            <a class="button primary" href="book.html">Book a fit call</a>
+            <a class="button secondary" href="apply.html">Apply for the pilot</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1286,6 +1377,44 @@
     </div>
   </footer>
 
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "UpSurge AI Team",
+          "description": "The command platform for an AI team that works across the AI platforms you choose, remembers your business, and brings back finished work under one quality standard.",
+          "brand": { "@type": "Brand", "name": "UpSurge Pros" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is this a chatbot?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. A chatbot is one engine you talk to. UpSurge is the driver above the engines: one lead sends work to the right specialists and platforms, has it checked, saves it to your memory, and brings back finished work." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can the team use ChatGPT, Gemini, or another AI platform I already have?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. A lane can run on Muse, Grok, Claude, ChatGPT, Gemini, or another capable platform. Your lead can spread work across the seats you already pay for, use the best fit for each job, and move a seat later without losing your memory or starting over. Every platform gets the same quality checks." }
+            },
+            {
+              "@type": "Question",
+              "name": "What if I already have tools and a CRM?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Setup starts by finding the apps your business actually uses, so nothing important is missed. We connect what already works, and the team works inside your tools. If your customer system is missing or broken, we can set up HighLevel as part of the install. Replacing a working tool is never forced on day one." }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens as my business grows?",
+              "acceptedAnswer": { "@type": "Answer", "text": "We add the help you need: a specialist for a new kind of work, another lane for more room, or a new platform for a new job. Your board, memory, and work history stay in place, so growth builds on everything your team already knows." }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
   <script>
     (function () {
       var clock = document.getElementById('localClock');
