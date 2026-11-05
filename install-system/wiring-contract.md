@@ -54,7 +54,7 @@ One row per event. "Satisfies" means the event is the evidence a step was waitin
 
 ### 2c. Connect stage (onboard.html)
 
-The full connect truth rule is Section 4. This table wires the events; the rule governs what the states mean.
+The full connect truth rule is Section 4. This table wires the events; the rule governs what the states mean. Which tools get rows at all is decided by the App Census (Section 4.5 and install-system/app-census.md, the source of truth for the census): the census runs at the head of this stage, and the verify steps below execute against census rows, not a fixed list.
 
 | Event | System of record (exact field) | Orchestrator step | Automation that fires | Failure or abandonment recovery |
 |---|---|---|---|---|
@@ -222,6 +222,16 @@ The front end never writes connect state, seat state, or install state. It rende
 ```
 
 Internal detail never enters the projection: no error codes, no step keys, no manifest paths, no amounts, no flag data. The projection is a client surface and follows the spec's rule that client visible status is a simplified, honest projection of the state machine.
+
+### 4.5 The App Census inside the Connect stage
+
+The census is the completeness guarantee for this stage: every app and platform the business uses or needs is discovered, listed, and brought to a recorded decision before the stage closes. install-system/app-census.md is the source of truth for the census questions, detection signals, record, and resolution rules; this section wires it and fixes the names both sides share.
+
+**Steps.** The census runs inside the Connect stage as three steps, after `connect.present_checklist` and before the verify steps, with idempotency keys in the house format of Section 3.3: `census.run_questions` (natural key `census:{client_slug}`), `census.apply_detections` (natural key `census-detections:{client_slug}`), and `census.resolve_rows` (natural key `census-resolution:{client_slug}`). The verify steps consume census rows: the standard four (`connect.verify_email`, `connect.verify_calendar`, `connect.verify_file_storage`, `connect.verify_crm`) plus one `connect.verify_<tool_key>` per further row the client connects, generated at `census.resolve_rows` time. `connect.record_connections` records the verified set from the census rows. `go_live.final_verification_sweep` gains one named check, `census_completeness` (defined in app-census.md Section 4): the sweep may not pass while any census row is unresolved.
+
+**The record.** The census lives in the manifest as the `census` array, one row per discovered app, with exactly these fields: `function`, `tool_name`, `state`, `owner`, `note`. The `state` field holds exactly one of `Connected`, `Set up for them`, `Coming next`, `Not needed`, with the meanings app-census.md Section 3.2 fixes. `Connected` is bounded by the truth rule of this section's parent: a row reads Connected only when the Section 4.1 verification for that tool has passed and the manifest connected apps entry holds `verified = true`. `Connected` and `Set up for them` rows count toward the tier's included app count (Launch 5, Growth 10, Full 18); rows beyond the count default to `Coming next`, never dropped.
+
+**The hub.** In onboard.html the Connect stage presents the census as the client's own list, headed "Your apps," never under the word census. Each row renders in the client's words: the function as their business says it (the business type pack's wording where one exists), the tool's own name, one plain state word (Connected, Set up for you, Coming next, Not needed), and the single action left on that row if one exists, named exactly as the client performs it. The projection's `connect` array (Section 4.4) is generated from the census rows, one entry per row that carries connection mechanics, so the list the client works from and the list the orchestrator verifies against are the same list seen from two sides. Rows the client is not asked to act on (Set up for them, Not needed) render without an action, with their `note` shown in plain words, so the client can always see why every app on their list is in the state it is in.
 
 ## 5. The self-serve contract
 
