@@ -10,5 +10,5 @@
 - Seat model: client-owned
 - Team Pack: 1.0.0
 
-Client layer status: skeleton (provision stage).
+Client layer status: Client layer v1 (draft).
 Facts above come from the signed agreement and the install config only.
