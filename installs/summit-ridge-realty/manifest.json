@@ -1,0 +1,29 @@
+{
+  "schema": "ai-team-install-manifest/1",
+  "install_id": "summit-ridge-demo",
+  "slug": "summit-ridge-realty",
+  "business_name": "Summit Ridge Realty Group",
+  "tier": "pilot",
+  "lanes": [
+    "muse",
+    "claude",
+    "grok"
+  ],
+  "timezone": "America/Denver",
+  "intake_mode": "surge-form",
+  "seat_model": "client-owned",
+  "pack_version": "1.0.0",
+  "desk": {
+    "project_id": "6b29dcf6-5f01-4dbe-a701-2c8f1ff20f48"
+  },
+  "slack": {
+    "channel": "ai-command"
+  },
+  "repo": "austin-gibbs/upsurge-ai-team",
+  "path_prefix": "installs",
+  "pointers": {
+    "passcode": "SURGE_PASSCODE_SUMMIT_RIDGE_REALTY"
+  },
+  "stages": {},
+  "updated_at": "2026-11-05T06:21:16.419059+00:00"
+}
