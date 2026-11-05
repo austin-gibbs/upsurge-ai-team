@@ -91,6 +91,31 @@
     }
     .security-note h4 { margin: 0 0 8px; font-size: 1rem; }
     .security-note ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
+    .census {
+      border: 1px solid rgba(56,225,255,0.3); background: rgba(56,225,255,0.05);
+      border-radius: 18px; padding: 20px; margin-bottom: 20px;
+    }
+    .census h4 { margin: 0 0 6px; font-size: 1.05rem; }
+    .census-intro { color: var(--muted); margin: 0 0 8px; line-height: 1.55; max-width: 760px; }
+    .census-row { display: grid; gap: 7px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.07); }
+    .census-row .census-q { font-weight: 750; font-size: 0.95rem; }
+    .census-row input[type="text"] {
+      width: 100%; border: 1px solid var(--line); background: rgba(3,10,22,0.48); color: var(--text);
+      border-radius: 12px; padding: 11px 13px; font: inherit; font-size: 0.95rem;
+    }
+    .census-row input[type="text"]:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; }
+    .census-none { color: var(--muted); font-size: 0.9rem; font-weight: 650; display: flex; gap: 8px; align-items: center; cursor: pointer; }
+    .census-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+    .tool-note { grid-column: 1 / -1; display: none; color: var(--muted); font-size: 0.88rem; margin: 0; }
+    .tool-row.show-note .tool-note { display: block; }
+    .platform-pick { display: grid; gap: 7px; margin-bottom: 14px; }
+    .platform-pick label { font-weight: 750; font-size: 0.92rem; }
+    .platform-pick select {
+      width: 100%; border: 1px solid var(--line); background: rgba(3,10,22,0.48); color: var(--text);
+      border-radius: 12px; padding: 11px 13px; font: inherit; font-size: 0.95rem;
+    }
+    .platform-pick select:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; }
+    .platform-note { color: var(--muted); margin: 16px 0 0; font-size: 0.95rem; }
     .lane-seat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .lane-seat { border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 20px; background: rgba(3,10,22,0.44); }
     .lane-seat h4 { margin: 0 0 4px; font-size: 1.1rem; letter-spacing: -0.02em; }
@@ -235,12 +260,66 @@
         <p class="stage-sub">Click Connect next to a tool, sign in on that tool's own page, then come back here. A quick check runs by itself, and only then does the tool count as connected. One tool at a time.</p>
         <p class="time-line">About 15 minutes, one tool at a time. We handle the rest.</p>
         <p class="shape-note" id="shapeNoteConnect" style="display:none">Do not see your kind of business? We shape everything around yours as we learn it.</p>
+        <div class="census" id="censusBlock">
+          <h4>Let us find everything you use</h4>
+          <p class="census-intro">Nine quick questions. Type the tool you use for each one, or tick "We do not have one." Your connect list below builds itself from your answers. Everything on your list ends up Connected, Set up for you, or Planned together. Nothing quietly missing.</p>
+          <div class="census-row" data-census="customers">
+            <label class="census-q" for="census-customers">Where do your customer names live?</label>
+            <input type="text" id="census-customers" data-census-input placeholder="HubSpot, Salesforce, a spreadsheet, a notebook">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="invoices">
+            <label class="census-q" for="census-invoices">Where do you make invoices?</label>
+            <input type="text" id="census-invoices" data-census-input placeholder="QuickBooks, Xero, Wave, paper invoices">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="email">
+            <label class="census-q" for="census-email">What do you use for email?</label>
+            <input type="text" id="census-email" data-census-input placeholder="Gmail, Outlook">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="calendar">
+            <label class="census-q" for="census-calendar">Where do you keep your calendar?</label>
+            <input type="text" id="census-calendar" data-census-input placeholder="Google Calendar, Outlook, a paper diary">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="phone">
+            <label class="census-q" for="census-phone">What do you use for phones and texts?</label>
+            <input type="text" id="census-phone" data-census-input placeholder="Your phone company, a calling app, your cell phone">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="files">
+            <label class="census-q" for="census-files">Where do you keep files and photos?</label>
+            <input type="text" id="census-files" data-census-input placeholder="Google Drive, Dropbox, OneDrive">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="ads">
+            <label class="census-q" for="census-ads">Where do you run ads and post on social?</label>
+            <input type="text" id="census-ads" data-census-input placeholder="Meta, Google Ads, TikTok">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="website">
+            <label class="census-q" for="census-website">Where does your website live?</label>
+            <input type="text" id="census-website" data-census-input placeholder="WordPress, Wix, Squarespace">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-row" data-census="other">
+            <label class="census-q" for="census-other">Anything else you open every week?</label>
+            <input type="text" id="census-other" data-census-input placeholder="Asana, Trello, Slack, a job board app">
+            <label class="census-none"><input type="checkbox" data-census-none> We do not have one</label>
+          </div>
+          <div class="census-actions">
+            <button class="button primary" type="button" id="censusSave">Save and build my connect list</button>
+            <span class="small-note" id="censusNote"></span>
+          </div>
+        </div>
         <div class="progress-shell" aria-hidden="true"><div class="progress-fill" id="connectProgress"></div></div>
-        <p class="fact-counter" style="margin-top:0"><strong id="connectCount">0</strong> of 8 tools connected and checked</p>
+        <p class="fact-counter" style="margin-top:0"><strong id="connectCount">0</strong> of <span id="connectTotal">8</span> on your list, connected, set up, or planned</p>
         <div id="toolList">
           <div class="tool-row" data-tool="crm">
             <div><strong>CRM</strong><small>So follow up, pipelines, and customer records stay current without anyone chasing them.</small></div>
             <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
+            <p class="tool-note" data-census-note></p>
           </div>
           <div class="tool-row" data-tool="email">
             <div><strong>Email</strong><small>So your team can draft, send, and follow up with your approval rules in place.</small></div>
@@ -272,6 +351,7 @@
             <div class="tool-actions"><span class="status idle" data-tool-status>Not started</span><button class="button secondary small" type="button" data-connect>Connect</button></div>
           </div>
         </div>
+        <div id="plannedList"></div>
         <div class="security-note">
           <h4>How connecting works, and why it is safe</h4>
           <ul>
@@ -281,7 +361,7 @@
             <li><strong style="color:var(--soft)">Least access by default.</strong> We request only the access each tool needs to do its job, and you see it before you approve it.</li>
           </ul>
         </div>
-        <div class="rescue" data-rescue="2"><strong>Next smallest step:</strong> connect one tool. Email is the fastest first win. <span class="small-note">We will keep your place if you need to come back to the rest.</span></div>
+        <div class="rescue" data-rescue="2"><strong>Next smallest step:</strong> <span id="rescue2Step">answer the first question above. Your connect list builds itself from your answers.</span> <span class="small-note">We will keep your place if you need to come back to the rest.</span></div>
       </section>
 
       <section class="stage-panel" id="panel3" aria-labelledby="stage3-title">
@@ -295,7 +375,17 @@
           <article class="lane-seat" data-lane="muse">
             <h4>Muse lane</h4>
             <p class="lane-sub">Operations and Systems: connected tools, memory, and daily follow through.</p>
-            <pre class="copy-block" data-setup-text>You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. When a request is unclear, ask the team lead once, with a recommendation.</pre>
+            <div class="platform-pick">
+              <label for="platform-muse">Runs on</label>
+              <select id="platform-muse" data-platform>
+                <option value="standard" selected>Muse (our standard pick)</option>
+                <option value="chatgpt">ChatGPT</option>
+                <option value="gemini">Gemini</option>
+                <option value="other">Another platform I already have</option>
+              </select>
+            </div>
+            <pre class="copy-block" data-setup-text>Setup words for the Muse lane, running on Muse.
+You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. When a request is unclear, ask the team lead once, with a recommendation.</pre>
             <div class="lane-actions">
               <button class="button secondary small" type="button" data-copy>Copy the setup words</button>
               <button class="button secondary small" type="button" data-pasted>I pasted it</button>
@@ -310,7 +400,17 @@
           <article class="lane-seat" data-lane="claude">
             <h4>Claude lane</h4>
             <p class="lane-sub">Strategy and Craft: deep thinking, careful writing, research, and polished work.</p>
-            <pre class="copy-block" data-setup-text>You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. Bring judgment, cite your sources, and hand finished work back through the team lead.</pre>
+            <div class="platform-pick">
+              <label for="platform-claude">Runs on</label>
+              <select id="platform-claude" data-platform>
+                <option value="standard" selected>Claude (our standard pick)</option>
+                <option value="chatgpt">ChatGPT</option>
+                <option value="gemini">Gemini</option>
+                <option value="other">Another platform I already have</option>
+              </select>
+            </div>
+            <pre class="copy-block" data-setup-text>Setup words for the Claude lane, running on Claude.
+You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. Bring judgment, cite your sources, and hand finished work back through the team lead.</pre>
             <div class="lane-actions">
               <button class="button secondary small" type="button" data-copy>Copy the setup words</button>
               <button class="button secondary small" type="button" data-pasted>I pasted it</button>
@@ -325,7 +425,17 @@
           <article class="lane-seat" data-lane="grok">
             <h4>Grok lane</h4>
             <p class="lane-sub">Speed and Signal: fast production, live awareness, and high volume follow through.</p>
-            <pre class="copy-block" data-setup-text>You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. Move fast, keep quality checks on, and report finished work to the board.</pre>
+            <div class="platform-pick">
+              <label for="platform-grok">Runs on</label>
+              <select id="platform-grok" data-platform>
+                <option value="standard" selected>Grok (our standard pick)</option>
+                <option value="chatgpt">ChatGPT</option>
+                <option value="gemini">Gemini</option>
+                <option value="other">Another platform I already have</option>
+              </select>
+            </div>
+            <pre class="copy-block" data-setup-text>Setup words for the Grok lane, running on Grok.
+You are part of the UpSurge AI Team installed for Summit Ridge Realty Group. Load the team roster and the routing rules for this workspace. Work only inside this business. Business memory lives in the Summit Ridge workspace. Move fast, keep quality checks on, and report finished work to the board.</pre>
             <div class="lane-actions">
               <button class="button secondary small" type="button" data-copy>Copy the setup words</button>
               <button class="button secondary small" type="button" data-pasted>I pasted it</button>
@@ -338,6 +448,7 @@
             <p style="margin:14px 0 0"><span class="status idle" data-lane-status>Not on yet</span></p>
           </article>
         </div>
+        <p class="platform-note">Your team works the same on any of these. We check every one the same way.</p>
         <div class="rescue" data-rescue="3"><strong>Next smallest step:</strong> turn on one lane. The Muse lane takes under a minute, start to checked. <span class="small-note">We will keep your place on the other two.</span></div>
       </section>
 
@@ -487,7 +598,9 @@
         return {
           provSteps: 0,
           tools: {},            // id -> { s: 'connected' | 'failed', tries: n }
-          lanes: {},            // id -> { pasted: bool, drill: 0..3, seated: bool }
+          census: null,         // census key -> { tool: 'name they typed', none: bool }
+          censusSaved: false,
+          lanes: {},            // id -> { pasted: bool, drill: 0..3, seated: bool, platform: 'standard' | 'chatgpt' | 'gemini' | 'other' }
           facts: null,          // [{ text, confirmed }]
           knowledge: {},        // field id -> value, plus voice
           knowledgeSaved: false,
@@ -504,7 +617,10 @@
         }
       } catch (e) { /* fresh state */ }
       TOOL_IDS.forEach(function (id) { if (!state.tools[id]) state.tools[id] = { s: 'idle', tries: 0 }; });
-      LANE_IDS.forEach(function (id) { if (!state.lanes[id]) state.lanes[id] = { pasted: false, drill: 0, seated: false }; });
+      LANE_IDS.forEach(function (id) {
+        if (!state.lanes[id]) state.lanes[id] = { pasted: false, drill: 0, seated: false, platform: 'standard' };
+        if (!state.lanes[id].platform) state.lanes[id].platform = 'standard';
+      });
       if (!state.facts) {
         var factSource = (typeCfg && typeCfg.facts) ? typeCfg.facts : DEFAULT_FACTS;
         state.facts = factSource.map(function (f) {
@@ -561,11 +677,135 @@
           if (row) toolListEl.appendChild(row);
         });
       }
+      /* ---------- The app census: their answers build the connect list ---------- */
+      /* Each census answer names the tool for one job in the business. A typed
+         name becomes that row's title. "We do not have one" on customer names
+         turns the row into a set up for you row (our team provides the standard
+         customer system). On any other job it becomes a Planned together row.
+         The website answer has no sign-in, so it lands as a planned row too.
+         Production: the answers seed the install's connect list, and the
+         no-customer-system answer starts the standard customer system setup. */
+      var CENSUS_FOR_TOOL = { crm: 'customers', email: 'email', calendar: 'calendar', phone: 'phone', ads: 'ads', files: 'files', accounting: 'invoices', project: 'other' };
+      var PLANNED_TITLES = { crm: 'Your customer names', email: 'Email', calendar: 'Calendar', phone: 'Phones and texts', ads: 'Ads and social', files: 'Files and photos', accounting: 'Invoices', project: 'Your other weekly tool' };
+      var TOOL_ORIG = {};
+      TOOL_IDS.forEach(function (id) {
+        var row = document.querySelector('[data-tool="' + id + '"]');
+        TOOL_ORIG[id] = { title: row.querySelector('strong').textContent, small: row.querySelector('small').textContent };
+      });
+      function censusEntry(toolId) {
+        if (!state.censusSaved || !state.census) return null;
+        return state.census[CENSUS_FOR_TOOL[toolId]] || null;
+      }
+      function censusMode(toolId) {
+        var e = censusEntry(toolId);
+        if (!e) return 'connect';
+        if (e.none) {
+          if (toolId === 'crm') return 'setup';
+          if (toolId === 'project') return 'hidden';
+          return 'planned';
+        }
+        return 'connect';
+      }
+      function toolHandled(id) {
+        if (censusMode(id) !== 'connect') return true;
+        return state.tools[id].s === 'connected';
+      }
+      function websiteAnswered() {
+        return !!(state.censusSaved && state.census && state.census.website && (state.census.website.tool || state.census.website.none));
+      }
+      function renderPlannedList() {
+        var box = document.getElementById('plannedList');
+        if (!box) return;
+        box.innerHTML = '';
+        if (!websiteAnswered()) return;
+        var e = state.census.website;
+        var row = document.createElement('div');
+        row.className = 'tool-row';
+        var left = document.createElement('div');
+        var strong = document.createElement('strong');
+        strong.textContent = e.tool ? e.tool + ', your website' : 'A website, when you are ready';
+        var small = document.createElement('small');
+        small.textContent = e.tool
+          ? 'Your team plans website work from your command center. There is nothing to connect here, and nothing is missing.'
+          : 'Planned together. When a website joins the plan, your team builds it with you.';
+        left.appendChild(strong); left.appendChild(small);
+        var actions = document.createElement('div');
+        actions.className = 'tool-actions';
+        var pillEl = document.createElement('span');
+        pill(pillEl, 'Planned together', 'review');
+        actions.appendChild(pillEl);
+        row.appendChild(left); row.appendChild(actions);
+        box.appendChild(row);
+      }
+      function renderRescue2() {
+        var el = document.getElementById('rescue2Step');
+        if (!el) return;
+        el.textContent = state.censusSaved
+          ? 'connect one tool below. Email is the fastest first win.'
+          : 'answer the first question above. Your connect list builds itself from your answers.';
+      }
+      var CENSUS_KEYS = ['customers', 'invoices', 'email', 'calendar', 'phone', 'files', 'ads', 'website', 'other'];
+      CENSUS_KEYS.forEach(function (key) {
+        var rowEl = document.querySelector('[data-census="' + key + '"]');
+        if (!rowEl) return;
+        var input = rowEl.querySelector('[data-census-input]');
+        var noneBox = rowEl.querySelector('[data-census-none]');
+        if (state.census && state.census[key]) {
+          input.value = state.census[key].tool || '';
+          noneBox.checked = !!state.census[key].none;
+        }
+        input.addEventListener('input', function () { if (input.value.trim()) noneBox.checked = false; });
+      });
+      document.getElementById('censusSave').addEventListener('click', function () {
+        var answers = {};
+        CENSUS_KEYS.forEach(function (key) {
+          var rowEl = document.querySelector('[data-census="' + key + '"]');
+          answers[key] = {
+            tool: rowEl.querySelector('[data-census-input]').value.trim(),
+            none: rowEl.querySelector('[data-census-none]').checked
+          };
+        });
+        state.census = answers; state.censusSaved = true; save();
+        TOOL_IDS.forEach(renderTool);
+        renderPlannedList(); renderConnectProgress(); renderRescue2(); renderProgress();
+        document.getElementById('censusNote').textContent = 'Saved. Your connect list below is built from your answers.';
+      });
+      renderRescue2();
+
       function renderTool(id) {
         var row = document.querySelector('[data-tool="' + id + '"]');
         var status = row.querySelector('[data-tool-status]');
         var btn = row.querySelector('[data-connect]');
+        var title = row.querySelector('strong');
+        var small = row.querySelector('small');
+        var note = row.querySelector('[data-census-note]');
         var t = state.tools[id];
+        var mode = censusMode(id);
+        row.style.display = mode === 'hidden' ? 'none' : '';
+        if (mode === 'setup') {
+          row.classList.remove('failed');
+          row.classList.add('show-note');
+          title.textContent = 'Your customer system';
+          small.textContent = 'We will set one up for you. It is included, and our team handles this part, so there is nothing for you to connect.';
+          if (note) note.textContent = 'We set you up on HighLevel, the system we run for our clients, included while you are with us.';
+          pill(status, 'Set up for you', 'done');
+          btn.style.display = 'none';
+          return;
+        }
+        if (mode === 'planned') {
+          row.classList.remove('failed');
+          row.classList.remove('show-note');
+          title.textContent = PLANNED_TITLES[id];
+          small.textContent = 'You do not have one yet, and that is fine. We will plan this together in your first week, and your team handles the setup. Nothing is missing.';
+          pill(status, 'Planned together', 'review');
+          btn.style.display = 'none';
+          return;
+        }
+        row.classList.remove('show-note');
+        btn.style.display = '';
+        var e = censusEntry(id);
+        title.textContent = (e && e.tool) ? e.tool : TOOL_ORIG[id].title;
+        small.textContent = TOOL_ORIG[id].small;
         row.classList.toggle('failed', t.s === 'failed');
         if (t.s === 'connected') { pill(status, 'Connected', 'done'); btn.textContent = 'Connected'; btn.disabled = true; }
         else if (t.s === 'failed') { pill(status, 'Needs attention', 'attn'); btn.textContent = 'Retry connection'; btn.disabled = false; }
@@ -574,14 +814,23 @@
         else { pill(status, 'Not started', 'idle'); btn.textContent = 'Connect'; btn.disabled = false; }
       }
       function renderConnectProgress() {
-        var done = TOOL_IDS.filter(function (id) { return state.tools[id].s === 'connected'; }).length;
+        var total = 0, done = 0;
+        TOOL_IDS.forEach(function (id) {
+          var m = censusMode(id);
+          if (m === 'hidden') return;
+          total++;
+          if (m === 'setup' || m === 'planned' || state.tools[id].s === 'connected') done++;
+        });
+        if (websiteAnswered()) { total++; done++; }
         document.getElementById('connectCount').textContent = done;
-        document.getElementById('connectProgress').style.width = (done / TOOL_IDS.length * 100) + '%';
+        document.getElementById('connectTotal').textContent = total;
+        document.getElementById('connectProgress').style.width = (total ? done / total * 100 : 0) + '%';
       }
       TOOL_IDS.forEach(function (id) {
         var row = document.querySelector('[data-tool="' + id + '"]');
         var btn = row.querySelector('[data-connect]');
         btn.addEventListener('click', function () {
+          if (censusMode(id) !== 'connect') return;
           var t = state.tools[id];
           t.tries++;
           t.s = 'opening'; save(); renderTool(id);
@@ -605,8 +854,29 @@
         renderTool(id);
       });
       renderConnectProgress();
+      renderPlannedList();
 
       /* ---------- Stage 3: turn on each lane, quick check runs itself ---------- */
+      /* Each lane runs on a platform. Ours is the standard pick. The client can
+         run a lane on a platform they already have instead: the setup words
+         stay the same, only the platform name inside them swaps, and the same
+         quick check confirms the lane either way. Production: the choice is
+         recorded on the install and the seat words are templated per platform. */
+      var LANE_PLATFORM_NAMES = { muse: 'Muse', claude: 'Claude', grok: 'Grok' };
+      function lanePlatformName(id) {
+        var p = state.lanes[id].platform || 'standard';
+        if (p === 'chatgpt') return 'ChatGPT';
+        if (p === 'gemini') return 'Gemini';
+        if (p === 'other') return 'the platform you already have';
+        return LANE_PLATFORM_NAMES[id];
+      }
+      function applyLanePlatform(id) {
+        var card = document.querySelector('[data-lane="' + id + '"]');
+        var pre = card.querySelector('[data-setup-text]');
+        pre.textContent = pre.textContent.replace(/running on [^.]*\./, 'running on ' + lanePlatformName(id) + '.');
+        var sel = card.querySelector('[data-platform]');
+        if (sel) sel.value = state.lanes[id].platform || 'standard';
+      }
       function renderLane(id) {
         var card = document.querySelector('[data-lane="' + id + '"]');
         var status = card.querySelector('[data-lane-status]');
@@ -638,6 +908,11 @@
       }
       LANE_IDS.forEach(function (id) {
         var card = document.querySelector('[data-lane="' + id + '"]');
+        var platSel = card.querySelector('[data-platform]');
+        platSel.addEventListener('change', function () {
+          state.lanes[id].platform = platSel.value; save(); applyLanePlatform(id);
+        });
+        applyLanePlatform(id);
         var copyBtn = card.querySelector('[data-copy]');
         copyBtn.addEventListener('click', function () {
           var text = card.querySelector('[data-setup-text]').textContent;
@@ -735,7 +1010,7 @@
       /* ---------- Stage completion, progress header, go live ---------- */
       function stageDone(n) {
         if (n === 1) return state.provSteps >= 5;
-        if (n === 2) return TOOL_IDS.every(function (id) { return state.tools[id].s === 'connected'; });
+        if (n === 2) return TOOL_IDS.every(toolHandled);
         if (n === 3) return LANE_IDS.every(function (id) { return state.lanes[id].seated; });
         if (n === 4) return state.knowledgeSaved && state.facts.every(function (f) { return f.confirmed; });
         if (n === 5) return state.live;
@@ -762,13 +1037,13 @@
           var rescue = document.querySelector('[data-rescue="' + s + '"]');
           if (rescue) rescue.style.display = stageDone(s) ? 'none' : 'block';
         }
+        renderRemaining();
+        maybeGoLive();
         var doneCount = [1, 2, 3, 4, 5].filter(stageDone).length;
         document.getElementById('hubSummary').textContent =
           state.live ? 'You are live. Your AI organization is on the job.' :
           doneCount === 0 ? 'Your setup is under way.' :
           'Saved: ' + doneCount + ' of 5 steps done.';
-        renderRemaining();
-        maybeGoLive();
       }
       function renderRemaining() {
         var list = document.getElementById('remainingList');
@@ -777,8 +1052,8 @@
         var items = [];
         if (!stageDone(1)) items.push(['Set up your command center', 'panel1', 'Finishing itself']);
         if (!stageDone(2)) {
-          var left = TOOL_IDS.filter(function (id) { return state.tools[id].s !== 'connected'; }).length;
-          items.push(['Connect your tools', 'panel2', left + (left === 1 ? ' tool' : ' tools') + ' to go']);
+          var left = TOOL_IDS.filter(function (id) { return !toolHandled(id); }).length;
+          items.push(['Connect your tools', 'panel2', left + (left === 1 ? ' item' : ' items') + ' to go']);
         }
         if (!stageDone(3)) {
           var lanesLeft = LANE_IDS.filter(function (id) { return !state.lanes[id].seated; }).length;
