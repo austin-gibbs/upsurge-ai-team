@@ -8,14 +8,25 @@ Usage (from the repo root):
     python3 -m orchestrator.run --install-id demo --status
     python3 -m orchestrator.run --install-id demo --show-audit
 
+    python3 -m orchestrator.run --install-id demo1 --live \\
+        --config install-demo1.json
+    python3 -m orchestrator.run --install-id demo1 --live \\
+        --config install-demo1.json --approve-qa --approved-by "Maive"
+
 A run walks the install from initiated toward live and stops at the
 qa_review gate. The approve command records the approval and continues
 the same run through go live. Every invocation ends by printing the
 audit trail.
 
+Live mode runs against real systems through the live adapters and
+needs an install config (see live_adapters.InstallConfig and the
+README). Smoke guard: a live run refuses unless the config names
+demo: true or the operator passes --allow-real.
+
 Exit codes: 0 live (or a read only command), 2 paused at the QA gate,
 3 another runner holds the lock, 4 the run ended in a failure or
-blocked state, 5 live mode requested (real adapters are v0 stubs).
+blocked state, 5 refused (no mode selected, bad or missing config,
+or the live smoke guard).
 
 Dry run mode never sleeps on the retry ladder; the intended waits are
 recorded in the audit log instead.
@@ -30,11 +41,13 @@ from pathlib import Path
 try:
     from .adapters import DryRunAdapters, RealAdapters
     from .engine import GATE, LIVE, LOCKED, Engine
+    from .live_adapters import LiveAdapters, load_config
     from .state import InstallContext
 except ImportError:  # direct file execution fallback
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
     from orchestrator.adapters import DryRunAdapters, RealAdapters
     from orchestrator.engine import GATE, LIVE, LOCKED, Engine
+    from orchestrator.live_adapters import LiveAdapters, load_config
     from orchestrator.state import InstallContext
 
 DEFAULT_STATE_DIR = Path(__file__).resolve().parent / ".state"
@@ -86,6 +99,14 @@ def main(argv: list | None = None) -> int:
                         help="defaults to <install-id>-client for a new install")
     parser.add_argument("--dry-run", action="store_true",
                         help="simulate every system with the DryRun adapters")
+    parser.add_argument("--live", action="store_true",
+                        help="run against real systems with the live "
+                             "adapters; requires --config")
+    parser.add_argument("--config", default=None,
+                        help="path to the install config JSON (live mode)")
+    parser.add_argument("--allow-real", action="store_true",
+                        help="permit a live run whose config does not "
+                             "name demo: true")
     parser.add_argument("--approve-qa", action="store_true",
                         help="record the QA gate approval, then continue the run")
     parser.add_argument("--approved-by", default="operator")
@@ -99,13 +120,47 @@ def main(argv: list | None = None) -> int:
     state_dir = Path(args.state_dir)
     install_id = args.install_id
 
+    if args.dry_run and args.live:
+        print("choose one mode: --dry-run or --live, not both.")
+        return 5
+
+    config = None
+    if args.live:
+        if not args.config:
+            print("live mode requires --config <install config JSON>.")
+            return 5
+        try:
+            config = load_config(Path(args.config))
+        except ValueError as exc:
+            print(f"invalid install config: {exc}")
+            return 5
+        if args.client_slug and args.client_slug != config.slug:
+            print(f"--client-slug {args.client_slug} conflicts with the "
+                  f"config slug {config.slug}; in live mode the config "
+                  "is the identity source.")
+            return 5
+
+    read_only = args.status or args.show_audit
+
     if args.dry_run:
         registry_path = state_dir / f"{install_id}.dryrun.json"
         adapters = DryRunAdapters(registry_path)
         sleeper = lambda seconds: None  # dry runs record waits, never sleep
-    else:
-        adapters = RealAdapters()
+    elif args.live:
+        if not read_only and not config.demo and not args.allow_real:
+            print("live smoke guard: this config does not name demo: "
+                  "true. Set demo: true for a smoke run, or pass "
+                  "--allow-real for a real install.")
+            return 5
+        adapters = LiveAdapters(config)
         sleeper = None  # engine default: real time.sleep
+    else:
+        if not read_only:
+            print("no mode selected: use --dry-run, or --live "
+                  "--config <install config JSON>.")
+            return 5
+        adapters = RealAdapters()  # read only commands never call it
+        sleeper = None
 
     engine_kwargs = {"state_dir": state_dir, "adapters": adapters, "log": print}
     if sleeper is not None:
@@ -118,14 +173,11 @@ def main(argv: list | None = None) -> int:
         _print_audit(engine, install_id)
         return 0
 
-    if not args.dry_run and not args.approve_qa:
-        print("live mode is not wired yet: the real adapters are v0 stubs. "
-              "Use --dry-run.")
-        return 5
-
     record = engine.load_record(install_id)
     if record is not None:
         ctx = InstallContext.from_params(record["params"])
+    elif config is not None:
+        ctx = config.to_context(install_id)
     else:
         ctx = InstallContext(
             install_id=install_id,
@@ -150,8 +202,17 @@ def main(argv: list | None = None) -> int:
     if result.status == LIVE:
         return 0
     if result.status == GATE:
-        print(f"approve with: python3 -m orchestrator.run --install-id "
-              f"{install_id} --dry-run --approve-qa --approved-by \"<name>\"")
+        if config is not None:
+            hint = (f"python3 -m orchestrator.run --install-id "
+                    f"{install_id} --live --config {args.config} "
+                    f"--approve-qa --approved-by \"<name>\"")
+            if args.allow_real:
+                hint += " --allow-real"
+        else:
+            hint = (f"python3 -m orchestrator.run --install-id "
+                    f"{install_id} --dry-run --approve-qa "
+                    f"--approved-by \"<name>\"")
+        print(f"approve with: {hint}")
         return 2
     if result.status == LOCKED:
         return 3
