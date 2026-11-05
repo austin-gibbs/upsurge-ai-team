@@ -30,6 +30,9 @@ GitHub is the source of truth for everything in this product. Code is built and 
 - `install-system/client-onboarding-pack.md`: everything the client receives. Welcome, timeline, connect checklist, how to work with the team, go live, FAQ.
 - `install-system/heartbeat-page-spec.md`: the client-facing team page build spec, with the Desk schema additions and the data honesty rules.
 - `team-pack/team-pack-and-roster.md`: Team Pack v1. Components, routing rules, QA checklists, the two-layer memory contract, the roster coverage matrix, and the quality system.
+- `product/bundle-and-showcase.md`: everything that comes with the service in seven groups, the Output Ledger spec, the showcase and demo mechanics, what is not included, and the bundle by tier (Launch Team, Growth Team, Full AI Organization).
+- `product/oversight-model.md`: how UpSurge oversees a client's AI organization as a named service: QA sampling, memory health, monitoring, Pack updates, cadence, the monthly owner report, and tiered oversight depth.
+- `go-to-market/`: the gameplan (with pricing approved by Austin on 2026-11-04), the sales asset pack, and the sales-to-install operations bridge.
 
 ## Rules for this repo
 
