@@ -28,7 +28,11 @@
     "manifest-stage:connect:summit-ridge-realty": {
       "recorded_at": "2026-11-05T06:21:37.624609+00:00",
       "recorded_by": "install-orchestrator"
+    },
+    "seat-model:summit-ridge-realty": {
+      "recorded_at": "2026-11-05T06:21:51.737577+00:00",
+      "recorded_by": "install-orchestrator"
     }
   },
-  "updated_at": "2026-11-05T06:21:37.624635+00:00"
+  "updated_at": "2026-11-05T06:21:51.737606+00:00"
 }
