@@ -24,6 +24,11 @@
   "pointers": {
     "passcode": "SURGE_PASSCODE_SUMMIT_RIDGE_REALTY"
   },
-  "stages": {},
-  "updated_at": "2026-11-05T06:21:16.419059+00:00"
+  "stages": {
+    "manifest-stage:connect:summit-ridge-realty": {
+      "recorded_at": "2026-11-05T06:21:37.624609+00:00",
+      "recorded_by": "install-orchestrator"
+    }
+  },
+  "updated_at": "2026-11-05T06:21:37.624635+00:00"
 }
