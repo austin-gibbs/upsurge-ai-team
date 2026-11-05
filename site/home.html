@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A demonstration of the Surge Command client home: board summary, team heartbeat, output ledger, and next steps.">
+  <title>Command Home (Demonstration) | UpSurge AI Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .page-hero { padding: 56px 0 6px; }
+    .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); margin-top: 20px; }
+    .demo-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(244,199,106,0.45); background: rgba(244,199,106,0.1);
+      color: #ffe1a1; border-radius: 999px; padding: 7px 13px;
+      font-size: 0.8rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .board-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 30px; }
+    .board-tile {
+      border: 1px solid var(--line); background: var(--panel); border-radius: 20px; padding: 20px;
+    }
+    .board-tile span { display: block; color: var(--muted); font-size: 0.78rem; font-weight: 900; letter-spacing: 0.11em; text-transform: uppercase; }
+    .board-tile strong { display: block; font-size: 2.1rem; letter-spacing: -0.04em; margin-top: 6px; }
+    .board-tile small { color: var(--muted); display: block; margin-top: 4px; line-height: 1.45; }
+    .home-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 18px; align-items: start; margin-top: 18px; }
+    .home-card {
+      border: 1px solid var(--line); background: var(--panel); border-radius: var(--radius); padding: 28px;
+    }
+    .home-card h3 { font-size: 1.35rem; margin-bottom: 6px; }
+    .home-card .card-sub { color: var(--muted); margin: 0 0 18px; }
+    .ledger-row {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .ledger-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .ledger-row strong { display: block; font-size: 0.98rem; }
+    .ledger-row small { color: var(--muted); display: block; margin-top: 1px; }
+    .ledger-cat {
+      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 9px; border-radius: 999px; background: rgba(56,225,255,0.12); color: #9beaff; white-space: nowrap;
+    }
+    .ledger-turn { text-align: right; color: #b8f4d8; font-weight: 800; font-size: 0.88rem; white-space: nowrap; }
+    .ledger-turn small { color: var(--muted); font-weight: 650; }
+    .switcher-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 26px; }
+    .switcher-row label { font-weight: 750; font-size: 0.95rem; }
+    .switcher-row select {
+      border: 1px solid var(--line); background: rgba(3, 10, 22, 0.48); color: var(--text);
+      border-radius: 12px; padding: 11px 13px; font: inherit; font-size: 0.95rem; font-weight: 650;
+    }
+    .switcher-row select:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; }
+    .switcher-note { color: var(--muted); font-size: 0.88rem; }
+    .type-line { color: var(--soft); font-weight: 700; margin: 16px 0 0; }
+    .type-line strong { color: #9beaff; }
+    .cat-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .cat-chip {
+      font-size: 0.74rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; background: rgba(56,225,255,0.1); color: #9beaff;
+      border: 1px solid rgba(56,225,255,0.22);
+    }
+    .board-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); gap: 12px; align-items: start; }
+    .board-col { border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; background: rgba(3,10,22,0.4); padding: 14px; display: grid; gap: 10px; }
+    .board-col-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .board-col-head strong { font-size: 0.92rem; letter-spacing: -0.01em; }
+    .board-col-head span { color: #8ff5c5; font-weight: 900; font-size: 0.85rem; }
+    .board-item { border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px 13px; background: rgba(255,255,255,0.045); }
+    .board-item strong { display: block; font-size: 0.92rem; line-height: 1.4; }
+    .board-item small { color: var(--muted); display: block; margin-top: 3px; font-size: 0.82rem; }
+    .board-item .item-cat { color: #9beaff; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; display: block; margin-top: 8px; }
+    .board-empty { color: var(--muted); font-size: 0.86rem; border: 1px dashed rgba(255,255,255,0.14); border-radius: 12px; padding: 12px; text-align: center; }
+    .template-list { display: grid; gap: 10px; }
+    .template-item {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 13px 15px;
+      background: rgba(3,10,22,0.44); font-weight: 700; font-size: 0.95rem;
+    }
+    .template-item span { color: #ffe1a1; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+    .cust-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 18px; align-items: start; }
+    .cust-block { margin-bottom: 22px; }
+    .cust-block:last-child { margin-bottom: 0; }
+    .cust-block > label, .cust-block > .cust-label { display: block; font-weight: 800; font-size: 0.95rem; margin-bottom: 9px; }
+    .cust-block .cust-hint { color: var(--muted); font-size: 0.88rem; margin: 0 0 10px; }
+    .cust-input, .cust-row input {
+      border: 1px solid var(--line); background: rgba(3, 10, 22, 0.48); color: var(--text);
+      border-radius: 12px; padding: 11px 13px; font: inherit; font-size: 0.95rem; width: 100%;
+    }
+    .cust-input:focus, .cust-row input:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; }
+    .cust-row { display: flex; gap: 9px; align-items: center; margin-bottom: 9px; }
+    .cust-row input { flex: 1; }
+    .cust-remove {
+      flex: 0 0 auto; border: 1px solid rgba(255,120,120,0.4); background: rgba(255,90,90,0.08); color: #ffb4b4;
+      border-radius: 11px; padding: 10px 13px; font: inherit; font-size: 0.85rem; font-weight: 750; cursor: pointer;
+    }
+    .cust-add { display: flex; gap: 9px; }
+    .cust-add input { flex: 1; }
+    .lead-card textarea {
+      width: 100%; border: 1px solid var(--line); background: rgba(3,10,22,0.48); color: var(--text);
+      border-radius: 14px; padding: 13px 14px; font: inherit; font-size: 0.95rem; min-height: 88px; resize: vertical;
+    }
+    .lead-card textarea:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; }
+    .lead-ack { color: #8ff5c5; font-weight: 700; font-size: 0.92rem; min-height: 1.2em; display: block; margin-top: 10px; }
+    .next-list { display: grid; gap: 12px; }
+    .next-item {
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 16px 18px;
+      background: rgba(3,10,22,0.44);
+    }
+    .next-item strong { display: block; font-size: 0.99rem; }
+    .next-item p { color: var(--muted); margin: 4px 0 0; font-size: 0.93rem; }
+    @media (max-width: 1020px) { .board-tiles { grid-template-columns: 1fr 1fr; } .home-grid, .cust-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .board-tiles { grid-template-columns: 1fr; } .ledger-row { grid-template-columns: 1fr; } .ledger-turn { text-align: left; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="UpSurge AI Team home">
+        <span class="brand-mark">US</span>
+        <span>UpSurge <small>AI Team</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#team">Team</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="signin.html">Client sign in</a>
+        <a class="button primary small" href="book.html">Book a fit call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-hero">
+      <span class="demo-badge">Demonstration: fictional business and data</span>
+      <h1>Good morning, <span id="greetName">Summit Ridge</span>. <span class="gradient">Your team has been busy.</span></h1>
+      <p class="hero-copy">This is the home your clients wake up to: what is moving, what landed, what the ledger says, and the one or two things that genuinely need the owner. The board below speaks this business's own language, because the tool takes the shape of the business, never the other way round.</p>
+
+      <div class="switcher-row">
+        <label for="typeSwitcher">See this workspace shaped for:</label>
+        <select id="typeSwitcher">
+          <option value="real-estate">Real estate team</option>
+          <option value="insurance">Insurance agency</option>
+          <option value="home-services">Home services</option>
+          <option value="dental">Dental practice</option>
+          <option value="education">School or education</option>
+          <option value="other">Something else</option>
+          <option value="custom" id="customTypeOption">Your kind of business</option>
+        </select>
+        <span class="switcher-note">Switch it and watch the board change its words, its stages, and its starter jobs. Pick Your kind of business and the workspace shapes itself around your own words.</span>
+      </div>
+      <p class="type-line" id="typeLine"></p>
+      <p class="shape-note" id="homeShapeNote" style="display:none;color:#9beaff;font-weight:650;margin:8px 0 0">Do not see your kind of business? We shape everything around yours as we learn it.</p>
+
+      <div class="board-tiles" id="boardTiles" aria-label="Board summary"></div>
+    </div>
+
+    <section style="padding-top:36px" aria-labelledby="board-title">
+      <div class="wrap">
+        <div class="home-grid">
+          <article class="home-card">
+            <h3 id="board-title">Your board, right now</h3>
+            <p class="card-sub" id="boardSub">Every job, who owns it, and where it stands, in your business's own words. Quiet here means the team is handling it.</p>
+            <div class="cat-chips" id="catChips" aria-label="Work categories"></div>
+            <div class="board-cols" id="boardCols"></div>
+          </article>
+
+          <div style="display:grid; gap:18px">
+            <article class="home-card">
+              <h3>Next steps</h3>
+              <p class="card-sub">The short list that keeps an owner out of the weeds.</p>
+              <div class="next-list">
+                <div class="next-item">
+                  <strong>Answer one batched question</strong>
+                  <p>Your lead grouped this week's decisions into a single ask, with a recommendation on each. Two minutes, once.</p>
+                </div>
+                <div class="next-item">
+                  <strong>Weekly review, Friday 9:00 AM</strong>
+                  <p>Fifteen minutes: what landed, what the ledger shows, and what the team proposes to take off your plate next.</p>
+                </div>
+              </div>
+              <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap">
+                <a class="button primary small" href="onboard.html">Finish your setup</a>
+                <a class="button secondary small" href="index.html">Service overview</a>
+              </div>
+            </article>
+
+            <article class="home-card">
+              <h3>Starter jobs, in your words</h3>
+              <p class="card-sub">Ready-made jobs your team can start the day you say go. They come with your business type and grow with you.</p>
+              <div class="template-list" id="templateList"></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px" aria-labelledby="heartbeat-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Team heartbeat</div>
+          <h2 id="heartbeat-title">The organization, breathing.</h2>
+          <p>A strip of the live team page: who is on each lane and what they are carrying today.</p>
+        </div>
+        <div class="team-console" aria-label="Demonstration of the team heartbeat strip">
+          <div class="team-window">
+            <div class="lead-strip">
+              <span class="avatar">ML</span>
+              <div>
+                <strong>Maive, Team Lead</strong>
+                <p>Your single point of contact. Scopes, routes, and brings work back finished.</p>
+              </div>
+              <span class="status working">Coordinating</span>
+            </div>
+            <div class="pulse-line" aria-hidden="true">
+              <svg viewBox="0 0 900 54" preserveAspectRatio="none" role="img">
+                <path d="M0 27 H250 L268 27 L282 12 L302 45 L318 27 H470 L488 27 L502 8 L524 48 L540 27 H900" />
+              </svg>
+            </div>
+            <div class="lanes">
+              <article class="lane cyan">
+                <div class="lane-head"><span>Muse lane</span><h3>Operations and Systems</h3></div>
+                <div class="specialist"><span class="avatar">DC</span><div><strong>Diego, CRM Systems</strong><small>Pipelines and customer records.</small><em>Cleanup delivered</em></div></div>
+                <div class="specialist"><span class="avatar">RV</span><div><strong>Remy, Voice Agents</strong><small>Calls, qualification, booking.</small><em>Dialing the open house list</em></div></div>
+                <div class="specialist"><span class="avatar">DQ</span><div><strong>Dex, Quality Review</strong><small>Independent checks before delivery.</small><em>Reviewing the listing page</em></div></div>
+              </article>
+              <article class="lane violet">
+                <div class="lane-head"><span>Claude lane</span><h3>Strategy and Craft</h3></div>
+                <div class="specialist"><span class="avatar">MM</span><div><strong>Mira, Marketing Strategy</strong><small>Offers and campaigns.</small><em>Planning the spring push</em></div></div>
+                <div class="specialist"><span class="avatar">KS</span><div><strong>Kai, Search and Visibility</strong><small>Search and AI visibility.</small><em>Drafting neighborhood guides</em></div></div>
+                <div class="specialist"><span class="avatar">PP</span><div><strong>Parker, Reporting</strong><small>Summaries and dashboards.</small><em>Report delivered</em></div></div>
+              </article>
+              <article class="lane gold">
+                <div class="lane-head"><span>Grok lane</span><h3>Speed and Signal</h3></div>
+                <div class="specialist"><span class="avatar">MC</span><div><strong>Milo, Creative Production</strong><small>Creative and campaign assets.</small><em>Producing ad variants</em></div></div>
+                <div class="specialist"><span class="avatar">GG</span><div><strong>Greta, Growth</strong><small>Outbound and partnerships.</small><em>Scanning partner lists</em></div></div>
+                <div class="specialist"><span class="avatar">TM</span><div><strong>Theo, Meeting Follow Through</strong><small>Actions captured and tracked.</small><em>Actions current</em></div></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px" aria-labelledby="customize-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Make it yours</div>
+          <h2 id="customize-title">Your workspace, your words.</h2>
+          <p>Change anything below and the board updates the moment you type. Or skip the settings entirely and just tell your team lead.</p>
+        </div>
+        <div class="cust-grid">
+          <article class="home-card">
+            <h3>Customize it yourself</h3>
+            <p class="card-sub">About 2 minutes to make it feel like home. Every change saves itself. We handle the rest.</p>
+            <div class="cust-block">
+              <label for="itemWordInput">What do you call a piece of work?</label>
+              <input class="cust-input" type="text" id="itemWordInput" autocomplete="off">
+              <p class="cust-hint">Listings, jobs, cases, patients. Whatever your team already says.</p>
+            </div>
+            <div class="cust-block">
+              <span class="cust-label">Your stages, in order</span>
+              <p class="cust-hint">Rename any stage, take one out, or add your own at the end.</p>
+              <div id="stagesEditor"></div>
+              <div class="cust-add">
+                <input class="cust-input" type="text" id="newStageInput" placeholder="Name a new stage" autocomplete="off">
+                <button class="button secondary small" type="button" id="addStageBtn">Add stage</button>
+              </div>
+            </div>
+            <div class="cust-block">
+              <span class="cust-label">Your work categories</span>
+              <p class="cust-hint">The buckets your work falls into. They label every job on the board.</p>
+              <div id="categoriesEditor"></div>
+              <div class="cust-add">
+                <input class="cust-input" type="text" id="newCategoryInput" placeholder="Name a new category" autocomplete="off">
+                <button class="button secondary small" type="button" id="addCategoryBtn">Add category</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="home-card lead-card">
+            <h3>Or just ask</h3>
+            <p class="card-sub">Do not want to touch settings? Just tell your team lead what you want changed and watch it happen.</p>
+            <p style="color:var(--muted); margin:0 0 14px">Try it in your own words: <em style="color:var(--soft)">Add a stage called Waiting on parts. Call jobs "visits" instead. Put renewals first.</em> Your lead makes the change, confirms here, and your board is new from that moment.</p>
+            <label for="leadMsg" style="font-weight:750; display:block; margin-bottom:8px">Tell your team lead</label>
+            <textarea id="leadMsg" placeholder="Ask for any change, in plain words."></textarea>
+            <div style="margin-top:14px">
+              <button class="button primary small" type="button" id="leadSend">Send to my team lead</button>
+              <span class="lead-ack" id="leadAck" role="status"></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px" aria-labelledby="ledger-title">
+      <div class="wrap">
+        <div class="home-card">
+          <h3 id="ledger-title">Output ledger, recent entries</h3>
+          <p class="card-sub">Every completed deliverable, written by the completion itself. Nothing manual, nothing inflated. This is the record the service is renewed on.</p>
+          <div id="ledgerList"></div>
+        </div>
+        <p class="pricing-note">Demonstration data for a fictional business. A real ledger is generated only from that client's own completed work.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>UpSurge AI Team</span>
+      <span>Installed AI operations for service businesses.</span>
+      <span>&copy; <span id="year">2026</span> UpSurge Pros</span>
+    </div>
+  </footer>
+
+  <script src="journey.js"></script>
+  <script>
+    (function () {
+      /* The workspace config is the client's own shape for the tool: their word
+         for work, their stages, their categories. It seeds from the business
+         type, and every customize change saves back to it and re-renders at
+         once. Production: this config lives server side on the workspace, and
+         the team lead can write it on the client's word. */
+      var cfg = JOURNEY.loadConfig();
+      var journey = JOURNEY.getJourney();
+
+      function el(id) { return document.getElementById(id); }
+      function esc(t) {
+        return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function save() { JOURNEY.saveConfig(cfg); }
+
+      /* Your kind of business: if the client named their own business type in
+         the application, those words sit on the journey as customType and name
+         this workspace's type. The switcher carries them as their own option,
+         driven by the stored words. */
+      var customActive = journey.businessType === 'other' && !!journey.customType;
+      var customOption = el('customTypeOption');
+      if (journey.customType) customOption.textContent = 'Your kind of business: ' + journey.customType;
+      if (customActive && !cfg.typeTerm) { cfg.typeTerm = journey.customType; save(); }
+
+      function renderTiles() {
+        var total = cfg.items.length;
+        var last = cfg.stages.length - 1;
+        var doneCount = cfg.items.filter(function (i) { return i.stage === last; }).length;
+        var firstCount = cfg.items.filter(function (i) { return i.stage === 0; }).length;
+        var midCount = total - doneCount - firstCount;
+        var tiles = [
+          { label: cfg.itemWord + ' on the board', n: total, small: 'Everything your team is carrying for you right now.' },
+          { label: 'Just in: ' + cfg.stages[0], n: firstCount, small: 'New work your team has already picked up.' },
+          { label: 'Moving in the middle', n: midCount, small: 'Work under way across your stages.' },
+          { label: cfg.stages[last], n: doneCount, small: 'Finished and written to your output ledger.' }
+        ];
+        el('boardTiles').innerHTML = tiles.map(function (t) {
+          return '<div class="board-tile"><span>' + esc(t.label) + '</span><strong>' + t.n + '</strong><small>' + esc(t.small) + '</small></div>';
+        }).join('');
+      }
+
+      var BOARD_SUB_BASE = 'Every job, who owns it, and where it stands, in your business\u2019s own words. Quiet here means the team is handling it.';
+      function renderTypeLine() {
+        var sel = switcher.value || cfg.type;
+        var key = sel === 'custom' ? 'other' : sel;
+        var term = (customActive && cfg.typeTerm) ? cfg.typeTerm : JOURNEY.typeLabel(key, JOURNEY.getJourney());
+        el('typeLine').innerHTML = 'Workspace type: <strong>' + esc(term) + '</strong>.';
+        el('homeShapeNote').style.display = JOURNEY.isFallback(key) ? '' : 'none';
+        el('boardSub').textContent = (customActive && cfg.typeTerm)
+          ? 'Shaped for ' + cfg.typeTerm + '. ' + BOARD_SUB_BASE
+          : BOARD_SUB_BASE;
+      }
+
+      function renderBoard() {
+        el('greetName').textContent = cfg.shortName || cfg.name;
+        renderTypeLine();
+        el('board-title').textContent = 'Your ' + cfg.itemWord.toLowerCase() + ', right now';
+        el('catChips').innerHTML = cfg.categories.map(function (c) {
+          return '<span class="cat-chip">' + esc(c) + '</span>';
+        }).join('');
+        el('boardCols').innerHTML = cfg.stages.map(function (stage, si) {
+          var items = cfg.items.filter(function (i) { return i.stage === si; });
+          var body = items.length ? items.map(function (i) {
+            return '<div class="board-item"><strong>' + esc(i.title) + '</strong><small>' + esc(i.owner) + '</small><span class="item-cat">' + esc(i.cat) + '</span></div>';
+          }).join('') : '<div class="board-empty">Nothing here right now</div>';
+          return '<div class="board-col"><div class="board-col-head"><strong>' + esc(stage) + '</strong><span>' + items.length + '</span></div>' + body + '</div>';
+        }).join('');
+      }
+
+      function renderTemplates() {
+        el('templateList').innerHTML = cfg.templates.map(function (t) {
+          return '<div class="template-item">' + esc(t) + '<span>Starter</span></div>';
+        }).join('');
+      }
+
+      function renderLedger() {
+        el('ledgerList').innerHTML = cfg.ledger.map(function (L) {
+          return '<div class="ledger-row"><span class="ledger-cat">' + esc(L.cat) + '</span>' +
+            '<span><strong>' + esc(L.title) + '</strong><small>' + esc(L.small) + '</small></span>' +
+            '<span class="ledger-turn">' + esc(L.turn) + '<small>' + esc(L.when) + '</small></span></div>';
+        }).join('');
+      }
+
+      function renderEditors() {
+        el('itemWordInput').value = cfg.itemWord;
+        el('stagesEditor').innerHTML = '';
+        cfg.stages.forEach(function (stage, si) {
+          var row = document.createElement('div');
+          row.className = 'cust-row';
+          var input = document.createElement('input');
+          input.type = 'text'; input.value = stage; input.setAttribute('aria-label', 'Stage ' + (si + 1) + ' name');
+          input.addEventListener('input', function () {
+            cfg.stages[si] = input.value;
+            save(); renderTiles(); renderBoard();
+          });
+          var rm = document.createElement('button');
+          rm.type = 'button'; rm.className = 'cust-remove'; rm.textContent = 'Remove';
+          rm.disabled = cfg.stages.length <= 1;
+          if (rm.disabled) rm.style.opacity = '0.45';
+          rm.addEventListener('click', function () {
+            cfg.stages.splice(si, 1);
+            cfg.items.forEach(function (i) {
+              if (i.stage === si) i.stage = Math.max(0, si - 1);
+              else if (i.stage > si) i.stage--;
+            });
+            save(); renderAll();
+          });
+          row.appendChild(input); row.appendChild(rm);
+          el('stagesEditor').appendChild(row);
+        });
+        el('categoriesEditor').innerHTML = '';
+        cfg.categories.forEach(function (cat, ci) {
+          var row = document.createElement('div');
+          row.className = 'cust-row';
+          var input = document.createElement('input');
+          input.type = 'text'; input.value = cat; input.setAttribute('aria-label', 'Category ' + (ci + 1) + ' name');
+          input.addEventListener('input', function () {
+            cfg.categories[ci] = input.value;
+            save(); renderBoard();
+          });
+          var rm = document.createElement('button');
+          rm.type = 'button'; rm.className = 'cust-remove'; rm.textContent = 'Remove';
+          rm.disabled = cfg.categories.length <= 1;
+          if (rm.disabled) rm.style.opacity = '0.45';
+          rm.addEventListener('click', function () {
+            cfg.categories.splice(ci, 1);
+            save(); renderAll();
+          });
+          row.appendChild(input); row.appendChild(rm);
+          el('categoriesEditor').appendChild(row);
+        });
+      }
+
+      function renderAll() { renderTiles(); renderBoard(); renderTemplates(); renderLedger(); renderEditors(); }
+
+      el('itemWordInput').addEventListener('input', function () {
+        cfg.itemWord = el('itemWordInput').value.trim() || 'Work items';
+        save(); renderTiles(); renderBoard();
+      });
+      el('addStageBtn').addEventListener('click', function () {
+        var v = el('newStageInput').value.trim();
+        if (!v) { el('newStageInput').focus(); return; }
+        cfg.stages.push(v);
+        el('newStageInput').value = '';
+        save(); renderAll();
+      });
+      el('addCategoryBtn').addEventListener('click', function () {
+        var v = el('newCategoryInput').value.trim();
+        if (!v) { el('newCategoryInput').focus(); return; }
+        cfg.categories.push(v);
+        el('newCategoryInput').value = '';
+        save(); renderAll();
+      });
+      el('leadSend').addEventListener('click', function () {
+        var msg = el('leadMsg').value.trim();
+        if (msg.length < 3) {
+          el('leadAck').textContent = 'Write the change you want in a sentence, and it is done.';
+          el('leadMsg').focus();
+          return;
+        }
+        // Production wiring: this message lands with the team lead, who applies
+        // the change to the workspace config and confirms it back here.
+        el('leadAck').textContent = 'Sent. Your team lead will make this change and confirm it here. Watch the board.';
+        el('leadMsg').value = '';
+      });
+
+      var switcher = el('typeSwitcher');
+      switcher.value = customActive ? 'custom' : (journey.businessType || cfg.type);
+      switcher.addEventListener('change', function () {
+        var key = switcher.value;
+        if (key === 'custom') {
+          /* Your kind of business runs on the stored free-text words. If none
+             are stored yet, ask for them in the client's own words. Either
+             way the workspace keeps the general shape and takes their name
+             for its type. */
+          var words = JOURNEY.getJourney().customType || '';
+          if (!words) {
+            words = (window.prompt('What kind of business is it? In your own words:') || '').trim();
+            if (!words) { switcher.value = cfg.type || 'real-estate'; return; }
+          }
+          JOURNEY.setJourney({ businessType: 'other', customType: words });
+          customOption.textContent = 'Your kind of business: ' + words;
+          customActive = true;
+          var wsC = { id: cfg.workspaceId, name: cfg.name, short: cfg.shortName, type: 'other' };
+          var freshC = JOURNEY.seedConfig(wsC, 'other');
+          freshC.name = cfg.name; freshC.shortName = cfg.shortName; freshC.workspaceId = cfg.workspaceId;
+          cfg = freshC;
+          save(); renderAll();
+          return;
+        }
+        customActive = false;
+        JOURNEY.setJourney({ businessType: key });
+        /* Switching the type reloads the starter shape for that business:
+           stages, words, categories, starter jobs. The business name stays. */
+        var ws = { id: cfg.workspaceId, name: cfg.name, short: cfg.shortName, type: key };
+        var fresh = JOURNEY.seedConfig(ws, key);
+        fresh.name = cfg.name; fresh.shortName = cfg.shortName; fresh.workspaceId = cfg.workspaceId;
+        cfg = fresh;
+        save(); renderAll();
+      });
+
+      renderAll();
+
+      var year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

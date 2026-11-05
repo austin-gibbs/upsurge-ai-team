@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign in to your UpSurge AI Team workspace. One email, one tap, and you are inside your own command center.">
+  <title>Sign In | UpSurge AI Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .page-hero { padding: 64px 0 6px; text-align: center; }
+    .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); margin-top: 20px; }
+    .page-hero .hero-copy { margin-inline: auto; }
+    .demo-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(244,199,106,0.45); background: rgba(244,199,106,0.1);
+      color: #ffe1a1; border-radius: 999px; padding: 7px 13px;
+      font-size: 0.8rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .signin-shell { max-width: 560px; margin: 38px auto 0; }
+    .signin-card {
+      border: 1px solid var(--line); background: var(--panel); border-radius: var(--radius);
+      padding: 32px; box-shadow: var(--shadow);
+    }
+    .signin-card h3 { font-size: 1.35rem; margin-bottom: 6px; }
+    .signin-card .card-sub { color: var(--muted); margin: 0 0 22px; }
+    .field { display: grid; gap: 7px; margin-bottom: 16px; }
+    .field label { font-weight: 750; font-size: 0.94rem; }
+    .field input[type="email"] {
+      width: 100%; border: 1px solid var(--line); background: rgba(3, 10, 22, 0.48);
+      color: var(--text); border-radius: 14px; padding: 14px; font: inherit; font-size: 1rem;
+    }
+    .field input:focus { outline: 2px solid rgba(56,225,255,0.55); outline-offset: 1px; border-color: rgba(56,225,255,0.5); }
+    .field.invalid input { border-color: rgba(255, 120, 120, 0.75); }
+    .field-error { display: none; color: #ffb4b4; font-size: 0.86rem; font-weight: 650; }
+    .field.invalid .field-error { display: block; }
+    .big-go { width: 100%; justify-content: center; font-size: 1.05rem; min-height: 56px; }
+    .signin-note { color: var(--muted); font-size: 0.9rem; text-align: center; margin: 16px 0 0; }
+    .ws-picker { display: none; max-width: 920px; margin: 30px auto 0; }
+    .ws-picker.show { display: block; }
+    .ws-picker h3 { text-align: center; font-size: 1.5rem; }
+    .ws-picker .card-sub { color: var(--muted); text-align: center; margin: 6px 0 22px; }
+    .ws-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .ws-card {
+      text-align: left; cursor: pointer; font: inherit; color: var(--text); width: 100%;
+      border: 1px solid var(--line); border-radius: 22px; padding: 24px;
+      background: var(--panel); transition: border-color 160ms ease, transform 160ms ease;
+    }
+    .ws-card:hover { border-color: rgba(56,225,255,0.55); transform: translateY(-2px); }
+    .ws-card .ws-mark {
+      width: 46px; height: 46px; border-radius: 15px; display: grid; place-items: center;
+      font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+    }
+    .ws-card strong { display: block; font-size: 1.12rem; letter-spacing: -0.02em; margin-bottom: 5px; }
+    .ws-card p { color: var(--muted); margin: 0 0 14px; font-size: 0.93rem; }
+    .ws-card .ws-type { color: #9beaff; font-weight: 800; font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    @media (max-width: 900px) { .ws-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="UpSurge AI Team home">
+        <span class="brand-mark">US</span>
+        <span>UpSurge <small>AI Team</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#team">Team</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="signin.html">Client sign in</a>
+        <a class="button primary small" href="book.html">Book a fit call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-hero">
+      <span class="demo-badge">Demonstration: pick any workspace below and look inside</span>
+      <h1>Welcome back. <span class="gradient">Your team kept working.</span></h1>
+      <p class="hero-copy">Type your email, tap one button, and you are inside your own workspace, shaped around your business.</p>
+    </div>
+
+    <section style="padding-top:6px">
+      <div class="wrap">
+        <form class="signin-shell" id="signinForm" novalidate>
+          <div class="signin-card">
+            <h3>Sign in</h3>
+            <p class="card-sub">About 10 seconds. We handle the rest.</p>
+            <div class="field" id="emailField">
+              <label for="signinEmail">Work email</label>
+              <input type="email" id="signinEmail" autocomplete="email" placeholder="you@yourbusiness.com">
+              <span class="field-error">That email does not look complete. Check it and try again.</span>
+            </div>
+            <button class="button primary big-go" type="submit">Take me to my workspace</button>
+            <p class="signin-note">New here? <a href="apply.html" style="color:#9beaff;font-weight:750">Start with the pilot</a> and your workspace is ready the same day. Still setting up? <a href="onboard.html" style="color:#9beaff;font-weight:750">Finish your setup</a>.</p>
+          </div>
+        </form>
+
+        <div class="ws-picker" id="wsPicker" role="status">
+          <h3>Pick your workspace</h3>
+          <p class="card-sub">In this demonstration there are three. Tap one and step inside it.</p>
+          <div class="ws-grid" id="wsGrid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>UpSurge AI Team</span>
+      <span>Installed AI operations for service businesses.</span>
+      <span>&copy; <span id="year">2026</span> UpSurge Pros</span>
+    </div>
+  </footer>
+
+  <script src="journey.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('signinForm');
+      var email = document.getElementById('signinEmail');
+      var field = document.getElementById('emailField');
+      var picker = document.getElementById('wsPicker');
+      var grid = document.getElementById('wsGrid');
+
+      function initials(name) {
+        return name.split(' ').filter(function (w) { return /^[A-Za-z]/.test(w); }).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
+      }
+      JOURNEY.WORKSPACES.forEach(function (ws) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ws-card';
+        b.innerHTML = '<span class="ws-mark">' + initials(ws.name) + '</span>' +
+          '<strong>' + ws.name + '</strong>' +
+          '<p>' + ws.line + '. Board, team, and ledger in this business\u2019s own words.</p>' +
+          '<span class="ws-type">' + JOURNEY.getType(ws.type).label + '</span>';
+        b.addEventListener('click', function () {
+          // Production wiring: the workspace comes from the signed-in account.
+          // Here the pick seeds the demo workspace config for that business.
+          JOURNEY.chooseWorkspace(ws);
+          window.location.href = 'home.html';
+        });
+        grid.appendChild(b);
+      });
+
+      email.addEventListener('input', function () { field.classList.remove('invalid'); });
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+        if (!ok) { field.classList.add('invalid'); email.focus(); return; }
+        picker.classList.add('show');
+        picker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      var year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
